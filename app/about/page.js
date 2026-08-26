@@ -16,7 +16,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-hero-grid bg-[length:20px_20px] opacity-20" />
         <div className="container-page relative section text-center lg:py-28">
           <span className="eyebrow bg-white/10 text-white ring-white/20">เกี่ยวกับเรา</span>
-          <h1 className="mx-auto mt-6 max-w-3xl font-display text-4xl font-bold leading-tight text-white sm:text-5xl">
+          <h1 className="mx-auto mt-6 max-w-3xl font-display text-4xl font-bold !leading-snug tracking-wide text-white sm:text-5xl">
             ทีมนักออกแบบการเรียนรู้ที่เชื่อว่าการเรียนรู้เปลี่ยนแปลงชีวิตได้
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-brand-100">

@@ -9,13 +9,17 @@ export default function HomePage() {
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-950">
         <div className="absolute inset-0 bg-hero-grid bg-[length:20px_20px] opacity-20" />
-        <div className="container-page relative section grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:py-32">
-          <div className="animate-fadeUp text-center lg:text-left">
+        <div className="container-page relative section grid grid-cols-1 items-center gap-12 lg:grid-cols-5 lg:py-32">
+          <div className="animate-fadeUp text-center lg:col-span-3 lg:text-left">
             <span className="eyebrow bg-white/10 text-white ring-white/20">
               {siteConfig.positioning}
             </span>
-            <h1 className="mt-6 font-display text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
-              {siteConfig.tagline}
+            <h1 className="mt-6 font-display text-[28px] font-bold !leading-snug tracking-wide text-white sm:text-5xl lg:text-5xl">
+              {siteConfig.tagline.split(" ").map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
             </h1>
             <p className="mx-auto mt-4 max-w-xl text-sm italic text-brand-200 lg:mx-0">
               &ldquo;{siteConfig.taglineEn}&rdquo;
@@ -42,7 +46,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative lg:col-span-2">
             <div className="mx-auto grid max-w-md grid-cols-2 gap-4">
               {stats.map((stat) => (
                 <div
