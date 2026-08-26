@@ -41,9 +41,13 @@ export default function Navbar() {
             className="h-9 w-9"
             priority
           />
-          <span className="font-display text-lg font-bold tracking-tight text-slate-900">
-            {siteConfig.name}
-          </span>
+          <Image
+            src="/logo-wordmark.png"
+            alt={siteConfig.name}
+            width={800}
+            height={316}
+            className="h-8 w-auto"
+          />
         </Link>
 
         <div className="hidden items-center gap-1 md:flex">
