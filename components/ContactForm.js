@@ -1,19 +1,39 @@
 "use client";
 
 import { useState } from "react";
-import { Send, CheckCircle2 } from "lucide-react";
+import { Send, CheckCircle2, AlertCircle } from "lucide-react";
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    setError("");
+
+    const form = e.target;
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.error || "ส่งข้อความไม่สำเร็จ กรุณาลองใหม่ภายหลัง");
+      }
+
       setSubmitted(true);
-    }, 900);
+    } catch (err) {
+      setError(err.message || "ส่งข้อความไม่สำเร็จ กรุณาลองใหม่ภายหลัง");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -107,6 +127,13 @@ export default function ContactForm() {
           className="input-field resize-none"
         />
       </div>
+
+      {error && (
+        <div className="flex items-start gap-2 rounded-xl bg-red-50 p-4 text-sm text-red-700">
+          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+          <span>{error}</span>
+        </div>
+      )}
 
       <button type="submit" disabled={loading} className="btn-primary w-full disabled:opacity-70">
         {loading ? "กำลังส่งข้อความ..." : "ส่งข้อความ"}
