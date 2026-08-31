@@ -132,7 +132,7 @@ export default function ServicesPage() {
             <div className="absolute inset-0 bg-hero-grid bg-[length:20px_20px] opacity-20" />
             <div className="relative">
               <h2 className="font-display text-3xl font-bold text-white sm:text-4xl">
-                ไม่แน่ใจว่าโรงเรียนหรือองค์กรของคุณต้องการรูปแบบไหน?
+                ให้เราช่วยออกแบบโปรแกรมที่ใช่สำหรับคุณ
               </h2>
               <p className="mx-auto mt-4 max-w-xl text-brand-100">
                 ทีมนักออกแบบการเรียนรู้ของเราพร้อมพูดคุยและช่วยออกแบบโปรแกรมที่เหมาะสมที่สุดให้ฟรี

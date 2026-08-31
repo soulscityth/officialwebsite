@@ -62,7 +62,7 @@ export default function ContactForm() {
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-slate-700">
-            ชื่อ-นามสกุล
+            ชื่อผู้ติดต่อ
           </label>
           <input
             id="name"

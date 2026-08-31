@@ -53,9 +53,17 @@ export default function Footer() {
           <h3 className="text-sm font-semibold uppercase tracking-wider text-white">ประเด็นการเรียนรู้</h3>
           <ul className="mt-4 space-y-3 text-sm text-brand-200">
             {domains.map((d) => (
-              <li key={d.title}>{d.title}</li>
+              <li key={d.title}>
+                <Link href="/services" className="transition-colors hover:text-white">
+                  {d.title}
+                </Link>
+              </li>
             ))}
-            <li>Signature Camp</li>
+            <li>
+              <Link href="/services" className="transition-colors hover:text-white">
+                Signature Camp
+              </Link>
+            </li>
           </ul>
         </div>
 

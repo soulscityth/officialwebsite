@@ -155,7 +155,7 @@ export default function AboutPage() {
             <div className="absolute inset-0 bg-hero-grid bg-[length:20px_20px] opacity-20" />
             <div className="relative">
               <h2 className="font-display text-3xl font-bold text-white sm:text-4xl">
-                อยากร่วมงานกับเรา หรือเป็นพันธมิตรทางการเรียนรู้?
+                อยากร่วมงานกับเราไหม?
               </h2>
               <p className="mx-auto mt-4 max-w-xl text-brand-100">
                 เราพร้อมรับฟังทุกไอเดียและความต้องการของคุณ เริ่มต้นบทสนทนากับทีมงานของเราได้เลยวันนี้
