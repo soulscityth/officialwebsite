@@ -21,7 +21,7 @@ export default function AboutPage() {
             <br />
             ที่เชื่อว่าการเรียนรู้เปลี่ยนแปลงชีวิตได้
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-brand-100">
+          <p className="mx-auto mt-6 max-w-2xl text-balance text-base leading-relaxed text-brand-100">
             {siteConfig.legalNameTh} ({siteConfig.legalName})
           </p>
         </div>
@@ -145,7 +145,7 @@ export default function AboutPage() {
             ))}
           </div>
           <p className="mt-8 text-center text-sm text-slate-500">
-            และทีม Staff Pool ที่ร่วมสนับสนุนการจัดกระบวนการในทุกโครงการ
+            และทีม Facilitator มืออาชีพที่ร่วมสนับสนุนการจัดกิจกรรม
           </p>
         </div>
       </section>
@@ -159,7 +159,7 @@ export default function AboutPage() {
               <h2 className="font-display text-3xl font-bold text-white sm:text-4xl">
                 อยากร่วมงานกับเราไหม?
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-brand-100">
+              <p className="mx-auto mt-4 max-w-2xl text-balance text-brand-100">
                 เราพร้อมรับฟังทุกไอเดียและความต้องการของคุณ เริ่มต้นบทสนทนากับทีมงานของเราได้เลยวันนี้
               </p>
               <div className="mt-8 flex justify-center">

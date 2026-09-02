@@ -25,7 +25,7 @@ export default function HomePage() {
             <p className="mx-auto mt-4 max-w-xl text-sm italic text-brand-200 lg:mx-0">
               &ldquo;{siteConfig.taglineEn}&rdquo;
             </p>
-            <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-brand-100 lg:mx-0">
+            <p className="mx-auto mt-6 max-w-2xl text-pretty text-base leading-relaxed text-brand-100 lg:mx-0">
               {siteConfig.description}
             </p>
             <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row lg:justify-start">
@@ -71,7 +71,7 @@ export default function HomePage() {
             <h2 className="mt-4 font-display text-3xl font-bold text-slate-900 sm:text-4xl">
               ออกแบบการเรียนรู้ที่มีความหมายในทุกมิติ
             </h2>
-            <p className="mt-4 text-slate-600">
+            <p className="mt-4 text-balance text-slate-600">
               เราออกแบบกระบวนการเรียนรู้ที่ผสมผสานศาสตร์การเรียนรู้กับวิธีการสอนที่ทันสมัย เพื่อให้ผู้เรียนได้ประสบการณ์ที่สนุก น่าตื่นเต้น และมีคุณค่า
             </p>
           </div>
@@ -173,13 +173,13 @@ export default function HomePage() {
       {/* CTA */}
       <section className="section bg-slate-50">
         <div className="container-page">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-700 to-brand-950 px-8 py-16 text-center sm:px-16">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-700 to-brand-950 px-8 py-16 text-center sm:px-10">
             <div className="absolute inset-0 bg-hero-grid bg-[length:20px_20px] opacity-20" />
             <div className="relative">
               <h2 className="font-display text-3xl font-bold text-white sm:text-4xl">
                 พร้อมออกแบบการเรียนรู้ที่มีความหมายให้กับผู้เรียนของคุณแล้วหรือยัง?
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-brand-100">
+              <p className="mx-auto mt-4 max-w-3xl text-balance text-brand-100">
                 ติดต่อทีมงานของเราวันนี้ เพื่อออกแบบค่ายหรือเวิร์กช็อปที่ตอบโจทย์โรงเรียนหรือองค์กรของคุณโดยเฉพาะ
               </p>
               <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">

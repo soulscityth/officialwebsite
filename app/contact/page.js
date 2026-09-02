@@ -18,7 +18,7 @@ export default function ContactPage() {
           <h1 className="mx-auto mt-6 max-w-4xl font-display text-4xl font-bold !leading-snug tracking-wide text-white sm:text-5xl">
             พร้อมพูดคุยเกี่ยวกับโครงการของคุณ
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-brand-100">
+          <p className="mx-auto mt-6 max-w-2xl text-balance text-base leading-relaxed text-brand-100">
             ไม่ว่าจะเป็นค่าย เวิร์กช็อป หรือกิจกรรมการเรียนรู้รูปแบบอื่น ทีมงานของเราพร้อมรับฟังและให้คำปรึกษาฟรี
           </p>
         </div>

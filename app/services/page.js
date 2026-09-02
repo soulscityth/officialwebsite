@@ -19,7 +19,7 @@ export default function ServicesPage() {
           <h1 className="mx-auto mt-6 max-w-3xl font-display text-4xl font-bold !leading-snug tracking-wide text-white sm:text-5xl">
             กระบวนการเรียนรู้ที่ออกแบบมาเพื่อผู้เรียนของคุณโดยเฉพาะ
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-brand-100">
+          <p className="mx-auto mt-6 max-w-2xl text-balance text-base leading-relaxed text-brand-100">
             ตั้งแต่ค่ายหลายวันไปจนถึงเวิร์กช็อปสั้น เราออกแบบและจัดกระบวนการเรียนรู้ที่ตอบโจทย์เป้าหมายของโรงเรียนและองค์กรของคุณ
           </p>
         </div>
@@ -134,7 +134,7 @@ export default function ServicesPage() {
               <h2 className="font-display text-3xl font-bold text-white sm:text-4xl">
                 ให้เราช่วยออกแบบโปรแกรมที่ใช่สำหรับคุณ
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-brand-100">
+              <p className="mx-auto mt-4 max-w-2xl text-balance text-brand-100">
                 ทีมนักออกแบบการเรียนรู้ของเราพร้อมพูดคุยและช่วยออกแบบโปรแกรมที่เหมาะสมที่สุดให้ฟรี
               </p>
               <div className="mt-8 flex justify-center">

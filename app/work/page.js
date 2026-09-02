@@ -20,7 +20,7 @@ export default function WorkPage() {
           <h1 className="mx-auto mt-6 max-w-5xl font-display text-4xl font-bold !leading-snug tracking-wide text-white sm:text-5xl">
             ค่ายและเวิร์กช็อปที่เราออกแบบและจัดขึ้นจริง
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-brand-100">
+          <p className="mx-auto mt-6 max-w-2xl text-balance text-base leading-relaxed text-brand-100">
             ตั้งแต่ปี 2566 เราร่วมงานกับโรงเรียน มหาวิทยาลัย และองค์กรกว่า 35 แห่งทั่วประเทศ ในการออกแบบและจัดกระบวนการเรียนรู้
           </p>
           <div className="mx-auto mt-10 grid max-w-2xl grid-cols-2 gap-4 sm:grid-cols-4">
@@ -50,7 +50,7 @@ export default function WorkPage() {
               <h2 className="font-display text-3xl font-bold text-white sm:text-4xl">
                 อยากให้เราออกแบบกิจกรรมถัดไปให้คุณ?
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-brand-100">
+              <p className="mx-auto mt-4 max-w-2xl text-balance text-brand-100">
                 เล่าเป้าหมายของโรงเรียนหรือองค์กรของคุณให้เราฟัง แล้วให้ทีมนักออกแบบการเรียนรู้ช่วยวางแผนโครงการที่ใช่
               </p>
               <div className="mt-8 flex justify-center">
