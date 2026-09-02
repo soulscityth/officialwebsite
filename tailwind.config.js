@@ -37,9 +37,19 @@ module.exports = {
           "0%": { opacity: "0", transform: "translateY(16px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        marqueeLeft: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        marqueeRight: {
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0)" },
+        },
       },
       animation: {
         fadeUp: "fadeUp 0.6s ease-out both",
+        marqueeLeft: "marqueeLeft 45s linear infinite",
+        marqueeRight: "marqueeRight 45s linear infinite",
       },
     },
   },

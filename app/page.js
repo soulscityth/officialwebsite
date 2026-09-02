@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { siteConfig } from "@/lib/site";
-import { domains, stats, process, partners, signatureCamp } from "@/lib/data";
+import PartnerMarquee from "@/components/PartnerMarquee";
+import { domains, stats, process, signatureCamp } from "@/lib/data";
 
 export default function HomePage() {
   return (
@@ -164,22 +164,8 @@ export default function HomePage() {
               โรงเรียนและองค์กรที่ไว้วางใจเรา
             </h2>
           </div>
-          <div className="mt-12 grid grid-cols-3 gap-4 sm:grid-cols-4 lg:grid-cols-6">
-            {partners.map((partner) => (
-              <div
-                key={partner.name}
-                title={partner.name}
-                className="flex h-20 items-center justify-center rounded-2xl border border-slate-100 bg-white p-4"
-              >
-                <Image
-                  src={partner.logo}
-                  alt={partner.name}
-                  width={120}
-                  height={120}
-                  className="h-full w-full object-contain grayscale transition-all duration-200 hover:grayscale-0"
-                />
-              </div>
-            ))}
+          <div className="mt-12">
+            <PartnerMarquee />
           </div>
         </div>
       </section>
