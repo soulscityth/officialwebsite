@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight, Target, Eye } from "lucide-react";
 import { stats, values, team } from "@/lib/data";
 import { siteConfig } from "@/lib/site";
@@ -121,9 +122,19 @@ export default function AboutPage() {
           <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {team.map((member) => (
               <div key={member.name} className="card">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-brand-900 font-display text-xl font-bold text-white">
-                  {member.nickname.slice(0, 1)}
-                </div>
+                {member.image ? (
+                  <Image
+                    src={member.image}
+                    alt={`${member.name} (${member.nickname})`}
+                    width={128}
+                    height={128}
+                    className="h-16 w-16 rounded-full object-cover ring-2 ring-brand-100"
+                  />
+                ) : (
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-brand-900 font-display text-xl font-bold text-white">
+                    {member.nickname.slice(0, 1)}
+                  </div>
+                )}
                 <h3 className="mt-4 font-display text-base font-semibold text-slate-900">
                   {member.name} <span className="font-sans text-sm font-normal text-slate-500">({member.nickname})</span>
                 </h3>
