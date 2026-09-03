@@ -17,14 +17,14 @@ function Row({ items, direction }) {
               <div
                 key={partner.name}
                 title={partner.name}
-                className="mr-4 flex h-20 w-36 shrink-0 items-center justify-center rounded-2xl border border-slate-100 bg-white p-4 sm:w-44"
+                className="mr-4 flex h-24 w-44 shrink-0 items-center justify-center rounded-2xl border border-slate-100 bg-white p-4 sm:w-52"
               >
                 <Image
                   src={partner.logo}
                   alt={partner.name}
                   width={120}
                   height={120}
-                  className="h-full w-full object-contain grayscale transition-all duration-200 hover:grayscale-0"
+                  className="h-full w-full object-contain"
                 />
               </div>
             ))}
