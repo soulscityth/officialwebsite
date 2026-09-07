@@ -34,6 +34,15 @@ produces no preview at all. There must be a commit production has not seen.
 
 **Two machines share this repo** (a Mac and a Windows PC). Always `git pull` before starting work.
 
+**Claude commits straight to `preview`.** No intermediate working branch — the chain above is the
+workflow, and a third branch only adds an empty merge.
+
+**Remote sessions cannot read the deployed site.** Claude Code on the web runs behind an egress
+proxy that denies `soulscity.co.th`, `www`, and the Vercel preview alias (403 on CONNECT). Local
+work is unaffected — install, dev server, real browser, screenshots and `next build` all verified
+working. But the "poll until the new content appears" rule below cannot be run from there, so
+confirming a deploy actually landed is the user's step, on a machine that can reach the site.
+
 ## Stack
 
 Next.js 14 App Router, JavaScript (**no TypeScript**) · React 18 · Tailwind 3 ·
