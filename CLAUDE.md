@@ -7,13 +7,30 @@ universities, and companies. Five pages, all in Thai: `/` `/about` `/services` `
 ## Deploy chain
 
 ```
-local → git push → github.com/soulscityth/officialwebsite (main) → Vercel auto-deploy → soulscity.vercel.app
+local → git push → github.com/soulscityth/officialwebsite (main) → Vercel auto-deploy → soulscity.co.th
 ```
+
+**Live domain is `soulscity.co.th`** (registered through THNIC, nameservers delegated to Vercel DNS).
+`www.soulscity.co.th` is configured as a 308 redirect to the apex, so the apex is the single canonical
+host. `soulscity.vercel.app` still resolves and is kept as a fallback — do not remove it.
 
 There is no `vercel.json` or `.vercel/` — normal for zero-config Next.js. The GitHub link lives on
 Vercel's side, so deploy settings and environment variables are changed at vercel.com, not in code.
-`siteConfig.url` feeds the sitemap and OG metadata; a custom domain means updating that value too,
-or SEO keeps pointing at `.vercel.app`.
+`siteConfig.url` (`lib/site.js:2`) is the single source of the canonical URL — it feeds `metadataBase`,
+the sitemap and robots.txt. Nothing else hardcodes the domain.
+
+### Previewing before production
+
+The `preview` branch exists so changes can be reviewed on a real device without touching production:
+
+```
+commit to `preview` → push → Vercel builds a Preview deployment
+→ https://officialwebsite-git-preview-soul-scity.vercel.app   (stable alias, always newest)
+→ merge into `main` only when approved
+```
+
+**Vercel skips a build when the SHA was already deployed.** Branching off `main` with no new commits
+produces no preview at all. There must be a commit production has not seen.
 
 **Two machines share this repo** (a Mac and a Windows PC). Always `git pull` before starting work.
 
@@ -56,8 +73,14 @@ social handles, service area, nav items, canonical `url`.
 }
 ```
 
-**Partners.** `{ name, logo }`, logo pointing into `public/partners/`. Logos are normalised on
-import: transparent/white padding trimmed, fit within 512px, saved as optimised transparent PNG.
+**Partners.** `{ name, logo }`, logo pointing into `public/partners/`. All 21 are transparent PNGs
+fitted within 512px. Most were originally opaque crops out of documents; they were fixed by
+flood-filling the background from the edges (so white *inside* a logo survives), then trimming.
+Five are official files: WWF and Mitr Phol from Wikipedia, LSEd from lsed.tu.ac.th, Giftwise and
+Triam Udom Suksa Pattanakarn Nonthaburi supplied by the client.
+
+`thammasat_secondary.png` is the one remaining weak file — a white-boxed screenshot. Their official
+SVG is on satit.tu.ac.th if it is ever worth converting.
 
 **Team.** An optional `image` field renders a circular photo on the About card; members without one
 fall back to a gradient letter avatar. Photos go in `public/team/`, square, e.g. `/team/palm.jpg`.
@@ -128,6 +151,19 @@ would mean rewriting copy — the user's call, not a silent edit.
   broken. Scroll it into view before asserting anything about load state.
 - **Stale webpack cache.** Editing an import and its usage in separate steps can produce
   "X is not defined" when the code is already correct. Clear `.next` rather than debugging the code.
+- **Replacing an image file needs a dev-server restart.** `next/image` holds optimised output in
+  memory, so after overwriting a file in `public/` the old one keeps being served — disk is right,
+  the page is wrong. Deleting `.next/cache/images` is NOT enough. Restart the dev server, then
+  confirm the served dimensions match the file on disk.
+- **Killing the dev server often orphans it.** Stopping the `npm` wrapper can leave `next dev`
+  alive still holding port 3000. Check the port is actually free (`netstat`) before building or
+  restarting — do not trust that the stop succeeded. This has caused broken-CSS previews three times.
+- **A production check straight after `git push` reads the old deploy.** Vercel takes ~20-60s.
+  Poll until the new content appears rather than reporting from the first response.
+- **Every string appears twice in the HTML** — once rendered, once in the inlined RSC flight data.
+  Strip tags before counting occurrences, or a doubled count reads as a real one.
+- **Screenshots of the home page time out** unless the partner marquee animation is paused first
+  (`animationPlayState = "paused"`), because the infinite animation never yields a stable frame.
 
 ## Environment
 
@@ -137,8 +173,12 @@ Copy `.env.example` → `.env.local` (it is correctly not in the repo).
   Settings → Environment Variables. Without it the site runs fine, only mail sending fails.
 - `CONTACT_EMAIL` — optional recipient override; defaults to `siteConfig.email`.
 
-The Resend `from:` is still the shared sandbox `onboarding@resend.dev`. Moving to a verified
-SoulScity domain is the outstanding improvement.
+There is currently **no `.env.local` on the Windows machine**, so `/api/contact` returns 500 locally.
+That is expected, not a bug — production has the key set in Vercel.
+
+The Resend `from:` is still the shared sandbox `onboarding@resend.dev`. Now that `soulscity.co.th`
+is owned and delegated, verifying it in Resend and sending as e.g. `web@soulscity.co.th` is the
+outstanding deliverability improvement.
 
 ## Working agreement
 
