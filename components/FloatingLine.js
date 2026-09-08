@@ -14,6 +14,7 @@ export default function FloatingLine() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={line.label}
+      data-ga-event="line_click"
       style={{ backgroundColor: LINE_GREEN }}
       className="group fixed bottom-5 right-5 z-40 flex items-center rounded-full shadow-lg ring-1 ring-black/5 transition-transform duration-200 hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
     >

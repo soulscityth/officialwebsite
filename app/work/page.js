@@ -57,7 +57,9 @@ export default function WorkPage() {
                 เล่าเป้าหมายของโรงเรียนหรือองค์กรของคุณให้เราฟัง แล้วให้ทีมนักออกแบบการเรียนรู้ช่วยวางแผนโครงการที่ใช่
               </p>
               <div className="mt-8 flex justify-center">
-                <Link href="/contact" className="btn bg-white text-brand-800 hover:bg-brand-50">
+                <Link href="/contact" className="btn bg-white text-brand-800 hover:bg-brand-50"
+                  data-ga-event="cta_consult_click"
+                >
                   ปรึกษาโครงการฟรี
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>
