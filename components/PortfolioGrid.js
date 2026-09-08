@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { portfolio } from "@/lib/data";
 import PortfolioCard from "./PortfolioCard";
 
@@ -11,8 +11,29 @@ const filters = [
   { key: "misc", label: "Miscellaneous" },
 ];
 
+const validKeys = filters.map((f) => f.key);
+
+// Cards in the first row are above the fold; everything after that lazy-loads.
+const EAGER_CARDS = 3;
+
 export default function PortfolioGrid() {
-  const [active, setActive] = useState("all");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // The URL is the source of truth, so a filtered view can be linked and shared.
+  const requested = searchParams.get("type");
+  const active = validKeys.includes(requested) ? requested : "all";
+
+  const select = (key) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (key === "all") {
+      params.delete("type");
+    } else {
+      params.set("type", key);
+    }
+    const query = params.toString();
+    router.replace(query ? `/work?${query}` : "/work", { scroll: false });
+  };
 
   const items = active === "all" ? portfolio : portfolio.filter((p) => p.category === active);
 
@@ -26,7 +47,8 @@ export default function PortfolioGrid() {
             <button
               key={f.key}
               type="button"
-              onClick={() => setActive(f.key)}
+              onClick={() => select(f.key)}
+              aria-pressed={isActive}
               className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                 isActive
                   ? "bg-brand-600 text-white"
@@ -40,8 +62,8 @@ export default function PortfolioGrid() {
       </div>
 
       <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((item) => (
-          <PortfolioCard key={item.title} item={item} />
+        {items.map((item, i) => (
+          <PortfolioCard key={item.title} item={item} eager={i < EAGER_CARDS} />
         ))}
       </div>
 

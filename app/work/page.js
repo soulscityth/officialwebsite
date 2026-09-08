@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import PortfolioGrid from "@/components/PortfolioGrid";
@@ -37,7 +38,9 @@ export default function WorkPage() {
       {/* Portfolio grid */}
       <section className="section">
         <div className="container-page">
-          <PortfolioGrid />
+          <Suspense fallback={null}>
+            <PortfolioGrid />
+          </Suspense>
         </div>
       </section>
 

@@ -6,7 +6,9 @@ import { ChevronLeft, ChevronRight, Calendar, Clock, Users2 } from "lucide-react
 
 const CATEGORY_LABEL = { camp: "Camp", workshop: "Workshop", misc: "Miscellaneous" };
 
-export default function PortfolioCard({ item }) {
+// `eager` is opt-in: only the first row of cards is above the fold. Marking every
+// card's first image `priority` made all 47 load eagerly and fight for bandwidth.
+export default function PortfolioCard({ item, eager = false }) {
   const [index, setIndex] = useState(0);
   const touchStartX = useRef(null);
 
@@ -47,7 +49,8 @@ export default function PortfolioCard({ item }) {
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
             className={`object-cover transition-opacity duration-300 ${i === index ? "opacity-100" : "opacity-0"}`}
-            priority={i === 0}
+            priority={eager && i === 0}
+            loading={eager && i === 0 ? undefined : "lazy"}
           />
         ))}
 
