@@ -2,6 +2,7 @@ import { Prompt, Mitr } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FloatingLine from "@/components/FloatingLine";
 import { siteConfig } from "@/lib/site";
 
 const prompt = Prompt({
@@ -34,6 +35,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <FloatingLine />
       </body>
     </html>
   );
