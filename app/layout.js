@@ -2,6 +2,9 @@ import { Prompt, Mitr } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FloatingLine from "@/components/FloatingLine";
+import StructuredData from "@/components/StructuredData";
+import Analytics from "@/components/Analytics";
 import { siteConfig } from "@/lib/site";
 
 const prompt = Prompt({
@@ -31,9 +34,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="th" className={`${prompt.variable} ${mitr.variable}`}>
       <body className="flex min-h-screen flex-col font-sans">
+        <StructuredData />
+        <Analytics />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <FloatingLine />
       </body>
     </html>
   );

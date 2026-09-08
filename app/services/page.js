@@ -138,7 +138,9 @@ export default function ServicesPage() {
                 ทีมนักออกแบบการเรียนรู้ของเราพร้อมพูดคุยและช่วยออกแบบโปรแกรมที่เหมาะสมที่สุดให้ฟรี
               </p>
               <div className="mt-8 flex justify-center">
-                <Link href="/contact" className="btn bg-white text-brand-800 hover:bg-brand-50">
+                <Link href="/contact" className="btn bg-white text-brand-800 hover:bg-brand-50"
+                  data-ga-event="cta_consult_click"
+                >
                   ปรึกษาโครงการฟรี
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>

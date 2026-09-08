@@ -29,7 +29,9 @@ export default function HomePage() {
               {siteConfig.description}
             </p>
             <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row lg:justify-start">
-              <Link href="/contact" className="btn-primary w-full sm:w-auto">
+              <Link href="/contact" className="btn-primary w-full sm:w-auto"
+                data-ga-event="cta_consult_click"
+              >
                 ปรึกษาโครงการของคุณ
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
@@ -183,7 +185,9 @@ export default function HomePage() {
                 ติดต่อทีมงานของเราวันนี้ เพื่อออกแบบค่ายหรือเวิร์กช็อปที่ตอบโจทย์โรงเรียนหรือองค์กรของคุณโดยเฉพาะ
               </p>
               <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <Link href="/contact" className="btn bg-white text-brand-800 hover:bg-brand-50">
+                <Link href="/contact" className="btn bg-white text-brand-800 hover:bg-brand-50"
+                  data-ga-event="cta_consult_click"
+                >
                   ปรึกษาโครงการฟรี
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>

@@ -70,7 +70,9 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:block">
-          <Link href="/contact" className="btn-primary">
+          <Link href="/contact" className="btn-primary"
+            data-ga-event="cta_consult_click"
+          >
             ปรึกษาโครงการ
             <ArrowUpRight className="h-4 w-4" />
           </Link>
@@ -109,7 +111,9 @@ export default function Navbar() {
               </Link>
             );
           })}
-          <Link href="/contact" className="btn-primary mt-2 w-full">
+          <Link href="/contact" className="btn-primary mt-2 w-full"
+            data-ga-event="cta_consult_click"
+          >
             ปรึกษาโครงการ
             <ArrowUpRight className="h-4 w-4" />
           </Link>

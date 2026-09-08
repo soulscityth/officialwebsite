@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import PortfolioGrid from "@/components/PortfolioGrid";
@@ -37,7 +38,9 @@ export default function WorkPage() {
       {/* Portfolio grid */}
       <section className="section">
         <div className="container-page">
-          <PortfolioGrid />
+          <Suspense fallback={null}>
+            <PortfolioGrid />
+          </Suspense>
         </div>
       </section>
 
@@ -54,7 +57,9 @@ export default function WorkPage() {
                 เล่าเป้าหมายของโรงเรียนหรือองค์กรของคุณให้เราฟัง แล้วให้ทีมนักออกแบบการเรียนรู้ช่วยวางแผนโครงการที่ใช่
               </p>
               <div className="mt-8 flex justify-center">
-                <Link href="/contact" className="btn bg-white text-brand-800 hover:bg-brand-50">
+                <Link href="/contact" className="btn bg-white text-brand-800 hover:bg-brand-50"
+                  data-ga-event="cta_consult_click"
+                >
                   ปรึกษาโครงการฟรี
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>
