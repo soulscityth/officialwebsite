@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { siteConfig } from "@/lib/site";
+import { activityTypes, learnerLevels } from "@/lib/data";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -17,6 +18,17 @@ export async function POST(request) {
   const subject = (body.subject || "").toString().trim().slice(0, 300);
   const message = (body.message || "").toString().trim().slice(0, 5000);
 
+  // Project-intake fields. All optional; the two dropdowns are checked against
+  // the same lists the form renders, so a hand-crafted POST cannot inject text.
+  const clean = (v, max) => (v || "").toString().trim().slice(0, max);
+  const oneOf = (v, allowed) => (allowed.includes(v) ? v : "");
+
+  const activityType = oneOf(clean(body.activityType, 100), activityTypes);
+  const learnerLevel = oneOf(clean(body.learnerLevel, 100), learnerLevels);
+  const participants = clean(body.participants, 50);
+  const durationDays = clean(body.durationDays, 50);
+  const preferredPeriod = clean(body.preferredPeriod, 100);
+
   if (!name || !email || !message) {
     return Response.json({ error: "กรุณากรอกชื่อ อีเมล และข้อความให้ครบถ้วน" }, { status: 400 });
   }
@@ -29,6 +41,10 @@ export async function POST(request) {
     console.error("RESEND_API_KEY is not set");
     return Response.json({ error: "เกิดข้อผิดพลาดของระบบ กรุณาลองใหม่ภายหลัง" }, { status: 500 });
   }
+
+  const hasProjectDetails = Boolean(
+    activityType || learnerLevel || participants || durationDays || preferredPeriod
+  );
 
   const resend = new Resend(apiKey);
 
@@ -43,11 +59,18 @@ export async function POST(request) {
         `อีเมล: ${email}`,
         phone ? `เบอร์โทรศัพท์: ${phone}` : null,
         subject ? `หัวข้อ: ${subject}` : null,
+        hasProjectDetails ? "" : null,
+        hasProjectDetails ? "--- รายละเอียดโครงการ ---" : null,
+        activityType ? `ประเภทกิจกรรม: ${activityType}` : null,
+        learnerLevel ? `ระดับผู้เรียน: ${learnerLevel}` : null,
+        participants ? `จำนวนผู้เข้าร่วม: ${participants}` : null,
+        durationDays ? `จำนวนวัน: ${durationDays}` : null,
+        preferredPeriod ? `ช่วงเวลาที่ต้องการจัด: ${preferredPeriod}` : null,
         "",
         "ข้อความ:",
         message,
       ]
-        .filter(Boolean)
+        .filter((line) => line !== null)
         .join("\n"),
     });
 

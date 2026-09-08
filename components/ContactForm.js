@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { activityTypes, learnerLevels } from "@/lib/data";
+import { trackEvent, GA_EVENTS } from "@/lib/analytics";
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -28,6 +30,9 @@ export default function ContactForm() {
         throw new Error(result.error || "ส่งข้อความไม่สำเร็จ กรุณาลองใหม่ภายหลัง");
       }
 
+      // Fires only on a confirmed send, so the GA4 count is real enquiries
+      // rather than button presses.
+      trackEvent(GA_EVENTS.formSubmit, { activity_type: data.activityType || "unspecified" });
       setSubmitted(true);
     } catch (err) {
       setError(err.message || "ส่งข้อความไม่สำเร็จ กรุณาลองใหม่ภายหลัง");
@@ -44,7 +49,7 @@ export default function ContactForm() {
         </span>
         <h3 className="mt-5 text-lg font-semibold text-slate-900">ส่งข้อความเรียบร้อยแล้ว!</h3>
         <p className="mt-2 max-w-sm text-sm text-slate-600">
-          ขอบคุณที่ติดต่อเรา ทีมงานจะรีบติดต่อกลับโดยเร็วที่สุด ภายใน 1-2 วันทำการ
+          ขอบคุณที่ติดต่อเรา ทีมงานจะติดต่อกลับภายใน 1 วันทำการ
         </p>
         <button
           type="button"
@@ -101,6 +106,81 @@ export default function ContactForm() {
         />
       </div>
 
+      {/* Project intake — every field optional so a general enquiry is never
+          blocked, but answering any of them lets us reply with specifics
+          instead of asking a second round of questions. */}
+      <fieldset className="rounded-2xl bg-slate-50 p-5 ring-1 ring-inset ring-slate-100">
+        <legend className="px-2 text-sm font-medium text-slate-700">
+          เกี่ยวกับโครงการ <span className="font-normal text-slate-400">(ไม่บังคับ)</span>
+        </legend>
+
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <div>
+            <label htmlFor="activityType" className="mb-1.5 block text-sm font-medium text-slate-700">
+              ประเภทกิจกรรม
+            </label>
+            <select id="activityType" name="activityType" className="input-field" defaultValue="">
+              <option value="">เลือกประเภท</option>
+              {activityTypes.map((t) => (
+                <option key={t} value={t}>{t}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label htmlFor="learnerLevel" className="mb-1.5 block text-sm font-medium text-slate-700">
+              ระดับผู้เรียน
+            </label>
+            <select id="learnerLevel" name="learnerLevel" className="input-field" defaultValue="">
+              <option value="">เลือกระดับ</option>
+              {learnerLevels.map((l) => (
+                <option key={l} value={l}>{l}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+          <div>
+            <label htmlFor="participants" className="mb-1.5 block text-sm font-medium text-slate-700">
+              จำนวนผู้เข้าร่วม
+            </label>
+            <input
+              id="participants"
+              name="participants"
+              type="text"
+              inputMode="numeric"
+              placeholder="เช่น 120"
+              className="input-field"
+            />
+          </div>
+          <div>
+            <label htmlFor="durationDays" className="mb-1.5 block text-sm font-medium text-slate-700">
+              จำนวนวัน
+            </label>
+            <input
+              id="durationDays"
+              name="durationDays"
+              type="text"
+              inputMode="numeric"
+              placeholder="เช่น 2"
+              className="input-field"
+            />
+          </div>
+          <div>
+            <label htmlFor="preferredPeriod" className="mb-1.5 block text-sm font-medium text-slate-700">
+              ช่วงเวลาที่ต้องการจัด
+            </label>
+            <input
+              id="preferredPeriod"
+              name="preferredPeriod"
+              type="text"
+              placeholder="เช่น ต.ค. 2569"
+              className="input-field"
+            />
+          </div>
+        </div>
+      </fieldset>
+
       <div>
         <label htmlFor="subject" className="mb-1.5 block text-sm font-medium text-slate-700">
           หัวข้อ
@@ -139,6 +219,8 @@ export default function ContactForm() {
         {loading ? "กำลังส่งข้อความ..." : "ส่งข้อความ"}
         {!loading && <Send className="h-4 w-4" />}
       </button>
+
+      <p className="text-center text-sm text-slate-500">ทีมงานตอบกลับภายใน 1 วันทำการ</p>
     </form>
   );
 }
