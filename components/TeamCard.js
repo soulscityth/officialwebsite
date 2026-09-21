@@ -1,6 +1,12 @@
 import Image from "next/image";
 import { BookOpen, Quote } from "lucide-react";
 
+// A square photo inside a panel that is taller than it is wide gets scaled to
+// cover the HEIGHT, so that — not the width — is what sets the resolution the
+// browser has to fetch. Describing the panel's width here made next/image serve
+// a 96px file into a 243px-tall box on phones, upscaled 2.5x and visibly soft.
+const PHOTO_SIZES = "(min-width: 1024px) 320px, 420px";
+
 // The left panel varies in shade per person, as the design does, but stays
 // inside the brand ramp instead of the five ad-hoc greens it used.
 const PANEL_SHADES = [
@@ -18,14 +24,15 @@ export default function TeamCard({ member, index = 0 }) {
     <div className="flex overflow-hidden rounded-3xl bg-white shadow-card ring-1 ring-slate-100">
       {/* Photo where we have one, the initial where we don't. */}
       <div
-        className={`relative w-24 shrink-0 bg-gradient-to-br sm:w-40 lg:w-56 ${shade}`}
+        className={`relative w-36 shrink-0 bg-gradient-to-br sm:w-44 lg:w-56 ${shade}`}
       >
         {member.image ? (
           <Image
             src={member.image}
             alt={`${member.name} (${member.nickname})`}
             fill
-            sizes="(min-width: 1024px) 224px, (min-width: 640px) 160px, 96px"
+            sizes={PHOTO_SIZES}
+            style={{ objectPosition: member.focal || "50% 50%" }}
             className="object-cover"
           />
         ) : (
@@ -37,7 +44,7 @@ export default function TeamCard({ member, index = 0 }) {
         )}
       </div>
 
-      <div className="flex min-w-0 flex-1 flex-col justify-center gap-2.5 p-5 sm:p-6">
+      <div className="flex min-w-0 flex-1 flex-col justify-center gap-2.5 p-4 sm:p-6">
         <div className="flex flex-col gap-2">
           <h3 className="font-display text-base font-semibold !leading-snug text-slate-900 sm:text-lg">
             {member.name}{" "}
