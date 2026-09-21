@@ -120,7 +120,7 @@ export default function AboutPage() {
               ทีมนักออกแบบการเรียนรู้เบื้องหลัง SoulScity
             </h2>
           </div>
-          <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
+          <div className="mt-14 grid grid-cols-1 gap-6 lg:auto-rows-fr lg:grid-cols-2 lg:gap-8">
             {team.map((member, i) => (
               <TeamCard key={member.name} member={member} index={i} />
             ))}
