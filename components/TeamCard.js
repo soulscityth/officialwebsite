@@ -24,7 +24,7 @@ export default function TeamCard({ member, index = 0 }) {
     <div className="flex overflow-hidden rounded-3xl bg-white shadow-card ring-1 ring-slate-100">
       {/* Photo where we have one, the initial where we don't. */}
       <div
-        className={`relative w-36 shrink-0 bg-gradient-to-br sm:w-44 lg:w-56 ${shade}`}
+        className={`relative w-28 shrink-0 bg-gradient-to-br min-[380px]:w-36 sm:w-44 lg:w-56 ${shade}`}
       >
         {member.image ? (
           <Image
@@ -52,7 +52,7 @@ export default function TeamCard({ member, index = 0 }) {
               ({member.nickname})
             </span>
           </h3>
-          <span className="self-start rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700">
+          <span className="self-start rounded-full min-[360px]:whitespace-nowrap bg-brand-50 px-2 py-1 text-[11px] font-semibold text-brand-700 sm:px-3 sm:text-xs">
             {member.role}
           </span>
         </div>
@@ -72,11 +72,11 @@ export default function TeamCard({ member, index = 0 }) {
         )}
 
         {member.expertise && (
-          <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap gap-1">
             {member.expertise.slice(0, 4).map((tag) => (
               <span
                 key={tag}
-                className="rounded-lg bg-brand-50 px-2.5 py-1 text-[11px] font-medium text-brand-700"
+                className="rounded-md bg-brand-50 px-2 py-0.5 text-[10px] font-medium text-brand-700"
               >
                 {tag}
               </span>
