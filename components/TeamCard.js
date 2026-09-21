@@ -46,9 +46,9 @@ export default function TeamCard({ member, index = 0 }) {
 
       <div className="flex min-w-0 flex-1 flex-col justify-center gap-2.5 p-4 sm:p-6">
         <div className="flex flex-col gap-2">
-          <h3 className="font-display text-base font-semibold !leading-snug text-slate-900 sm:text-lg">
+          <h3 className="font-display text-sm font-semibold !leading-snug text-slate-900 sm:text-lg">
             {member.name}{" "}
-            <span className="font-sans text-sm font-normal text-slate-500">
+            <span className="font-sans text-[11px] font-normal text-slate-500 sm:text-sm">
               ({member.nickname})
             </span>
           </h3>
