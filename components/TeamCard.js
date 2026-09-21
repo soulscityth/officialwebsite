@@ -73,7 +73,7 @@ export default function TeamCard({ member, index = 0 }) {
 
         {member.expertise && (
           <div className="flex flex-wrap gap-1">
-            {member.expertise.slice(0, 4).map((tag) => (
+            {member.expertise.slice(0, 3).map((tag) => (
               <span
                 key={tag}
                 className="rounded-md bg-brand-50 px-2 py-0.5 text-[10px] font-medium text-brand-700"
