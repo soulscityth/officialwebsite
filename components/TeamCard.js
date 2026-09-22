@@ -24,7 +24,7 @@ export default function TeamCard({ member, index = 0 }) {
     <div className="flex overflow-hidden rounded-3xl bg-white shadow-card ring-1 ring-slate-100">
       {/* Photo where we have one, the initial where we don't. */}
       <div
-        className={`relative w-28 shrink-0 bg-gradient-to-br min-[380px]:w-36 sm:w-44 lg:w-56 ${shade}`}
+        className={`relative w-28 shrink-0 bg-gradient-to-br min-[380px]:w-36 sm:w-44 ${shade}`}
       >
         {member.image ? (
           <Image
