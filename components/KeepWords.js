@@ -24,6 +24,10 @@ const MANUAL = [
   "เชิงปฏิบัติ",
   "เวทีถอดบทเรียน",
   "ให้กับ",
+  // Home services journey, narrowest phones.
+  "ตั้งแต่จุดประกาย",
+  "ระดมความคิด",
+  "ปรึกษาโครงการฟรี",
 ];
 
 const WORDS = new Set([...MANUAL, ...generated]);

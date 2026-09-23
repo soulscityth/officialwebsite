@@ -62,7 +62,7 @@ Almost all copy is centralised — edit these first, not the pages.
 `lib/site.js` — `siteConfig`: company names, tagline, description, email, phone contacts,
 social handles, service area, nav items, canonical `url`.
 
-`lib/data.js` — `domains`, `signatureCamp`, `formatTypes`, `expertiseGroups`, `process`, `values`,
+`lib/data.js` — `domains`, `signatureCamp`, `formatTypes`, `serviceJourney`, `expertiseGroups`, `process`, `values`,
 `team`, `stats`, `partners`, `portfolio`.
 
 **Portfolio entries.** `portfolio` is `portfolioRaw` sorted newest-first by `sortDate`:
@@ -112,6 +112,7 @@ earlier commit. Do not renumber to "fix" them.
 | `Navbar.js` | Client. Sticky, scroll state, mobile menu |
 | `ContactForm.js` | Client. Posts to `/api/contact` |
 | `Footer.js` | Server |
+| `ServiceJourney.js` | Server. Home "Our Services": Workshop → Signature Camp → Facilitation from `serviceJourney`. Markers in a row above the cards on `lg`; below that they move beside each stacked card on a dashed vertical line |
 
 ### PartnerMarquee — do not refactor to `gap`
 

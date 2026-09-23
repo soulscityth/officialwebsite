@@ -3,7 +3,8 @@ import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 import KeepWords from "@/components/KeepWords";
 import { siteConfig } from "@/lib/site";
 import PartnerMarquee from "@/components/PartnerMarquee";
-import { domains, stats, process, signatureCamp } from "@/lib/data";
+import ServiceJourney from "@/components/ServiceJourney";
+import { domains, stats, process } from "@/lib/data";
 
 export default function HomePage() {
   return (
@@ -110,38 +111,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Signature Camp highlight */}
-      <section className="section">
-        <div className="container-page grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-          <div>
-            <span className="eyebrow">Our Product</span>
-            <h2 className="mt-4 font-display text-3xl font-bold text-slate-900 sm:text-4xl">
-              <KeepWords>{signatureCamp.title}</KeepWords>
-            </h2>
-            <p className="mt-4 text-slate-600 leading-relaxed">
-              <KeepWords>
-                ค่ายที่ออกแบบมาเฉพาะสำหรับโรงเรียนและองค์กรของคุณ ผสมผสานทั้ง Soft Skills และ Hard Skills ผ่านกระบวนการเรียนรู้ที่สนุกและมีความหมาย
-              </KeepWords>
-            </p>
-            <ul className="mt-6 space-y-3">
-              {signatureCamp.points.map((point) => (
-                <li key={point} className="flex items-start gap-3 text-sm text-slate-700">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" />
-                  <KeepWords>{point}</KeepWords>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            {stats.map((stat) => (
-              <div key={stat.label} className="card text-center">
-                <p className="font-display text-3xl font-bold text-brand-600">{stat.value}</p>
-                <p className="mt-2 text-balance text-sm text-slate-600"><KeepWords>{stat.label}</KeepWords></p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ServiceJourney />
 
       {/* Process */}
       <section className="section bg-slate-50">
