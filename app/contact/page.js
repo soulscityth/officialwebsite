@@ -13,7 +13,7 @@ export default function ContactPage() {
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-950">
         <div className="absolute inset-0 bg-hero-grid bg-[length:20px_20px] opacity-20" />
-        <div className="container-page relative section text-center lg:py-28">
+        <div className="container-page relative section text-center py-16 sm:py-20 lg:py-28">
           <span className="eyebrow bg-white/10 text-white ring-white/20">ติดต่อเรา</span>
           <h1 className="mx-auto mt-6 max-w-4xl font-display text-4xl font-bold !leading-snug tracking-wide text-white sm:text-5xl">
             พร้อมพูดคุยเกี่ยวกับโครงการของคุณ

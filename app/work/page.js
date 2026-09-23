@@ -16,7 +16,7 @@ export default function WorkPage() {
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-950">
         <div className="absolute inset-0 bg-hero-grid bg-[length:20px_20px] opacity-20" />
-        <div className="container-page relative section text-center lg:py-28">
+        <div className="container-page relative section text-center py-16 sm:py-20 lg:py-28">
           <span className="eyebrow bg-white/10 text-white ring-white/20">ผลงานของเรา</span>
           <h1 className="mx-auto mt-6 max-w-5xl font-display text-4xl font-bold !leading-snug tracking-wide text-white sm:text-5xl">
             ค่ายและเวิร์กช็อปที่เราออกแบบและจัดขึ้นจริง
@@ -45,7 +45,7 @@ export default function WorkPage() {
       </section>
 
       {/* CTA */}
-      <section className="pb-16 sm:pb-20 lg:pb-24">
+      <section className="pb-12 sm:pb-16 lg:pb-20">
         <div className="container-page">
           <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-700 to-brand-950 px-8 py-16 text-center sm:px-16">
             <div className="absolute inset-0 bg-hero-grid bg-[length:20px_20px] opacity-20" />

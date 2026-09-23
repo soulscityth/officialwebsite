@@ -10,7 +10,7 @@ export default function HomePage() {
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-950">
         <div className="absolute inset-0 bg-hero-grid bg-[length:20px_20px] opacity-20" />
-        <div className="container-page relative section grid grid-cols-1 items-center gap-12 lg:grid-cols-5 lg:py-32">
+        <div className="container-page relative section grid grid-cols-1 items-center gap-12 lg:grid-cols-5 py-16 sm:py-20 lg:py-32">
           <div className="animate-fadeUp text-center lg:col-span-3 lg:text-left">
             <span className="eyebrow bg-white/10 text-white ring-white/20">
               {siteConfig.positioning}

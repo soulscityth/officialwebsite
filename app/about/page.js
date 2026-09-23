@@ -17,7 +17,7 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-950">
         <div className="absolute inset-0 bg-hero-grid bg-[length:20px_20px] opacity-20" />
-        <div className="container-page relative section text-center lg:py-28">
+        <div className="container-page relative section text-center py-16 sm:py-20 lg:py-28">
           <span className="eyebrow bg-white/10 text-white ring-white/20">เกี่ยวกับเรา</span>
           <h1 className="mx-auto mt-6 max-w-4xl font-display text-[28px] font-bold !leading-snug tracking-wide text-white sm:text-5xl">
             ทีมนักออกแบบการเรียนรู้
@@ -85,8 +85,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values */}
-      <section className="section">
+      {/* Values. Story above is also white, so there is no colour change to mark the
+          boundary; half the usual top padding keeps the two from drifting apart. */}
+      <section className="section pt-6 sm:pt-8 lg:pt-10">
         <div className="container-page">
           <div className="mx-auto max-w-2xl text-center">
             <span className="eyebrow">สิ่งที่เรายึดมั่น</span>
