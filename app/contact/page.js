@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Facebook } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, ArrowUpRight } from "lucide-react";
 import KeepWords from "@/components/KeepWords";
 import ContactForm from "@/components/ContactForm";
 import { siteConfig } from "@/lib/site";
@@ -86,17 +86,34 @@ export default function ContactPage() {
                 </span>
                 <div className="flex-1">
                   <p className="text-xs font-semibold uppercase tracking-wider text-slate-400"><KeepWords>โซเชียลมีเดีย</KeepWords></p>
-                  <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm text-slate-700">
-                    <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-brand-600">
-                      Facebook: {siteConfig.social.facebookHandle}
-                    </a>
-                    <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-brand-600">
-                      Instagram: {siteConfig.social.instagramHandle}
-                    </a>
-                    <a href={siteConfig.social.tiktok} target="_blank" rel="noopener noreferrer" className="hover:text-brand-600">
-                      TikTok: {siteConfig.social.tiktokHandle}
-                    </a>
-                  </div>
+                  {/* One account per line, styled as links: handle in the action colour
+                      with an outward arrow, since these open another site. */}
+                  <ul className="mt-1 text-sm">
+                    {[
+                      ["Facebook", siteConfig.social.facebook, siteConfig.social.facebookHandle],
+                      ["Instagram", siteConfig.social.instagram, siteConfig.social.instagramHandle],
+                      ["TikTok", siteConfig.social.tiktok, siteConfig.social.tiktokHandle],
+                    ].map(([platform, href, handle]) => (
+                      <li key={platform}>
+                        <a
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group inline-flex items-center gap-2 py-2 sm:py-1"
+                        >
+                          <span className="w-[4.5rem] text-slate-500">{platform}</span>
+                          <span className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-4 transition-colors group-hover:text-brand-700 group-hover:decoration-brand-600">
+                            {handle}
+                          </span>
+                          <ArrowUpRight
+                            className="h-4 w-4 text-brand-600 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                            aria-hidden="true"
+                          />
+                          <span className="sr-only">(เปิดในแท็บใหม่)</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>
