@@ -29,7 +29,6 @@ const MANUAL = [
   "ระดมความคิด",
   "ปรึกษาโครงการฟรี",
   // Team quotes on About, in the narrow photo-card column.
-  "พาไอเดีย",
   "ที่มั่นคง",
   "ที่ดี",
 ];
