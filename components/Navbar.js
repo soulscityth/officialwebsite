@@ -31,7 +31,7 @@ export default function Navbar() {
           : "bg-white/70 backdrop-blur-md"
       }`}
     >
-      <nav className="container-page flex items-center justify-between py-4">
+      <nav className="container-page flex items-center justify-between py-3">
         <Link href="/" className="flex items-center gap-2.5">
           <Image
             src="/logo-mark.png"
@@ -69,8 +69,10 @@ export default function Navbar() {
           })}
         </div>
 
+        {/* The shared .btn is sized for in-page calls to action; at its full 44px it
+            set the bar's height and left 20px of white around the logo and links. */}
         <div className="hidden md:block">
-          <Link href="/contact" className="btn-primary"
+          <Link href="/contact" className="btn-primary py-2.5"
             data-ga-event="cta_consult_click"
           >
             ปรึกษาโครงการ
