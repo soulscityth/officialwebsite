@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import KeepWords from "@/components/KeepWords";
 import PortfolioGrid from "@/components/PortfolioGrid";
 import { stats } from "@/lib/data";
 import { siteConfig } from "@/lib/site";
@@ -19,7 +20,7 @@ export default function WorkPage() {
         <div className="container-page relative section text-center py-16 sm:py-20 lg:py-28">
           <span className="eyebrow bg-white/10 text-white ring-white/20">ผลงานของเรา</span>
           <h1 className="mx-auto mt-6 max-w-5xl font-display text-4xl font-bold !leading-snug tracking-wide text-white sm:text-5xl">
-            ค่ายและเวิร์กช็อปที่เราออกแบบและจัดขึ้นจริง
+            <KeepWords>ค่ายและเวิร์กช็อปที่เราออกแบบและจัดขึ้นจริง</KeepWords>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-balance text-base leading-relaxed text-brand-100">
             ตั้งแต่ปี 2566 เราร่วมงานกับโรงเรียน มหาวิทยาลัย และองค์กรกว่า 35 แห่งทั่วประเทศ ในการออกแบบและจัดกระบวนการเรียนรู้

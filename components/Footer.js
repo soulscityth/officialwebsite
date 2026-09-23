@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Facebook, Instagram, Music2, Mail, Phone } from "lucide-react";
+import KeepWords from "@/components/KeepWords";
 import { siteConfig } from "@/lib/site";
 import { domains } from "@/lib/data";
 
@@ -14,7 +15,7 @@ export default function Footer() {
             <span className="font-display text-lg font-bold text-white">{siteConfig.name}</span>
           </Link>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-brand-200">
-            {siteConfig.description}
+            <KeepWords>{siteConfig.description}</KeepWords>
           </p>
           <div className="mt-6 flex gap-3">
             {[

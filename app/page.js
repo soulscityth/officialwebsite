@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, CheckCircle2 } from "lucide-react";
+import KeepWords from "@/components/KeepWords";
 import { siteConfig } from "@/lib/site";
 import PartnerMarquee from "@/components/PartnerMarquee";
 import { domains, stats, process, signatureCamp } from "@/lib/data";
@@ -26,7 +27,7 @@ export default function HomePage() {
               &ldquo;{siteConfig.taglineEn}&rdquo;
             </p>
             <p className="mx-auto mt-6 max-w-2xl text-pretty text-base leading-relaxed text-brand-100 lg:mx-0">
-              {siteConfig.description}
+              <KeepWords>{siteConfig.description}</KeepWords>
             </p>
             <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row lg:justify-start">
               <Link href="/contact" className="btn-primary w-full sm:w-auto"
@@ -182,7 +183,9 @@ export default function HomePage() {
                 พร้อมออกแบบการเรียนรู้ที่มีความหมายให้กับผู้เรียนของคุณแล้วหรือยัง?
               </h2>
               <p className="mx-auto mt-4 max-w-3xl text-balance text-brand-100">
-                ติดต่อทีมงานของเราวันนี้ เพื่อออกแบบค่ายหรือเวิร์กช็อปที่ตอบโจทย์โรงเรียนหรือองค์กรของคุณโดยเฉพาะ
+                <KeepWords>
+                  ติดต่อทีมงานของเราวันนี้ เพื่อออกแบบค่ายหรือเวิร์กช็อปที่ตอบโจทย์โรงเรียนหรือองค์กรของคุณโดยเฉพาะ
+                </KeepWords>
               </p>
               <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <Link href="/contact" className="btn bg-white text-brand-800 hover:bg-brand-50"

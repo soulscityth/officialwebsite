@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin, Facebook } from "lucide-react";
+import KeepWords from "@/components/KeepWords";
 import ContactForm from "@/components/ContactForm";
 import { siteConfig } from "@/lib/site";
 
@@ -19,7 +20,9 @@ export default function ContactPage() {
             พร้อมพูดคุยเกี่ยวกับโครงการของคุณ
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-balance text-base leading-relaxed text-brand-100">
-            ไม่ว่าจะเป็นค่าย เวิร์กช็อป หรือกิจกรรมการเรียนรู้รูปแบบอื่น ทีมงานของเราพร้อมรับฟังและให้คำปรึกษาฟรี
+            <KeepWords>
+              ไม่ว่าจะเป็นค่าย เวิร์กช็อป หรือกิจกรรมการเรียนรู้รูปแบบอื่น ทีมงานของเราพร้อมรับฟังและให้คำปรึกษาฟรี
+            </KeepWords>
           </p>
         </div>
       </section>

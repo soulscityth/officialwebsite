@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { ArrowDown, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { domains, signatureCamp, formatTypes, expertiseTags } from "@/lib/data";
 import { siteConfig } from "@/lib/site";
+import KeepWords from "@/components/KeepWords";
 
 export const metadata = {
   title: "บริการของเรา",
@@ -20,7 +21,9 @@ export default function ServicesPage() {
             กระบวนการเรียนรู้ที่ออกแบบมาเพื่อผู้เรียนของคุณโดยเฉพาะ
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-balance text-base leading-relaxed text-brand-100">
-            ตั้งแต่ค่ายหลายวันไปจนถึงเวิร์กช็อปสั้น เราออกแบบและจัดกระบวนการเรียนรู้ที่ตอบโจทย์เป้าหมายของโรงเรียนและองค์กรของคุณ
+            <KeepWords>
+              ตั้งแต่ค่ายหลายวันไปจนถึงเวิร์กช็อปสั้น เราออกแบบและจัดกระบวนการเรียนรู้ที่ตอบโจทย์เป้าหมายของโรงเรียนและองค์กรของคุณ
+            </KeepWords>
           </p>
         </div>
       </section>
@@ -31,7 +34,10 @@ export default function ServicesPage() {
           <div className="rounded-3xl bg-brand-950 px-8 py-14 text-center sm:px-16">
             <span className="eyebrow bg-white/10 text-white ring-white/20">Our Product</span>
             <h2 className="mt-4 font-display text-3xl font-bold text-white sm:text-4xl">{signatureCamp.title}</h2>
-            <div className="mx-auto mt-8 grid max-w-3xl grid-cols-1 gap-4 text-left sm:grid-cols-2">
+            <p className="mx-auto mt-5 max-w-2xl text-balance text-base leading-relaxed text-brand-100">
+              <KeepWords>{signatureCamp.pitch}</KeepWords>
+            </p>
+            <div className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-4 text-left sm:grid-cols-2">
               {signatureCamp.points.map((point) => (
                 <div key={point} className="flex items-start gap-3 rounded-xl bg-white/5 p-4">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-300" />
@@ -39,18 +45,58 @@ export default function ServicesPage() {
                 </div>
               ))}
             </div>
+            <div className="mt-10 flex flex-col items-center gap-5">
+              <Link
+                href="/contact"
+                className="btn bg-white text-brand-800 hover:bg-brand-50"
+                data-ga-event="cta_consult_click"
+              >
+                ปรึกษาการจัดค่าย
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+              {/* Two phrases, so a narrow screen breaks before เป็น rather than after it. */}
+              <a
+                href="#domains"
+                className="text-center text-sm text-brand-200 transition-colors hover:text-white"
+              >
+                <span className="inline-block">เลือก 1 จาก 3 Content Domains</span>{" "}
+                <span className="inline-block">
+                  เป็นเนื้อหาหลักของค่าย
+                  <ArrowDown className="ml-1.5 inline h-4 w-4 align-[-3px]" aria-hidden="true" />
+                </span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Content domains */}
-      <section className="section bg-slate-50">
+      {/* Content domains — each Signature Camp is built on one of these. scroll-mt
+          keeps the heading clear of the sticky 64px navbar when the camp card's
+          link jumps here. */}
+      <section id="domains" className="section scroll-mt-16 bg-slate-50">
         <div className="container-page">
           <div className="mx-auto max-w-2xl text-center">
-            <span className="eyebrow">ประเด็นการเรียนรู้ที่เราเชี่ยวชาญ</span>
+            <span className="eyebrow">เนื้อหาใน Signature Camp</span>
+            {/* Left to the dictionary this split "ให้ / เลือก", and "Content / Domains"
+                on phones. The break is after "3 Content Domains"; when a phone is too
+                narrow for either half, each has exactly one fallback point inside it
+                (after "3", and at the <wbr>), so neither can break anywhere else. */}
             <h2 className="mt-4 font-display text-3xl font-bold text-slate-900 sm:text-4xl">
-              3 Content Domains หลักในการออกแบบกระบวนการเรียนรู้
+              <span className="inline-block">
+                3 <span className="whitespace-nowrap">Content Domains</span>
+              </span>{" "}
+              <span className="inline-block">
+                <span className="whitespace-nowrap">ให้เลือกเป็น</span>
+                <wbr />
+                <span className="whitespace-nowrap">แกนหลักของค่าย</span>
+              </span>
             </h2>
+            <p className="mt-4 text-balance text-base leading-relaxed text-slate-600">
+              <KeepWords>
+                Signature Camp แต่ละค่ายออกแบบรอบ 1 ประเด็นหลัก เลือกประเด็นที่ตรงกับเป้าหมายของผู้เรียน
+                แล้วเราออกแบบทุกกิจกรรมในค่ายให้พาไปสู่เป้าหมายนั้น
+              </KeepWords>
+            </p>
           </div>
 
           <div className="mt-14 space-y-8">
