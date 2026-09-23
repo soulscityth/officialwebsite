@@ -50,7 +50,10 @@ export default function Navbar() {
           />
         </Link>
 
-        <div className="hidden items-center gap-1 md:flex">
+        {/* The full menu switches on at 900px, not md (768px): below ~891px the five
+            Thai labels and the button wrap to two lines and run into the wordmark.
+            At exactly 900px the gaps either side of the menu are only 3px. */}
+        <div className="hidden items-center gap-1 min-[900px]:flex">
           {siteConfig.nav.map((item) => {
             const active = pathname === item.href;
             return (
@@ -71,7 +74,7 @@ export default function Navbar() {
 
         {/* The shared .btn is sized for in-page calls to action; at its full 44px it
             set the bar's height and left 20px of white around the logo and links. */}
-        <div className="hidden md:block">
+        <div className="hidden min-[900px]:block">
           <Link href="/contact" className="btn-primary py-2.5"
             data-ga-event="cta_consult_click"
           >
@@ -83,7 +86,7 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="inline-flex items-center justify-center rounded-lg p-2 text-slate-700 hover:bg-slate-100 md:hidden"
+          className="inline-flex items-center justify-center rounded-lg p-2 text-slate-700 hover:bg-slate-100 min-[900px]:hidden"
           aria-label="เปิดเมนู"
           aria-expanded={open}
         >
@@ -92,7 +95,7 @@ export default function Navbar() {
       </nav>
 
       <div
-        className={`overflow-hidden border-t border-slate-100 bg-white transition-[max-height] duration-300 ease-in-out md:hidden ${
+        className={`overflow-hidden border-t border-slate-100 bg-white transition-[max-height] duration-300 ease-in-out min-[900px]:hidden ${
           open ? "max-h-96" : "max-h-0 border-t-0"
         }`}
       >
