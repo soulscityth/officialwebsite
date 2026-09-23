@@ -19,11 +19,17 @@ function Row({ items, direction }) {
                 title={partner.name}
                 className="mr-4 flex h-24 w-44 shrink-0 items-center justify-center rounded-2xl border border-slate-100 bg-white p-4 sm:w-52"
               >
+                {/* Eager, not next/image's default lazy: the browser counts a card
+                    clipped by the row's overflow-hidden as off-screen, so a lazy logo
+                    only started downloading as it slid into view and the card sat
+                    blank until it arrived. All 21 logos are ~150KB (~300KB at 2x),
+                    and off-screen images are fetched at low priority. */}
                 <Image
                   src={partner.logo}
                   alt={partner.name}
                   width={120}
                   height={120}
+                  loading="eager"
                   className="h-full w-full object-contain"
                 />
               </div>
