@@ -1,12 +1,21 @@
+import { Fragment } from "react";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight, CheckCircle2 } from "lucide-react";
-import { domains, signatureCamp, formatTypes, expertiseTags } from "@/lib/data";
+import { domains, signatureCamp, formatTypes, expertiseGroups } from "@/lib/data";
 import { siteConfig } from "@/lib/site";
 import KeepWords from "@/components/KeepWords";
 
 export const metadata = {
   title: "บริการของเรา",
   description: `Signature Camp และประเด็นการเรียนรู้ที่ ${siteConfig.name} เชี่ยวชาญ`,
+};
+
+// Full class strings, not built from the colour name, so Tailwind can find them.
+const tagColors = {
+  amber: { dot: "bg-amber-600", chip: "bg-amber-50 text-amber-800 ring-amber-200" },
+  rose: { dot: "bg-rose-600", chip: "bg-rose-50 text-rose-800 ring-rose-200" },
+  violet: { dot: "bg-violet-600", chip: "bg-violet-50 text-violet-800 ring-violet-200" },
+  sky: { dot: "bg-sky-600", chip: "bg-sky-50 text-sky-800 ring-sky-200" },
 };
 
 export default function ServicesPage() {
@@ -143,14 +152,30 @@ export default function ServicesPage() {
               </KeepWords>
             </h2>
           </div>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            {expertiseTags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full border border-brand-100 bg-brand-50 px-4 py-2 text-sm font-medium text-brand-700"
-              >
-                {tag}
+          {/* Legend: 2x2 on a phone so no group name sits alone on a second line. */}
+          <div className="mx-auto mt-6 grid w-fit grid-cols-2 gap-x-4 gap-y-1.5 sm:mt-8 sm:flex sm:flex-wrap sm:justify-center sm:gap-x-5">
+            {expertiseGroups.map((group) => (
+              <span key={group.name} className="inline-flex items-center gap-1.5 text-[12.5px] text-slate-600 sm:gap-2 sm:text-sm">
+                <span className={`h-2 w-2 shrink-0 rounded-full sm:h-2.5 sm:w-2.5 ${tagColors[group.color].dot}`} aria-hidden="true" />
+                <KeepWords>{group.name}</KeepWords>
               </span>
+            ))}
+          </div>
+          {/* One cloud, coloured by group. Chips shrink on a phone so two fit per row;
+              at full size most rows held one tag and the section ran ~980px tall. */}
+          <div className="mx-auto mt-6 flex max-w-4xl flex-wrap items-center justify-center gap-1.5 sm:mt-8 sm:gap-3">
+            {expertiseGroups.map((group) => (
+              <Fragment key={group.name}>
+                <span className="sr-only">{group.name}</span>
+                {group.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className={`whitespace-nowrap rounded-full px-[11px] py-[5px] text-[12.5px] font-medium ring-1 ring-inset sm:px-4 sm:py-2 sm:text-sm ${tagColors[group.color].chip}`}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </Fragment>
             ))}
           </div>
         </div>
@@ -174,7 +199,7 @@ export default function ServicesPage() {
                   <format.icon className="h-6 w-6" />
                 </div>
                 <h3 className="mt-5 font-display text-lg font-semibold text-slate-900"><KeepWords>{format.name}</KeepWords></h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600"><KeepWords>{format.description}</KeepWords></p>
+                <p className="mt-2 text-balance text-sm leading-relaxed text-slate-600"><KeepWords>{format.description}</KeepWords></p>
               </div>
             ))}
           </div>

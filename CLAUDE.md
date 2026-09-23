@@ -62,7 +62,7 @@ Almost all copy is centralised — edit these first, not the pages.
 `lib/site.js` — `siteConfig`: company names, tagline, description, email, phone contacts,
 social handles, service area, nav items, canonical `url`.
 
-`lib/data.js` — `domains`, `signatureCamp`, `formatTypes`, `expertiseTags`, `process`, `values`,
+`lib/data.js` — `domains`, `signatureCamp`, `formatTypes`, `expertiseGroups`, `process`, `values`,
 `team`, `stats`, `partners`, `portfolio`.
 
 **Portfolio entries.** `portfolio` is `portfolioRaw` sorted newest-first by `sortDate`:
@@ -141,6 +141,12 @@ Headings and subtitles must not strand a short fragment on the last line. Prefer
 2. Widen the max-width
 3. An explicit `<br />` only where a specific break is required (the About `h1`)
 4. Shrinking font size only as a last resort — this hurts readability and has been pushed back on
+
+Every `h1`/`h2` is balanced by a base rule in `app/globals.css`; stat labels, the home English
+tagline and the services format-card descriptions carry `text-balance` too. The home hero paragraph
+stays `text-pretty` — balancing it measured worse. The one widow left is the About `h1` at ~768px
+("…เปลี่ยนแปลง / ชีวิตได้"): its `<br />` fixes the line split, so balance cannot move it.
+Balancing picks new break points, so a phrase it splits badly goes into `MANUAL` in KeepWords.
 
 **Measure, don't eyeball.** Line-break work is done by measuring real line-box widths in the browser
 with the Range API, not by guessing.

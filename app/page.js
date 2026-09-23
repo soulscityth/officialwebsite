@@ -23,7 +23,7 @@ export default function HomePage() {
                 </span>
               ))}
             </h1>
-            <p className="mx-auto mt-4 max-w-xl text-sm italic text-brand-200 lg:mx-0">
+            <p className="mx-auto mt-4 max-w-xl text-balance text-sm italic text-brand-200 lg:mx-0">
               &ldquo;{siteConfig.taglineEn}&rdquo;
             </p>
             <p className="mx-auto mt-6 max-w-2xl text-pretty text-base leading-relaxed text-brand-100 lg:mx-0">
@@ -62,7 +62,7 @@ export default function HomePage() {
                   className="rounded-2xl bg-white/10 p-6 text-center ring-1 ring-white/15 backdrop-blur"
                 >
                   <p className="font-display text-3xl font-bold text-white">{stat.value}</p>
-                  <p className="mt-2 text-xs text-brand-100"><KeepWords>{stat.label}</KeepWords></p>
+                  <p className="mt-2 text-balance text-xs text-brand-100"><KeepWords>{stat.label}</KeepWords></p>
                 </div>
               ))}
             </div>
@@ -136,7 +136,7 @@ export default function HomePage() {
             {stats.map((stat) => (
               <div key={stat.label} className="card text-center">
                 <p className="font-display text-3xl font-bold text-brand-600">{stat.value}</p>
-                <p className="mt-2 text-sm text-slate-600"><KeepWords>{stat.label}</KeepWords></p>
+                <p className="mt-2 text-balance text-sm text-slate-600"><KeepWords>{stat.label}</KeepWords></p>
               </div>
             ))}
           </div>

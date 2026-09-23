@@ -11,7 +11,20 @@ import generated from "@/lib/thai-keepwords.json";
 // MANUAL holds what the script cannot produce: phrases that should stay on one
 // line, words its dictionary splits the same way the browser does, and words the
 // browser keeps whole alone but splits inside a sentence (ลงพื้นที่).
-const MANUAL = ["Facilitator มืออาชีพ", "1 ประเด็นหลัก", "การดูแล", "หลายวัน", "ตรงกับ", "ลงพื้นที่"];
+const MANUAL = [
+  "Facilitator มืออาชีพ",
+  "1 ประเด็นหลัก",
+  "การดูแล",
+  "หลายวัน",
+  "ตรงกับ",
+  "ลงพื้นที่",
+  // Phrases text-balance otherwise split: "ความเป็นไป / ได้", "เชิง / ปฏิบัติ".
+  "ความเป็นไปได้",
+  "การมีส่วนร่วม",
+  "เชิงปฏิบัติ",
+  "เวทีถอดบทเรียน",
+  "ให้กับ",
+];
 
 const WORDS = new Set([...MANUAL, ...generated]);
 // Longest first, so an entry that contains another still matches whole.

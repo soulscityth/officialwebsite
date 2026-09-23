@@ -31,7 +31,7 @@ export default function WorkPage() {
             {stats.map((stat) => (
               <div key={stat.label} className="rounded-2xl bg-white/10 p-4 text-center ring-1 ring-white/15 backdrop-blur">
                 <p className="font-display text-2xl font-bold text-white">{stat.value}</p>
-                <p className="mt-1 text-[11px] text-brand-100"><KeepWords>{stat.label}</KeepWords></p>
+                <p className="mt-1 text-balance text-[11px] text-brand-100"><KeepWords>{stat.label}</KeepWords></p>
               </div>
             ))}
           </div>
