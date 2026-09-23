@@ -12,7 +12,7 @@ export default function Footer() {
         <div className="sm:col-span-2 lg:col-span-1">
           <Link href="/" className="flex items-center gap-2.5">
             <Image src="/logo-mark.png" alt={siteConfig.name} width={36} height={36} className="h-9 w-9" />
-            <span className="font-display text-lg font-bold text-white">{siteConfig.name}</span>
+            <span className="font-display text-lg font-bold text-white"><KeepWords>{siteConfig.name}</KeepWords></span>
           </Link>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-brand-200">
             <KeepWords>{siteConfig.description}</KeepWords>
@@ -38,12 +38,12 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="text-sm font-semibold uppercase tracking-wider text-white">เมนู</h3>
+          <h3 className="text-sm font-semibold uppercase tracking-wider text-white"><KeepWords>เมนู</KeepWords></h3>
           <ul className="mt-4 space-y-3">
             {siteConfig.nav.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className="text-sm text-brand-200 transition-colors hover:text-white">
-                  {item.label}
+                  <KeepWords>{item.label}</KeepWords>
                 </Link>
               </li>
             ))}
@@ -51,12 +51,12 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="text-sm font-semibold uppercase tracking-wider text-white">ประเด็นการเรียนรู้</h3>
+          <h3 className="text-sm font-semibold uppercase tracking-wider text-white"><KeepWords>ประเด็นการเรียนรู้</KeepWords></h3>
           <ul className="mt-4 space-y-3 text-sm text-brand-200">
             {domains.map((d) => (
               <li key={d.title}>
                 <Link href="/services" className="transition-colors hover:text-white">
-                  {d.title}
+                  <KeepWords>{d.title}</KeepWords>
                 </Link>
               </li>
             ))}
@@ -69,7 +69,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="text-sm font-semibold uppercase tracking-wider text-white">ติดต่อเรา</h3>
+          <h3 className="text-sm font-semibold uppercase tracking-wider text-white"><KeepWords>ติดต่อเรา</KeepWords></h3>
           <ul className="mt-4 space-y-3 text-sm text-brand-200">
             <li className="flex gap-3">
               <Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
@@ -87,7 +87,10 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <div className="container-page flex flex-col items-center justify-between gap-3 py-6 text-xs text-brand-300 sm:flex-row">
-          <p>© {new Date().getFullYear()} {siteConfig.legalNameTh} สงวนลิขสิทธิ์ทุกประการ</p>
+          <p>
+              © {new Date().getFullYear()}{" "}
+              <KeepWords>{`${siteConfig.legalNameTh} สงวนลิขสิทธิ์ทุกประการ`}</KeepWords>
+            </p>
           <p>{siteConfig.taglineEn}</p>
         </div>
       </div>

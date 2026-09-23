@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { BookOpen, Quote } from "lucide-react";
+import KeepWords from "@/components/KeepWords";
 
 // A square photo inside a panel that is taller than it is wide gets scaled to
 // cover the HEIGHT, so that — not the width — is what sets the resolution the
@@ -47,7 +48,7 @@ export default function TeamCard({ member, index = 0 }) {
       <div className="flex min-w-0 flex-1 flex-col justify-center gap-2.5 p-4 sm:p-6">
         <div className="flex flex-col gap-2">
           <h3 className="font-display text-sm font-semibold !leading-snug text-slate-900 sm:text-lg">
-            {member.name}{" "}
+            <KeepWords>{member.name}</KeepWords>{" "}
             <span className="font-sans text-[11px] font-normal text-slate-500 sm:text-sm">
               ({member.nickname})
             </span>
@@ -67,7 +68,7 @@ export default function TeamCard({ member, index = 0 }) {
         {member.quote && (
           <div className="flex items-start gap-2.5 rounded-xl bg-brand-50/60 px-3 py-2.5">
             <Quote className="mt-0.5 h-4 w-4 shrink-0 text-brand-600/60" aria-hidden="true" />
-            <p className="text-xs font-medium leading-relaxed text-slate-700">{member.quote}</p>
+            <p className="text-xs font-medium leading-relaxed text-slate-700"><KeepWords>{member.quote}</KeepWords></p>
           </div>
         )}
 

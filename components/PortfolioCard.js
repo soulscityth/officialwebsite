@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Calendar, Clock, Users2 } from "lucide-react";
+import KeepWords from "@/components/KeepWords";
 
 const CATEGORY_LABEL = { camp: "Camp", workshop: "Workshop", misc: "Miscellaneous" };
 
@@ -106,21 +107,21 @@ export default function PortfolioCard({ item, eager = false }) {
             </span>
           ))}
         </div>
-        <h3 className="mt-4 font-display text-base font-semibold leading-snug text-slate-900">{item.title}</h3>
-        <p className="mt-1.5 text-xs text-slate-500">{item.partner}</p>
+        <h3 className="mt-4 font-display text-base font-semibold leading-snug text-slate-900"><KeepWords>{item.title}</KeepWords></h3>
+        <p className="mt-1.5 text-xs text-slate-500"><KeepWords>{item.partner}</KeepWords></p>
 
         <div className="mt-4 space-y-1.5 text-xs text-slate-500">
           <div className="flex items-center gap-2">
             <Calendar className="h-3.5 w-3.5 shrink-0 text-brand-500" />
-            {item.date}
+            <KeepWords>{item.date}</KeepWords>
           </div>
           <div className="flex items-center gap-2">
             <Clock className="h-3.5 w-3.5 shrink-0 text-brand-500" />
-            {item.duration}
+            <KeepWords>{item.duration}</KeepWords>
           </div>
           <div className="flex items-center gap-2">
             <Users2 className="h-3.5 w-3.5 shrink-0 text-brand-500" />
-            {item.participants}
+            <KeepWords>{item.participants}</KeepWords>
           </div>
         </div>
 

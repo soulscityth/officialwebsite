@@ -16,13 +16,15 @@ export default function ServicesPage() {
       <section className="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-950">
         <div className="absolute inset-0 bg-hero-grid bg-[length:20px_20px] opacity-20" />
         <div className="container-page relative section text-center py-16 sm:py-20 lg:py-28">
-          <span className="eyebrow bg-white/10 text-white ring-white/20">บริการของเรา</span>
+          <span className="eyebrow bg-white/10 text-white ring-white/20"><KeepWords>บริการของเรา</KeepWords></span>
           <h1 className="mx-auto mt-6 max-w-3xl font-display text-4xl font-bold !leading-snug tracking-wide text-white sm:text-5xl">
-            กระบวนการเรียนรู้ที่ออกแบบมาเพื่อผู้เรียนของคุณโดยเฉพาะ
+            <KeepWords>
+              กระบวนการเรียนรู้ที่ออกแบบมาเพื่อผู้เรียนของคุณโดยเฉพาะ
+            </KeepWords>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-balance text-base leading-relaxed text-brand-100">
             <KeepWords>
-              ตั้งแต่ค่ายหลายวันไปจนถึงเวิร์กช็อปสั้น เราออกแบบและจัดกระบวนการเรียนรู้ที่ตอบโจทย์เป้าหมายของโรงเรียนและองค์กรของคุณ
+                ตั้งแต่ค่ายหลายวันไปจนถึงเวิร์กช็อปสั้น เราออกแบบและจัดกระบวนการเรียนรู้ที่ตอบโจทย์เป้าหมายของโรงเรียนและองค์กรของคุณ
             </KeepWords>
           </p>
         </div>
@@ -33,7 +35,7 @@ export default function ServicesPage() {
         <div className="container-page">
           <div className="rounded-3xl bg-brand-950 px-8 py-14 text-center sm:px-16">
             <span className="eyebrow bg-white/10 text-white ring-white/20">Our Product</span>
-            <h2 className="mt-4 font-display text-3xl font-bold text-white sm:text-4xl">{signatureCamp.title}</h2>
+            <h2 className="mt-4 font-display text-3xl font-bold text-white sm:text-4xl"><KeepWords>{signatureCamp.title}</KeepWords></h2>
             <p className="mx-auto mt-5 max-w-2xl text-balance text-base leading-relaxed text-brand-100">
               <KeepWords>{signatureCamp.pitch}</KeepWords>
             </p>
@@ -41,7 +43,7 @@ export default function ServicesPage() {
               {signatureCamp.points.map((point) => (
                 <div key={point} className="flex items-start gap-3 rounded-xl bg-white/5 p-4">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-300" />
-                  <span className="text-sm text-brand-50">{point}</span>
+                  <span className="text-sm text-brand-50"><KeepWords>{point}</KeepWords></span>
                 </div>
               ))}
             </div>
@@ -51,7 +53,9 @@ export default function ServicesPage() {
                 className="btn bg-white text-brand-800 hover:bg-brand-50"
                 data-ga-event="cta_consult_click"
               >
-                ปรึกษาการจัดค่าย
+                <KeepWords>
+                  ปรึกษาการจัดค่าย
+                </KeepWords>
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
               {/* Two phrases, so a narrow screen breaks before เป็น rather than after it. */}
@@ -59,9 +63,11 @@ export default function ServicesPage() {
                 href="#domains"
                 className="text-center text-sm text-brand-200 transition-colors hover:text-white"
               >
-                <span className="inline-block">เลือก 1 จาก 3 Content Domains</span>{" "}
+                <span className="inline-block"><KeepWords>เลือก 1 จาก 3 Content Domains</KeepWords></span>{" "}
                 <span className="inline-block">
-                  เป็นเนื้อหาหลักของค่าย
+                  <KeepWords>
+                    เป็นเนื้อหาหลักของค่าย
+                  </KeepWords>
                   <ArrowDown className="ml-1.5 inline h-4 w-4 align-[-3px]" aria-hidden="true" />
                 </span>
               </a>
@@ -76,7 +82,7 @@ export default function ServicesPage() {
       <section id="domains" className="section scroll-mt-16 bg-slate-50">
         <div className="container-page">
           <div className="mx-auto max-w-2xl text-center">
-            <span className="eyebrow">เนื้อหาใน Signature Camp</span>
+            <span className="eyebrow"><KeepWords>เนื้อหาใน Signature Camp</KeepWords></span>
             {/* Left to the dictionary this split "ให้ / เลือก", and "Content / Domains"
                 on phones. The break is after "3 Content Domains"; when a phone is too
                 narrow for either half, each has exactly one fallback point inside it
@@ -93,8 +99,8 @@ export default function ServicesPage() {
             </h2>
             <p className="mt-4 text-balance text-base leading-relaxed text-slate-600">
               <KeepWords>
-                Signature Camp แต่ละค่ายออกแบบรอบ 1 ประเด็นหลัก เลือกประเด็นที่ตรงกับเป้าหมายของผู้เรียน
-                แล้วเราออกแบบทุกกิจกรรมในค่ายให้พาไปสู่เป้าหมายนั้น
+                  Signature Camp แต่ละค่ายออกแบบรอบ 1 ประเด็นหลัก เลือกประเด็นที่ตรงกับเป้าหมายของผู้เรียน
+                  แล้วเราออกแบบทุกกิจกรรมในค่ายให้พาไปสู่เป้าหมายนั้น
               </KeepWords>
             </p>
           </div>
@@ -109,14 +115,14 @@ export default function ServicesPage() {
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
                     <domain.icon className="h-6 w-6" />
                   </div>
-                  <h3 className="mt-4 font-display text-xl font-semibold text-slate-900">{domain.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{domain.description}</p>
+                  <h3 className="mt-4 font-display text-xl font-semibold text-slate-900"><KeepWords>{domain.title}</KeepWords></h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600"><KeepWords>{domain.description}</KeepWords></p>
                 </div>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-2">
                   {domain.formats.map((format) => (
                     <div key={format.name} className="rounded-2xl bg-brand-50/60 p-5">
-                      <p className="font-display text-sm font-semibold text-brand-700">{format.name}</p>
-                      <p className="mt-2 text-sm leading-relaxed text-slate-600">{format.detail}</p>
+                      <p className="font-display text-sm font-semibold text-brand-700"><KeepWords>{format.name}</KeepWords></p>
+                      <p className="mt-2 text-sm leading-relaxed text-slate-600"><KeepWords>{format.detail}</KeepWords></p>
                     </div>
                   ))}
                 </div>
@@ -130,9 +136,11 @@ export default function ServicesPage() {
       <section className="section">
         <div className="container-page">
           <div className="mx-auto max-w-2xl text-center">
-            <span className="eyebrow">ทักษะที่เราออกแบบได้</span>
+            <span className="eyebrow"><KeepWords>ทักษะที่เราออกแบบได้</KeepWords></span>
             <h2 className="mt-4 font-display text-3xl font-bold text-slate-900 sm:text-4xl">
-              ประเด็นการเรียนรู้ที่เราเชี่ยวชาญ
+              <KeepWords>
+                ประเด็นการเรียนรู้ที่เราเชี่ยวชาญ
+              </KeepWords>
             </h2>
           </div>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
@@ -152,9 +160,11 @@ export default function ServicesPage() {
       <section className="section bg-slate-50">
         <div className="container-page">
           <div className="mx-auto max-w-2xl text-center">
-            <span className="eyebrow">รูปแบบกิจกรรม</span>
+            <span className="eyebrow"><KeepWords>รูปแบบกิจกรรม</KeepWords></span>
             <h2 className="mt-4 font-display text-3xl font-bold text-slate-900 sm:text-4xl">
-              เลือกรูปแบบที่เหมาะกับเป้าหมายของคุณ
+              <KeepWords>
+                เลือกรูปแบบที่เหมาะกับเป้าหมายของคุณ
+              </KeepWords>
             </h2>
           </div>
           <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-3">
@@ -163,8 +173,8 @@ export default function ServicesPage() {
                 <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
                   <format.icon className="h-6 w-6" />
                 </div>
-                <h3 className="mt-5 font-display text-lg font-semibold text-slate-900">{format.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">{format.description}</p>
+                <h3 className="mt-5 font-display text-lg font-semibold text-slate-900"><KeepWords>{format.name}</KeepWords></h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600"><KeepWords>{format.description}</KeepWords></p>
               </div>
             ))}
           </div>
@@ -178,16 +188,22 @@ export default function ServicesPage() {
             <div className="absolute inset-0 bg-hero-grid bg-[length:20px_20px] opacity-20" />
             <div className="relative">
               <h2 className="font-display text-3xl font-bold text-white sm:text-4xl">
-                ให้เราช่วยออกแบบโปรแกรมที่ใช่สำหรับคุณ
+                <KeepWords>
+                  ให้เราช่วยออกแบบโปรแกรมที่ใช่สำหรับคุณ
+                </KeepWords>
               </h2>
               <p className="mx-auto mt-4 max-w-2xl text-balance text-brand-100">
-                ทีมนักออกแบบการเรียนรู้ของเราพร้อมพูดคุยและช่วยออกแบบโปรแกรมที่เหมาะสมที่สุดให้ฟรี
+                <KeepWords>
+                  ทีมนักออกแบบการเรียนรู้ของเราพร้อมพูดคุยและช่วยออกแบบโปรแกรมที่เหมาะกับผู้เรียนของคุณ
+                </KeepWords>
               </p>
               <div className="mt-8 flex justify-center">
                 <Link href="/contact" className="btn bg-white text-brand-800 hover:bg-brand-50"
                   data-ga-event="cta_consult_click"
                 >
-                  ปรึกษาโครงการฟรี
+                  <KeepWords>
+                    ปรึกษาโครงการฟรี
+                  </KeepWords>
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>
               </div>

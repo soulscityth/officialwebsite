@@ -15,13 +15,15 @@ export default function ContactPage() {
       <section className="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-950">
         <div className="absolute inset-0 bg-hero-grid bg-[length:20px_20px] opacity-20" />
         <div className="container-page relative section text-center py-16 sm:py-20 lg:py-28">
-          <span className="eyebrow bg-white/10 text-white ring-white/20">ติดต่อเรา</span>
+          <span className="eyebrow bg-white/10 text-white ring-white/20"><KeepWords>ติดต่อเรา</KeepWords></span>
           <h1 className="mx-auto mt-6 max-w-4xl font-display text-4xl font-bold !leading-snug tracking-wide text-white sm:text-5xl">
-            พร้อมพูดคุยเกี่ยวกับโครงการของคุณ
+            <KeepWords>
+              พร้อมพูดคุยเกี่ยวกับโครงการของคุณ
+            </KeepWords>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-balance text-base leading-relaxed text-brand-100">
             <KeepWords>
-              ไม่ว่าจะเป็นค่าย เวิร์กช็อป หรือกิจกรรมการเรียนรู้รูปแบบอื่น ทีมงานของเราพร้อมรับฟังและให้คำปรึกษาฟรี
+                ไม่ว่าจะเป็นค่าย เวิร์กช็อป หรือกิจกรรมการเรียนรู้รูปแบบอื่น ทีมงานของเราพร้อมรับฟังและให้คำปรึกษาฟรี
             </KeepWords>
           </p>
         </div>
@@ -31,12 +33,16 @@ export default function ContactPage() {
       <section className="section">
         <div className="container-page grid grid-cols-1 gap-12 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <span className="eyebrow">ช่องทางติดต่อ</span>
+            <span className="eyebrow"><KeepWords>ช่องทางติดต่อ</KeepWords></span>
             <h2 className="mt-4 text-2xl font-bold text-slate-900 sm:text-3xl font-display">
-              เลือกช่องทางที่สะดวกสำหรับคุณ
+              <KeepWords>
+                เลือกช่องทางที่สะดวกสำหรับคุณ
+              </KeepWords>
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-slate-600">
-              ทีมงานของเราพร้อมตอบทุกคำถามและให้คำปรึกษาโดยไม่มีค่าใช้จ่าย ติดต่อเราผ่านช่องทางด้านล่าง หรือกรอกแบบฟอร์มเพื่อให้เราติดต่อกลับ
+              <KeepWords>
+                ทีมงานของเราพร้อมตอบทุกคำถามและให้คำปรึกษาโดยไม่มีค่าใช้จ่าย ติดต่อเราผ่านช่องทางด้านล่าง หรือกรอกแบบฟอร์มเพื่อให้เราติดต่อกลับ
+              </KeepWords>
             </p>
 
             <div className="mt-8 space-y-5">
@@ -45,7 +51,7 @@ export default function ContactPage() {
                   <Mail className="h-5 w-5" />
                 </span>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">อีเมล</p>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-400"><KeepWords>อีเมล</KeepWords></p>
                   <p className="mt-1 text-sm leading-relaxed text-slate-700">{siteConfig.email}</p>
                 </div>
               </div>
@@ -55,7 +61,7 @@ export default function ContactPage() {
                   <Phone className="h-5 w-5" />
                 </span>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">โทรศัพท์</p>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-400"><KeepWords>โทรศัพท์</KeepWords></p>
                   {siteConfig.contacts.map((c) => (
                     <p key={c.phone} className="mt-1 text-sm leading-relaxed text-slate-700">
                       {c.phone} ({c.name})
@@ -69,8 +75,8 @@ export default function ContactPage() {
                   <MapPin className="h-5 w-5" />
                 </span>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">พื้นที่ให้บริการ</p>
-                  <p className="mt-1 text-sm leading-relaxed text-slate-700">{siteConfig.serviceArea}</p>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-400"><KeepWords>พื้นที่ให้บริการ</KeepWords></p>
+                  <p className="mt-1 text-sm leading-relaxed text-slate-700"><KeepWords>{siteConfig.serviceArea}</KeepWords></p>
                 </div>
               </div>
 
@@ -79,7 +85,7 @@ export default function ContactPage() {
                   <Facebook className="h-5 w-5" />
                 </span>
                 <div className="flex-1">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">โซเชียลมีเดีย</p>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-400"><KeepWords>โซเชียลมีเดีย</KeepWords></p>
                   <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm text-slate-700">
                     <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-brand-600">
                       Facebook: {siteConfig.social.facebookHandle}
@@ -97,9 +103,11 @@ export default function ContactPage() {
           </div>
 
           <div className="rounded-3xl bg-slate-50 p-6 shadow-card ring-1 ring-slate-100 sm:p-10 lg:col-span-3">
-            <h2 className="font-display text-2xl font-bold text-slate-900">ส่งข้อความถึงเรา</h2>
+            <h2 className="font-display text-2xl font-bold text-slate-900"><KeepWords>ส่งข้อความถึงเรา</KeepWords></h2>
             <p className="mt-2 text-sm text-slate-600">
-              กรอกแบบฟอร์มด้านล่าง ทีมงานจะติดต่อกลับภายใน 1-2 วันทำการ
+              <KeepWords>
+                กรอกแบบฟอร์มด้านล่าง ทีมงานจะติดต่อกลับภายใน 1 วันทำการ
+              </KeepWords>
             </p>
             <div className="mt-8">
               <ContactForm />

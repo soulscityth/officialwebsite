@@ -1,40 +1,39 @@
 import { Fragment } from "react";
+import generated from "@/lib/thai-keepwords.json";
 
-// Thai line breaking works from a dictionary. Transliterated loanwords are not
-// in it, so browsers split เวิร์กช็อป as "เวิร์ / กช็อป", and compounds and set
-// phrases are stored as their parts, so ภายใต้ can land as "ภาย / ใต้". Each entry
-// here is wrapped so it can only move to the next line whole. The list is what
-// was caught breaking in text that renders through this component — print the
-// laid-out lines across widths and add to it when another one turns up.
-const WORDS = [
-  "เวิร์กช็อป",
-  "Facilitator มืออาชีพ",
-  "ลองผิดลองถูก",
-  "1 ประเด็นหลัก",
-  "มืออาชีพ",
-  "เป้าหมาย",
-  "โดยเฉพาะ",
-  "การดูแล",
-  "ภายใต้",
-  "ลงมือทำ",
-  "หลายวัน",
-  "ตัวเอง",
-  "ค้นพบ",
-  "ตรงกับ",
-];
+// Browsers break Thai lines using ICU's dictionary, which stores many ordinary
+// words as parts: ผู้เรียน lands as "ผู้ / เรียน", ไว้วางใจ as "ไว้ / วางใจ",
+// เวิร์กช็อป as "เวิร์ / กช็อป". Every word listed here is wrapped so it can only
+// move to the next line whole; everything else breaks as the browser decides.
+//
+// Most of the list is lib/thai-keepwords.json, which scripts/thai-keepwords.py
+// generates from the site's copy — rerun it after adding or rewording Thai text.
+// MANUAL holds what the script cannot produce: phrases that should stay on one
+// line, words its dictionary splits the same way the browser does, and words the
+// browser keeps whole alone but splits inside a sentence (ลงพื้นที่).
+const MANUAL = ["Facilitator มืออาชีพ", "1 ประเด็นหลัก", "การดูแล", "หลายวัน", "ตรงกับ", "ลงพื้นที่"];
+
+const WORDS = new Set([...MANUAL, ...generated]);
 // Longest first, so an entry that contains another still matches whole.
 const PATTERN = new RegExp(`(${[...WORDS].sort((a, b) => b.length - a.length).join("|")})`);
 
+// The pieces go inside one plain <span>. Returned bare, they became separate items
+// wherever the parent is a flex container — buttons, eyebrows, chips, list rows —
+// and the parent's gap was drawn between the halves of a single label.
 export default function KeepWords({ children }) {
-  return String(children)
-    .split(PATTERN)
-    .map((part, i) =>
-      WORDS.includes(part) ? (
-        <span key={i} className="whitespace-nowrap">
-          {part}
-        </span>
-      ) : (
-        <Fragment key={i}>{part}</Fragment>
-      )
-    );
+  return (
+    <span>
+      {String(children)
+        .split(PATTERN)
+        .map((part, i) =>
+          WORDS.has(part) ? (
+            <span key={i} className="whitespace-nowrap">
+              {part}
+            </span>
+          ) : (
+            <Fragment key={i}>{part}</Fragment>
+          )
+        )}
+    </span>
+  );
 }
