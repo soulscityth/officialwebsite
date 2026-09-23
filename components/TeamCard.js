@@ -68,7 +68,7 @@ export default function TeamCard({ member, index = 0 }) {
         {member.quote && (
           <div className="flex items-start gap-2.5 rounded-xl bg-brand-50/60 px-3 py-2.5">
             <Quote className="mt-0.5 h-4 w-4 shrink-0 text-brand-600/60" aria-hidden="true" />
-            <p className="text-xs font-medium leading-relaxed text-slate-700"><KeepWords>{member.quote}</KeepWords></p>
+            <p className="text-balance text-xs font-medium leading-relaxed text-slate-700"><KeepWords>{member.quote}</KeepWords></p>
           </div>
         )}
 

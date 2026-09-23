@@ -28,6 +28,10 @@ const MANUAL = [
   "ตั้งแต่จุดประกาย",
   "ระดมความคิด",
   "ปรึกษาโครงการฟรี",
+  // Team quotes on About, in the narrow photo-card column.
+  "พาไอเดีย",
+  "ที่มั่นคง",
+  "ที่ดี",
 ];
 
 const WORDS = new Set([...MANUAL, ...generated]);
