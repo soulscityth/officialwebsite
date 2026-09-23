@@ -1,7 +1,13 @@
-import { Mail, Phone, MapPin, Facebook, ArrowUpRight } from "lucide-react";
+import { Mail, Phone, MapPin, Globe, ArrowUpRight } from "lucide-react";
 import KeepWords from "@/components/KeepWords";
 import ContactForm from "@/components/ContactForm";
 import { siteConfig } from "@/lib/site";
+
+// Email, phone and social rows share one link style: action colour, underline,
+// and a 36px tap target on phones.
+const linkClass = "group inline-flex items-center py-2 text-sm sm:py-1";
+const linkText =
+  "font-medium text-brand-600 underline decoration-brand-200 underline-offset-4 transition-colors group-hover:text-brand-700 group-hover:decoration-brand-600";
 
 export const metadata = {
   title: "ติดต่อเรา",
@@ -45,33 +51,44 @@ export default function ContactPage() {
               </KeepWords>
             </p>
 
+            {/* The icon squares show from sm up. On a phone they took 60px from each card,
+                and a social row ("Instagram  soulscity.learning ↗") no longer fit at 320-360px. */}
             <div className="mt-8 space-y-5">
               <div className="flex items-start gap-4 rounded-2xl border border-slate-100 p-5">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+                <span className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 sm:flex">
                   <Mail className="h-5 w-5" />
                 </span>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wider text-slate-400"><KeepWords>อีเมล</KeepWords></p>
-                  <p className="mt-1 text-sm leading-relaxed text-slate-700">{siteConfig.email}</p>
+                  <a href={`mailto:${siteConfig.email}`} className={`${linkClass} mt-1`}>
+                    <span className={linkText}>{siteConfig.email}</span>
+                  </a>
                 </div>
               </div>
 
               <div className="flex items-start gap-4 rounded-2xl border border-slate-100 p-5">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+                <span className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 sm:flex">
                   <Phone className="h-5 w-5" />
                 </span>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wider text-slate-400"><KeepWords>โทรศัพท์</KeepWords></p>
-                  {siteConfig.contacts.map((c) => (
-                    <p key={c.phone} className="mt-1 text-sm leading-relaxed text-slate-700">
-                      {c.phone} ({c.name})
-                    </p>
-                  ))}
+                  <ul className="mt-1 text-sm">
+                    {siteConfig.contacts.map((c) => (
+                      <li key={c.phone}>
+                        <a href={`tel:${c.phone.replace(/\D/g, "")}`} className={`${linkClass} gap-2`}>
+                          <span className={linkText}>{c.phone}</span>
+                          <span className="text-slate-500">
+                            (<KeepWords>{c.name}</KeepWords>)
+                          </span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
 
               <div className="flex items-start gap-4 rounded-2xl border border-slate-100 p-5">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+                <span className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 sm:flex">
                   <MapPin className="h-5 w-5" />
                 </span>
                 <div>
@@ -81,13 +98,12 @@ export default function ContactPage() {
               </div>
 
               <div className="flex items-start gap-4 rounded-2xl border border-slate-100 p-5">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
-                  <Facebook className="h-5 w-5" />
+                <span className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 sm:flex">
+                  <Globe className="h-5 w-5" />
                 </span>
                 <div className="flex-1">
                   <p className="text-xs font-semibold uppercase tracking-wider text-slate-400"><KeepWords>โซเชียลมีเดีย</KeepWords></p>
-                  {/* One account per line, styled as links: handle in the action colour
-                      with an outward arrow, since these open another site. */}
+                  {/* One account per line; the arrow marks these as opening another site. */}
                   <ul className="mt-1 text-sm">
                     {[
                       ["Facebook", siteConfig.social.facebook, siteConfig.social.facebookHandle],
@@ -99,12 +115,10 @@ export default function ContactPage() {
                           href={href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group inline-flex items-center gap-2 py-2 sm:py-1"
+                          className={`${linkClass} gap-2`}
                         >
                           <span className="w-[4.5rem] text-slate-500">{platform}</span>
-                          <span className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-4 transition-colors group-hover:text-brand-700 group-hover:decoration-brand-600">
-                            {handle}
-                          </span>
+                          <span className={linkText}>{handle}</span>
                           <ArrowUpRight
                             className="h-4 w-4 text-brand-600 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                             aria-hidden="true"
