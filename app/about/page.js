@@ -1,8 +1,9 @@
+import { Fragment } from "react";
 import Link from "next/link";
 import TeamCard from "@/components/TeamCard";
 import FacilitatorCard from "@/components/FacilitatorCard";
-import { ArrowUpRight, Target, Eye } from "lucide-react";
-import { stats, values, team } from "@/lib/data";
+import { ArrowUpRight, Target, Quote } from "lucide-react";
+import { values, team } from "@/lib/data";
 import { siteConfig } from "@/lib/site";
 
 export const metadata = {
@@ -49,39 +50,37 @@ export default function AboutPage() {
               เพื่อให้ผู้เรียนได้มีประสบการณ์ที่สนุก น่าตื่นเต้น และมีคุณค่า
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            {stats.map((stat) => (
-              <div key={stat.label} className="card text-center">
-                <p className="font-display text-3xl font-bold text-brand-600">{stat.value}</p>
-                <p className="mt-2 text-sm text-slate-600">{stat.label}</p>
+          {/* The slogan leads; positioning sits under it as the practical promise. */}
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-900 via-brand-800 to-brand-950 p-8 sm:p-10">
+            <div className="absolute inset-0 bg-hero-grid bg-[length:20px_20px] opacity-20" />
+            <div className="relative">
+              <Quote className="h-8 w-8 text-brand-300" aria-hidden="true" />
+              <p className="mt-6 font-display text-3xl font-bold !leading-snug tracking-wide text-white sm:text-4xl">
+                {siteConfig.taglineEn}
+              </p>
+              {/* Each half of the tagline wraps as a unit, so a narrow screen breaks at
+                  the space between them rather than stranding "สู่" on the first line. */}
+              <p className="mt-4 text-lg leading-relaxed text-brand-100">
+                {siteConfig.tagline.split(" ").map((part, i) => (
+                  <Fragment key={part}>
+                    {i > 0 && " "}
+                    <span className="inline-block">{part}</span>
+                  </Fragment>
+                ))}
+              </p>
+              <div className="mt-8 h-px bg-white/15" />
+              <div className="mt-8 flex gap-4">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/10 text-white ring-1 ring-inset ring-white/15">
+                  <Target className="h-5 w-5" />
+                </span>
+                <div>
+                  <h3 className="font-display text-lg font-semibold text-white">Human Development Solution</h3>
+                  <p className="mt-1.5 text-pretty text-sm leading-relaxed text-brand-100">
+                    เราเป็นพันธมิตรด้านการพัฒนาคน ที่ออกแบบกระบวนการเรียนรู้ให้ตอบโจทย์เป้าหมายของแต่ละโรงเรียนและองค์กรโดยเฉพาะ
+                  </p>
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Positioning */}
-      <section className="section bg-slate-50">
-        <div className="container-page grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <div className="card">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
-              <Target className="h-6 w-6" />
             </div>
-            <h3 className="mt-5 font-display text-lg font-semibold text-slate-900">Human Development Solution</h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">
-              เราเป็นพันธมิตรด้านการพัฒนาคน ที่ออกแบบกระบวนการเรียนรู้ให้ตอบโจทย์เป้าหมายของแต่ละโรงเรียนและองค์กรโดยเฉพาะ
-            </p>
-          </div>
-          <div className="card">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
-              <Eye className="h-6 w-6" />
-            </div>
-            <h3 className="mt-5 font-display text-lg font-semibold text-slate-900">
-              &ldquo;{siteConfig.taglineEn}&rdquo;
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">
-              {siteConfig.tagline} — นี่คือความเชื่อที่ขับเคลื่อนทุกกระบวนการเรียนรู้ที่เราออกแบบ
-            </p>
           </div>
         </div>
       </section>
