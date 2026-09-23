@@ -10,13 +10,20 @@ body {
   @apply bg-white text-slate-800 antialiased;
 }
 
+/* Every page and section heading is balanced, so a narrow screen never leaves one
+   short word ("คุณ", "จริง") alone on the last line. */
+h1,
+h2 {
+  text-wrap: balance;
+}
+
 @layer components {
   .container-page {
     @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
   }
 
   .section {
-    @apply py-16 sm:py-20 lg:py-24;
+    @apply py-12 sm:py-16 lg:py-20;
   }
 
   .btn {

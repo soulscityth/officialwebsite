@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Send, CheckCircle2, AlertCircle } from "lucide-react";
+import KeepWords from "@/components/KeepWords";
 import { activityTypes, learnerLevels } from "@/lib/data";
 import { trackEvent, GA_EVENTS } from "@/lib/analytics";
 
@@ -47,16 +48,20 @@ export default function ContactForm() {
         <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-600 text-white">
           <CheckCircle2 className="h-7 w-7" />
         </span>
-        <h3 className="mt-5 text-lg font-semibold text-slate-900">ส่งข้อความเรียบร้อยแล้ว!</h3>
+        <h3 className="mt-5 text-lg font-semibold text-slate-900"><KeepWords>ส่งข้อความเรียบร้อยแล้ว!</KeepWords></h3>
         <p className="mt-2 max-w-sm text-sm text-slate-600">
-          ขอบคุณที่ติดต่อเรา ทีมงานจะติดต่อกลับภายใน 1 วันทำการ
+          <KeepWords>
+            ขอบคุณที่ติดต่อเรา ทีมงานจะติดต่อกลับภายใน 1 วันทำการ
+          </KeepWords>
         </p>
         <button
           type="button"
           onClick={() => setSubmitted(false)}
           className="btn-secondary mt-6"
         >
-          ส่งข้อความอีกครั้ง
+          <KeepWords>
+            ส่งข้อความอีกครั้ง
+          </KeepWords>
         </button>
       </div>
     );
@@ -67,7 +72,9 @@ export default function ContactForm() {
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-slate-700">
-            ชื่อผู้ติดต่อ
+            <KeepWords>
+              ชื่อผู้ติดต่อ
+            </KeepWords>
           </label>
           <input
             id="name"
@@ -80,7 +87,9 @@ export default function ContactForm() {
         </div>
         <div>
           <label htmlFor="phone" className="mb-1.5 block text-sm font-medium text-slate-700">
-            เบอร์โทรศัพท์
+            <KeepWords>
+              เบอร์โทรศัพท์
+            </KeepWords>
           </label>
           <input
             id="phone"
@@ -94,7 +103,9 @@ export default function ContactForm() {
 
       <div>
         <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-slate-700">
-          อีเมล
+          <KeepWords>
+            อีเมล
+          </KeepWords>
         </label>
         <input
           id="email"
@@ -111,13 +122,15 @@ export default function ContactForm() {
           instead of asking a second round of questions. */}
       <fieldset className="rounded-2xl bg-slate-50 p-5 ring-1 ring-inset ring-slate-100">
         <legend className="px-2 text-sm font-medium text-slate-700">
-          เกี่ยวกับโครงการ <span className="font-normal text-slate-400">(ไม่บังคับ)</span>
+          เกี่ยวกับโครงการ <span className="font-normal text-slate-400"><KeepWords>(ไม่บังคับ)</KeepWords></span>
         </legend>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div>
             <label htmlFor="activityType" className="mb-1.5 block text-sm font-medium text-slate-700">
-              ประเภทกิจกรรม
+              <KeepWords>
+                ประเภทกิจกรรม
+              </KeepWords>
             </label>
             <select id="activityType" name="activityType" className="input-field" defaultValue="">
               <option value="">เลือกประเภท</option>
@@ -128,7 +141,9 @@ export default function ContactForm() {
           </div>
           <div>
             <label htmlFor="learnerLevel" className="mb-1.5 block text-sm font-medium text-slate-700">
-              ระดับผู้เรียน
+              <KeepWords>
+                ระดับผู้เรียน
+              </KeepWords>
             </label>
             <select id="learnerLevel" name="learnerLevel" className="input-field" defaultValue="">
               <option value="">เลือกระดับ</option>
@@ -142,7 +157,9 @@ export default function ContactForm() {
         <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
           <div>
             <label htmlFor="participants" className="mb-1.5 block text-sm font-medium text-slate-700">
-              จำนวนผู้เข้าร่วม
+              <KeepWords>
+                จำนวนผู้เข้าร่วม
+              </KeepWords>
             </label>
             <input
               id="participants"
@@ -155,7 +172,9 @@ export default function ContactForm() {
           </div>
           <div>
             <label htmlFor="durationDays" className="mb-1.5 block text-sm font-medium text-slate-700">
-              จำนวนวัน
+              <KeepWords>
+                จำนวนวัน
+              </KeepWords>
             </label>
             <input
               id="durationDays"
@@ -168,7 +187,9 @@ export default function ContactForm() {
           </div>
           <div>
             <label htmlFor="preferredPeriod" className="mb-1.5 block text-sm font-medium text-slate-700">
-              ช่วงเวลาที่ต้องการจัด
+              <KeepWords>
+                ช่วงเวลาที่ต้องการจัด
+              </KeepWords>
             </label>
             <input
               id="preferredPeriod"
@@ -183,7 +204,9 @@ export default function ContactForm() {
 
       <div>
         <label htmlFor="subject" className="mb-1.5 block text-sm font-medium text-slate-700">
-          หัวข้อ
+          <KeepWords>
+            หัวข้อ
+          </KeepWords>
         </label>
         <input
           id="subject"
@@ -196,7 +219,9 @@ export default function ContactForm() {
 
       <div>
         <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-slate-700">
-          ข้อความ
+          <KeepWords>
+            ข้อความ
+          </KeepWords>
         </label>
         <textarea
           id="message"
@@ -220,7 +245,7 @@ export default function ContactForm() {
         {!loading && <Send className="h-4 w-4" />}
       </button>
 
-      <p className="text-center text-sm text-slate-500">ทีมงานตอบกลับภายใน 1 วันทำการ</p>
+      <p className="text-center text-sm text-slate-500"><KeepWords>ทีมงานตอบกลับภายใน 1 วันทำการ</KeepWords></p>
     </form>
   );
 }
