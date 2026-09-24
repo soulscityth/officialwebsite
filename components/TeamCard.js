@@ -73,14 +73,15 @@ export default function TeamCard({ member, index = 0 }) {
             </div>
           )}
 
-          {member.expertise && <Tags tags={member.expertise} className="hidden lg:flex" />}
+          {member.expertise && <Tags tags={member.expertise} className="hidden min-[380px]:flex" />}
         </div>
       </div>
 
-      {/* Below lg the tags sit in their own strip under the photo row. Inside the text
-          column they made these cards ~30% taller than the rest, and the photo, which
-          covers the full card height, was zoomed in by the same amount. */}
-      {member.expertise && <Tags tags={member.expertise} className="flex px-4 pb-4 pt-3 sm:px-6 sm:pb-5 sm:pt-4 lg:hidden" />}
+      {/* Below 380px the tags sit in their own strip under the photo row; the text
+          column there is only ~200px wide. From 380px they stay in the column, which
+          makes these cards taller than the rest below lg, and the photo, covering the
+          full card height, is zoomed in by the same amount (owners' choice). */}
+      {member.expertise && <Tags tags={member.expertise} className="flex px-4 pb-4 pt-3 min-[380px]:hidden" />}
     </div>
   );
 }
