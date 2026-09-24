@@ -152,10 +152,8 @@ export default function ServicesPage() {
               </KeepWords>
             </h2>
           </div>
-          {/* Legend: 2x2 on a phone so no group name sits alone on a second line, and one
-              column below 360px, where two English names side by side no longer fit. One row from
-              md; between sm and md a single row left "Community & Society" alone. */}
-          <div className="mx-auto mt-6 grid w-fit grid-cols-1 gap-x-4 gap-y-1.5 min-[360px]:grid-cols-2 sm:mt-8 md:flex md:flex-wrap md:justify-center md:gap-x-5">
+          {/* Legend: 2x2 below md so no group name sits alone on a second line; one row from md. */}
+          <div className="mx-auto mt-6 grid w-fit grid-cols-2 gap-x-4 gap-y-1.5 sm:mt-8 md:flex md:flex-wrap md:justify-center md:gap-x-5">
             {expertiseGroups.map((group) => (
               <span key={group.name} className="inline-flex items-center gap-1.5 whitespace-nowrap text-[12.5px] text-slate-600 sm:gap-2 sm:text-sm">
                 <span className={`h-2 w-2 shrink-0 rounded-full sm:h-2.5 sm:w-2.5 ${tagColors[group.color].dot}`} aria-hidden="true" />

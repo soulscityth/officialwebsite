@@ -177,7 +177,7 @@ would mean rewriting copy — the user's call, not a silent edit.
 ## Conventions
 
 - All user-facing copy is **Thai**; keep the tone warm and professional. Code identifiers stay English.
-  Deliberate exceptions: skill tags and their group names on `/services` (`expertiseGroups`), the
+  Deliberate exceptions: skill tags on `/services` (`expertiseGroups`; their group names are Thai), the
   service names (Workshop, Signature Camp, Facilitation) and English eyebrows such as "Our Services".
 - Server Components by default. Add `"use client"` only where state or effects are needed.
 - Every page exports `metadata`; the title template in `app/layout.js` appends `| SoulScity`.
