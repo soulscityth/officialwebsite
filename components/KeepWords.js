@@ -28,6 +28,8 @@ const MANUAL = [
   "ตั้งแต่จุดประกาย",
   "ระดมความคิด",
   "ปรึกษาโครงการฟรี",
+  "ลองคิด",
+  "ลองทำ",
   // Team quotes on About, in the narrow photo-card column.
   "ที่มั่นคง",
   "ที่ดี",
