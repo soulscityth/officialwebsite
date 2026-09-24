@@ -22,69 +22,77 @@ export default function TeamCard({ member, index = 0 }) {
   const shade = PANEL_SHADES[index % PANEL_SHADES.length];
 
   return (
-    <div className="flex overflow-hidden rounded-3xl bg-white shadow-card ring-1 ring-slate-100">
-      {/* Photo where we have one, the initial where we don't. */}
-      <div
-        className={`relative w-28 shrink-0 bg-gradient-to-br min-[380px]:w-36 sm:w-44 ${shade}`}
-      >
-        {member.image ? (
-          <Image
-            src={member.image}
-            alt={`${member.name} (${member.nickname})`}
-            fill
-            sizes={PHOTO_SIZES}
-            style={{ objectPosition: member.focal || "50% 50%" }}
-            className="object-cover"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center">
-            <span className="font-display text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
-              {member.nickname.slice(0, 1)}
-            </span>
-          </div>
-        )}
-      </div>
-
-      <div className="flex min-w-0 flex-1 flex-col justify-center gap-2.5 p-4 sm:p-6">
-        <div className="flex flex-col gap-2">
-          <h3 className="font-display text-sm font-semibold !leading-snug text-slate-900 sm:text-lg">
-            <KeepWords>{member.name}</KeepWords>{" "}
-            <span className="font-sans text-[11px] font-normal text-slate-500 sm:text-sm">
-              ({member.nickname})
-            </span>
-          </h3>
-          <span className="self-start rounded-full min-[360px]:whitespace-nowrap bg-brand-50 px-2 py-1 text-[11px] font-semibold text-brand-700 sm:px-3 sm:text-xs">
-            {member.role}
-          </span>
-        </div>
-
-        <div className="h-px bg-slate-100" />
-
-        <div className="flex items-start gap-2.5">
-          <BookOpen className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
-          <p className="text-xs leading-relaxed text-slate-600">{member.education}</p>
-        </div>
-
-        {member.quote && (
-          <div className="flex items-start gap-2.5 rounded-xl bg-brand-50/60 px-3 py-2.5">
-            <Quote className="mt-0.5 h-4 w-4 shrink-0 text-brand-600/60" aria-hidden="true" />
-            <p className="text-balance text-xs font-medium leading-relaxed text-slate-700"><KeepWords>{member.quote}</KeepWords></p>
-          </div>
-        )}
-
-        {member.expertise && (
-          <div className="flex flex-wrap gap-1">
-            {member.expertise.slice(0, 3).map((tag) => (
-              <span
-                key={tag}
-                className="rounded-md bg-brand-50 px-2 py-0.5 text-[10px] font-medium text-brand-700"
-              >
-                {tag}
+    <div className="flex flex-col overflow-hidden rounded-3xl bg-white shadow-card ring-1 ring-slate-100">
+      <div className="flex flex-1">
+        {/* Photo where we have one, the initial where we don't. */}
+        <div
+          className={`relative w-28 shrink-0 bg-gradient-to-br min-[380px]:w-36 sm:w-44 ${shade}`}
+        >
+          {member.image ? (
+            <Image
+              src={member.image}
+              alt={`${member.name} (${member.nickname})`}
+              fill
+              sizes={PHOTO_SIZES}
+              style={{ objectPosition: member.focal || "50% 50%" }}
+              className="object-cover"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center">
+              <span className="font-display text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
+                {member.nickname.slice(0, 1)}
               </span>
-            ))}
+            </div>
+          )}
+        </div>
+
+        <div className="flex min-w-0 flex-1 flex-col justify-center gap-2.5 p-4 sm:p-6">
+          <div className="flex flex-col gap-2">
+            <h3 className="font-display text-sm font-semibold !leading-snug text-slate-900 sm:text-lg">
+              <KeepWords>{member.name}</KeepWords>{" "}
+              <span className="font-sans text-[11px] font-normal text-slate-500 sm:text-sm">
+                ({member.nickname})
+              </span>
+            </h3>
+            <span className="self-start rounded-full min-[360px]:whitespace-nowrap bg-brand-50 px-2 py-1 text-[11px] font-semibold text-brand-700 sm:px-3 sm:text-xs">
+              {member.role}
+            </span>
           </div>
-        )}
+
+          <div className="h-px bg-slate-100" />
+
+          <div className="flex items-start gap-2.5">
+            <BookOpen className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
+            <p className="text-xs leading-relaxed text-slate-600">{member.education}</p>
+          </div>
+
+          {member.quote && (
+            <div className="flex items-start gap-2.5 rounded-xl bg-brand-50/60 px-3 py-2.5">
+              <Quote className="mt-0.5 h-4 w-4 shrink-0 text-brand-600/60" aria-hidden="true" />
+              <p className="text-balance text-xs font-medium leading-relaxed text-slate-700"><KeepWords>{member.quote}</KeepWords></p>
+            </div>
+          )}
+
+          {member.expertise && <Tags tags={member.expertise} className="hidden lg:flex" />}
+        </div>
       </div>
+
+      {/* Below lg the tags sit in their own strip under the photo row. Inside the text
+          column they made these cards ~30% taller than the rest, and the photo, which
+          covers the full card height, was zoomed in by the same amount. */}
+      {member.expertise && <Tags tags={member.expertise} className="flex px-4 pb-4 pt-3 sm:px-6 sm:pb-5 sm:pt-4 lg:hidden" />}
+    </div>
+  );
+}
+
+function Tags({ tags, className }) {
+  return (
+    <div className={`flex-wrap gap-1 ${className}`}>
+      {tags.slice(0, 3).map((tag) => (
+        <span key={tag} className="rounded-md bg-brand-50 px-2 py-0.5 text-[10px] font-medium text-brand-700">
+          {tag}
+        </span>
+      ))}
     </div>
   );
 }
