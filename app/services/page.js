@@ -33,7 +33,7 @@ export default function ServicesPage() {
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-balance text-base leading-relaxed text-brand-100">
             <KeepWords>
-                ตั้งแต่ค่ายหลายวันไปจนถึงเวิร์กช็อปสั้น เราออกแบบและจัดกระบวนการเรียนรู้ที่ตอบโจทย์เป้าหมายของโรงเรียนและองค์กรของคุณ
+                ตั้งแต่เวิร์กช็อปครึ่งวันไปจนถึงค่ายหลายวัน เราออกแบบและจัดกระบวนการเรียนรู้ให้ตรงกับเป้าหมายของโรงเรียนและองค์กรของคุณ
             </KeepWords>
           </p>
         </div>
@@ -152,10 +152,10 @@ export default function ServicesPage() {
               </KeepWords>
             </h2>
           </div>
-          {/* Legend: 2x2 on a phone so no group name sits alone on a second line. */}
-          <div className="mx-auto mt-6 grid w-fit grid-cols-2 gap-x-4 gap-y-1.5 sm:mt-8 sm:flex sm:flex-wrap sm:justify-center sm:gap-x-5">
+          {/* Legend: 2x2 below md so no group name sits alone on a second line; one row from md. */}
+          <div className="mx-auto mt-6 grid w-fit grid-cols-2 gap-x-4 gap-y-1.5 sm:mt-8 md:flex md:flex-wrap md:justify-center md:gap-x-5">
             {expertiseGroups.map((group) => (
-              <span key={group.name} className="inline-flex items-center gap-1.5 text-[12.5px] text-slate-600 sm:gap-2 sm:text-sm">
+              <span key={group.name} className="inline-flex items-center gap-1.5 whitespace-nowrap text-[12.5px] text-slate-600 sm:gap-2 sm:text-sm">
                 <span className={`h-2 w-2 shrink-0 rounded-full sm:h-2.5 sm:w-2.5 ${tagColors[group.color].dot}`} aria-hidden="true" />
                 <KeepWords>{group.name}</KeepWords>
               </span>

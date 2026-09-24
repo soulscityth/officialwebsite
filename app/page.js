@@ -172,7 +172,7 @@ export default function HomePage() {
               </h2>
               <p className="mx-auto mt-4 max-w-3xl text-balance text-brand-100">
                 <KeepWords>
-                    ติดต่อทีมงานของเราวันนี้ เพื่อออกแบบค่ายหรือเวิร์กช็อปที่ตอบโจทย์โรงเรียนหรือองค์กรของคุณโดยเฉพาะ
+                    ติดต่อเราวันนี้ เพื่อออกแบบกิจกรรมที่ตอบโจทย์โรงเรียนหรือองค์กรของคุณ
                 </KeepWords>
               </p>
               <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">

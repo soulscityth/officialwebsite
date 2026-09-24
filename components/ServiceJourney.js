@@ -105,7 +105,7 @@ export default function ServiceJourney() {
           </h2>
           <p className="mx-auto mt-4 max-w-3xl text-balance leading-relaxed text-slate-600 sm:text-[17px]">
             <KeepWords>
-              เลือกเริ่มจากจุดไหนก็ได้ หรือต่อทั้งเส้นทางเป็นโครงการเดียว เราออกแบบให้ทุกช่วงเชื่อมถึงกัน
+              เลือกเฉพาะบริการที่ต้องการ หรือรวมทั้งสามเป็นโครงการต่อเนื่อง เราออกแบบให้ทุกขั้นเชื่อมถึงกัน
             </KeepWords>
           </p>
         </div>
