@@ -182,6 +182,37 @@ would mean rewriting copy — the user's call, not a silent edit.
 - Server Components by default. Add `"use client"` only where state or effects are needed.
 - Every page exports `metadata`; the title template in `app/layout.js` appends `| SoulScity`.
 
+## Parked work
+
+### "Case Study" — project detail pages (parked 2026-09-24, not started)
+
+When the owners say **"Case Study"** or **"งาน case study"**, this is it. It is phase 02 of the growth plan
+the owners shared on 2026-09-08 (https://claude.ai/code/artifact/4b0bf341-4631-47d0-b73f-d9563b227965).
+Goal: make a few `/work` cards clickable, each opening a full write-up of that project.
+
+**Projects (facts, dates and photos are already in `portfolio`):** SK Design Thinking Experience Camp ·
+Rise Up: Young Leaders · ค่ายผู้นำรุ่นใหม่ฯ รุ่นที่ 18 · House of The Saint: Teacher Orientation ·
+AC STEM: Turbo Motion Challenge.
+
+**Content the owners must supply, per project** (never invent any of it):
+1. โจทย์จากลูกค้า, 2-4 sentences in the teacher's own words
+2. what we designed and *why that process*, 1-2 paragraphs
+3. short schedule, 2-3 lines per day
+4. a caption for each photo
+5. outcomes, 3-5 points (learner work, evaluation scores with respondent count, what happened next)
+Teacher testimonials are skipped for now; leave a slot. A results summary dropped in the `claude` Drive
+folder can be drafted from.
+
+**Code plan:** `slug` + `caseStudy` fields in `lib/data.js` · `app/work/[slug]/page.js` with
+`generateStaticParams` and per-page metadata · only cards that have a case study become links (the rest
+stay as they are) · case-study URLs in the sitemap · `Event` JSON-LD · an "อยากจัดแบบนี้บ้าง" button to
+`/contact` with the activity type preselected. The Signature Camp card's "ดูตัวอย่างค่าย" link
+(`serviceJourney`, now `/work`) can then point at a camp case study.
+
+**Open decisions:** photos (use the 3-4 per project already here, or the owners send more; the plan
+suggested 4-6) · build **one project first** (suggested: SK Design Thinking Camp) and agree the page
+layout before doing the other four.
+
 ## Gotchas that have cost real time
 
 - **Never run `next build` while the dev server is running.** It overwrites `.next` and the dev
