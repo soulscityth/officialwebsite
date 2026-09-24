@@ -145,7 +145,7 @@ export default function ServiceJourney() {
             href="/contact"
             className="inline-flex min-h-[44px] items-center text-[15px] font-medium text-brand-600 underline underline-offset-4 hover:text-brand-700"
           >
-            <KeepWords>ไม่แน่ใจว่าแบบไหนเหมาะ? ปรึกษาโครงการฟรี</KeepWords>
+            <KeepWords>กำลังตัดสินใจว่าแบบไหนดี? ปรึกษาโครงการฟรี</KeepWords>
           </Link>
         </div>
       </div>
