@@ -112,6 +112,7 @@ earlier commit. Do not renumber to "fix" them.
 | `Navbar.js` | Client. Sticky, scroll state, mobile menu |
 | `ContactForm.js` | Client. Posts to `/api/contact` |
 | `Footer.js` | Server |
+| `TeamCard.js` | Server. About team card: photo panel covers the card's full height. Expertise tags drop into a strip under the photo only below 380px (see Owner decisions) |
 | `ServiceJourney.js` | Server. Home "Our Services": Workshop → Signature Camp → Facilitation from `serviceJourney`. Markers in a row above the cards on `lg`; below that they move beside each stacked card on a dashed vertical line |
 
 ### PartnerMarquee — do not refactor to `gap`
@@ -150,7 +151,7 @@ stays `text-pretty` — balancing it measured worse. The one widow left is the A
 Balancing picks new break points, so a phrase it splits badly goes into `MANUAL` in KeepWords.
 
 **Measure, don't eyeball.** Line-break work is done by measuring real line-box widths in the browser
-with the Range API, not by guessing.
+with the Range API, not by guessing. The scripts in `scripts/audit/` do this (see Checking a change).
 
 **Words split in the middle.** Browsers break Thai with ICU's dictionary, which stores many ordinary
 words as parts, so without help they print "ผู้ / เรียน", "ไว้ / วางใจ", "เวิร์ / กช็อป". A site-wide
@@ -167,12 +168,31 @@ audit found 125 such breaks. The fix:
   the copy; Node's `Intl.Segmenter`, same ICU data as the browser, keeps the words it would split).
   **Rerun it after adding or rewording Thai copy:** `pip install pythainlp` once, then
   `python3 scripts/thai-keepwords.py`. `MANUAL` in KeepWords holds what it can't generate.
-- Verified by laying out all five pages at 8 widths and checking every break against pythainlp's
-  word boundaries: 125 mid-word breaks before, 1 after ("Mid- / Year", an ordinary English hyphen).
+- `node scripts/audit/breaks.js` lays out all five pages at 8 widths and checks every break against
+  pythainlp's word boundaries: 125 mid-word breaks before the fix. Its expected output is in the next section.
 
 Known and deliberately left alone: widows inside fixed-width cards (service descriptions, partner
 names, team credentials). Those are 320–350px grid columns that cannot be widened, and fixing them
 would mean rewriting copy — the user's call, not a silent edit.
+
+## Checking a change
+
+`scripts/audit/` drives a real Chromium against a running build (`npm run build && npm run start`,
+never while `npm run dev` is up) and prints numbers, not impressions. Run the ones that fit the change
+before reporting it done. Base URL: `AUDIT_URL`, default `http://127.0.0.1:3000`. Output files go to
+the OS temp dir (`soulscity-audit/`), never the repo.
+
+| Command | What it answers | Clean result today |
+|---|---|---|
+| `node scripts/audit/layout.js` | Sideways overflow, h1/h2 with a stranded last word, `[object Object]`, console errors — 5 pages × 8 widths | Only the About h1 at 768px |
+| `node scripts/audit/breaks.js` | Thai words split mid-word (needs `pip install pythainlp`) | 2 lines, both fine: "Mid- / Year" and "เชิงปฏิบัติ \| การมีส่วนร่วม" (a real space) |
+| `node scripts/audit/lines.js /route "text" [widths]` | Exactly how one heading or paragraph wraps at each width — use after every copy change | — |
+| `node scripts/audit/shot.js /route "text" [widths]` | PNG of the section holding that text; phones at 2x, navbar and LINE button hidden | — |
+
+Any new line in `layout.js` or `breaks.js` is a regression until explained. After rewording Thai copy,
+run `scripts/thai-keepwords.py` first, then `breaks.js`. Playwright is not a dependency: remote sessions
+have it globally; on the Mac or Windows PC run `npm i --no-save playwright && npx playwright install chromium`
+once.
 
 ## Conventions
 
@@ -181,6 +201,20 @@ would mean rewriting copy — the user's call, not a silent edit.
   service names (Workshop, Signature Camp, Facilitation) and English eyebrows such as "Our Services".
 - Server Components by default. Add `"use client"` only where state or effects are needed.
 - Every page exports `metadata`; the title template in `app/layout.js` appends `| SoulScity`.
+
+## Owner decisions — do not "fix"
+
+Choices the owners made knowingly. They look like bugs or inconsistencies; leave them unless asked.
+
+- **Team cards, 380–1023px:** Kanta's and Tanthai's expertise tags stay in the text column, so their
+  cards are taller and their photos zoom in ~30% more than the others'. Moving the tags under the photo
+  for all widths below `lg` fixed it; the owners chose the 380px breakpoint anyway.
+- **Signature Camp duration** reads "3 วัน – ค้างคืน" in `serviceJourney`. Owners' wording.
+- **Portfolio `misc` stays "Miscellaneous"** even though the third service is now Facilitation: the
+  category also holds a stage play, an exhibition and Excel training.
+- **About paragraph 2** ("ด้วยความเชื่อเหล่านี้ …") stays as written; three rewrites were drafted and
+  declined for now.
+- **Contact page copy** was excluded from the CI tone pass on purpose.
 
 ## Parked work
 
@@ -253,6 +287,10 @@ outstanding deliverability improvement.
 
 ## Working agreement
 
+- **One task per session.** Long sessions re-read their whole history on every reply (this repo's
+  week of 22–24 Sep averaged ~400K tokens of context per reply). Everything a new session needs lives
+  here and in git: when a task ends, record its decisions in this file before the session closes.
+  Keep this file to rules, decisions and parked work; a long plan goes in `docs/` and is linked here.
 - **Never push unprompted.** Make the change, verify it, summarise, then stop. The user says when to push.
 - **Verify before claiming done** — run the dev server, drive the real browser, measure, screenshot.
   Concrete numbers are valued over assurances.
