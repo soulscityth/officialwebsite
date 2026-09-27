@@ -37,11 +37,22 @@ produces no preview at all. There must be a commit production has not seen.
 **Claude commits straight to `preview`.** No intermediate working branch — the chain above is the
 workflow, and a third branch only adds an empty merge.
 
-**Remote sessions cannot read the deployed site.** Claude Code on the web runs behind an egress
-proxy that denies `soulscity.co.th`, `www`, and the Vercel preview alias (403 on CONNECT). Local
-work is unaffected — install, dev server, real browser, screenshots and `next build` all verified
-working. But the "poll until the new content appears" rule below cannot be run from there, so
-confirming a deploy actually landed is the user's step, on a machine that can reach the site.
+**Remote sessions read deployed builds through the preview alias.** Claude Code on the web runs
+behind an egress proxy. As of 2026-09-27 it still denies `soulscity.co.th` and `www` (403 on
+CONNECT), but lets through both `*.vercel.app` hosts: the preview alias above and
+`soulscity.vercel.app` (production). **Use the preview alias as the main one** — it is where
+changes are reviewed before `main`. To confirm a production deploy, use `soulscity.vercel.app`: it
+is the same deployment the domain serves.
+
+- `curl` works directly. Use it to poll for new content after a push.
+- A plain Chromium does **not**: its parallel requests through the proxy fail with
+  `ERR_TOO_MANY_RETRIES`, so the page renders unstyled with no images. `scripts/audit/browser.js`
+  handles this. When `HTTPS_PROXY` is set and `AUDIT_URL` is remote, it routes every request
+  through curl, and all four audit scripts work against the deployed site:
+  `AUDIT_URL=https://officialwebsite-git-preview-soul-scity.vercel.app node scripts/audit/layout.js`
+  (~50s, same clean result as a local build).
+- If the proxy ever blocks `*.vercel.app` again, confirming a deploy goes back to being the user's
+  step, on a machine that can reach the site.
 
 ## Stack
 
@@ -179,8 +190,9 @@ would mean rewriting copy — the user's call, not a silent edit.
 
 `scripts/audit/` drives a real Chromium against a running build (`npm run build && npm run start`,
 never while `npm run dev` is up) and prints numbers, not impressions. Run the ones that fit the change
-before reporting it done. Base URL: `AUDIT_URL`, default `http://127.0.0.1:3000`. Output files go to
-the OS temp dir (`soulscity-audit/`), never the repo.
+before reporting it done. Base URL: `AUDIT_URL`, default `http://127.0.0.1:3000`; point it at the
+preview alias to audit a deployed build (see Deploy chain). Output files go to the OS temp dir
+(`soulscity-audit/`), never the repo.
 
 | Command | What it answers | Clean result today |
 |---|---|---|
