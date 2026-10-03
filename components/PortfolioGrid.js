@@ -16,6 +16,10 @@ const validKeys = filters.map((f) => f.key);
 // Cards in the first row are above the fold; everything after that lazy-loads.
 const EAGER_CARDS = 3;
 
+// Reads the filter from the URL, so it suspends on a static page. app/work/page.js
+// renders <PortfolioGridView active="all" /> as its Suspense fallback: the full grid
+// is in the server HTML for crawlers, and a ?type= link switches to its filter on
+// hydration (a brief flash of "all" first, accepted).
 export default function PortfolioGrid() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -35,6 +39,12 @@ export default function PortfolioGrid() {
     router.replace(query ? `/work?${query}` : "/work", { scroll: false });
   };
 
+  return <PortfolioGridView active={active} onSelect={select} />;
+}
+
+// Without `onSelect` (the server-rendered fallback) the filter buttons are inert
+// until the real grid takes over.
+export function PortfolioGridView({ active, onSelect }) {
   const items = active === "all" ? portfolio : portfolio.filter((p) => p.category === active);
 
   return (
@@ -47,7 +57,7 @@ export default function PortfolioGrid() {
             <button
               key={f.key}
               type="button"
-              onClick={() => select(f.key)}
+              onClick={onSelect ? () => onSelect(f.key) : undefined}
               aria-pressed={isActive}
               className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                 isActive

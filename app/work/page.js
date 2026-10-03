@@ -2,13 +2,14 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import KeepWords from "@/components/KeepWords";
-import PortfolioGrid from "@/components/PortfolioGrid";
+import PortfolioGrid, { PortfolioGridView } from "@/components/PortfolioGrid";
 import { stats } from "@/lib/data";
 import { siteConfig } from "@/lib/site";
 
 export const metadata = {
   title: "ผลงานของเรา",
   description: `ผลงานค่าย เวิร์กช็อป และกิจกรรมการเรียนรู้ที่ ${siteConfig.name} ออกแบบและจัดขึ้น`,
+  alternates: { canonical: "/work" },
 };
 
 export default function WorkPage() {
@@ -41,7 +42,7 @@ export default function WorkPage() {
       {/* Portfolio grid */}
       <section className="section">
         <div className="container-page">
-          <Suspense fallback={null}>
+          <Suspense fallback={<PortfolioGridView active="all" />}>
             <PortfolioGrid />
           </Suspense>
         </div>

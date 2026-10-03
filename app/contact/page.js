@@ -12,6 +12,7 @@ const linkText =
 export const metadata = {
   title: "ติดต่อเรา",
   description: `ช่องทางการติดต่อ ${siteConfig.name} สำหรับสอบถามและปรึกษาโครงการฟรี`,
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

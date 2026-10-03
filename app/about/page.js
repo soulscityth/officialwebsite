@@ -10,6 +10,7 @@ import { siteConfig } from "@/lib/site";
 export const metadata = {
   title: "เกี่ยวกับเรา",
   description: `เรื่องราวและพันธกิจของ ${siteConfig.name} ผู้ออกแบบและจัดกระบวนการเรียนรู้ที่มีความหมาย`,
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {
