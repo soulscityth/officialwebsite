@@ -6,6 +6,12 @@ import PartnerMarquee from "@/components/PartnerMarquee";
 import ServiceJourney from "@/components/ServiceJourney";
 import { domains, stats, process } from "@/lib/data";
 
+// Title and description come from the layout defaults. Canonical is set per page,
+// never in the layout, or every page would inherit "/" and read as a duplicate of home.
+export const metadata = {
+  alternates: { canonical: "/" },
+};
+
 export default function HomePage() {
   return (
     <>

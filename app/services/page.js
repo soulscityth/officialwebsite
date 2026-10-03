@@ -8,6 +8,7 @@ import KeepWords from "@/components/KeepWords";
 export const metadata = {
   title: "บริการของเรา",
   description: `Signature Camp และประเด็นการเรียนรู้ที่ ${siteConfig.name} เชี่ยวชาญ`,
+  alternates: { canonical: "/services" },
 };
 
 // Full class strings, not built from the colour name, so Tailwind can find them.

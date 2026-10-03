@@ -118,7 +118,7 @@ earlier commit. Do not renumber to "fix" them.
 | File | Notes |
 |---|---|
 | `PortfolioCard.js` | Client. Per-card image carousel: prev/next, dot indicators, touch swipe, crossfade via stacked absolute images |
-| `PortfolioGrid.js` | Client. Category filter tabs with counts |
+| `PortfolioGrid.js` | Client. Category filter tabs with counts, filter in `?type=`. Reading the URL suspends a static page, so `/work` passes `<PortfolioGridView active="all" />` as the Suspense fallback: all cards are in the server HTML (crawlers, AI bots). A `?type=` link flashes "all" before filtering — accepted (owners chose this over making `/work` dynamic) |
 | `PartnerMarquee.js` | **Server** component. Two rows scrolling in opposite directions, infinite |
 | `Navbar.js` | Client. Sticky, scroll state, mobile menu |
 | `ContactForm.js` | Client. Posts to `/api/contact` |
@@ -213,6 +213,9 @@ once.
   service names (Workshop, Signature Camp, Facilitation) and English eyebrows such as "Our Services".
 - Server Components by default. Add `"use client"` only where state or effects are needed.
 - Every page exports `metadata`; the title template in `app/layout.js` appends `| SoulScity`.
+- Every page sets its own `alternates: { canonical: "/route" }`. **Never put canonical in the layout**:
+  every page would inherit `/` and read as a duplicate of home. It also points `soulscity.vercel.app`
+  and `/work?type=…` at the canonical URLs. A new page needs its own line.
 
 ## Owner decisions — do not "fix"
 
