@@ -218,6 +218,11 @@ once.
   every page would inherit `/` and read as a duplicate of home. Canonical also points
   `soulscity.vercel.app` and `/work?type=…` at `soulscity.co.th`. A new page needs its own call.
   The image is listed explicitly because a page that sets `openGraph` loses the inherited one.
+- **Share image** (LINE / Facebook preview) is `public/og-image.jpg`, rendered by
+  `node scripts/og-image.js` against a running build (site fonts + white wordmark on the hero
+  gradient). The original `app/opengraph-image.png` was almost entirely white — replaced 2026-10-03.
+  After changing the picture, bump `v` in `OG_IMAGE` (`lib/metadata.js`): apps cache by URL. Keep
+  it JPEG: WhatsApp drops preview images over ~300KB (the PNG was 428KB, the JPEG is 83KB).
 
 ### SEO output generated from data — no separate editing
 
