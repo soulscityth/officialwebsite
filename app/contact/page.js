@@ -2,6 +2,7 @@ import { Mail, Phone, MapPin, Globe, ArrowUpRight } from "lucide-react";
 import KeepWords from "@/components/KeepWords";
 import ContactForm from "@/components/ContactForm";
 import { siteConfig } from "@/lib/site";
+import { pageMeta } from "@/lib/metadata";
 
 // Email, phone and social rows share one link style: action colour, underline,
 // and a 36px tap target on phones.
@@ -12,7 +13,7 @@ const linkText =
 export const metadata = {
   title: "ติดต่อเรา",
   description: `ช่องทางการติดต่อ ${siteConfig.name} สำหรับสอบถามและปรึกษาโครงการฟรี`,
-  alternates: { canonical: "/contact" },
+  ...pageMeta("/contact"),
 };
 
 export default function ContactPage() {

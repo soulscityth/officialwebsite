@@ -6,11 +6,12 @@ import FacilitatorCard from "@/components/FacilitatorCard";
 import { ArrowUpRight, Target, Quote } from "lucide-react";
 import { values, team } from "@/lib/data";
 import { siteConfig } from "@/lib/site";
+import { pageMeta } from "@/lib/metadata";
 
 export const metadata = {
   title: "เกี่ยวกับเรา",
   description: `เรื่องราวและพันธกิจของ ${siteConfig.name} ผู้ออกแบบและจัดกระบวนการเรียนรู้ที่มีความหมาย`,
-  alternates: { canonical: "/about" },
+  ...pageMeta("/about"),
 };
 
 export default function AboutPage() {

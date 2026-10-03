@@ -213,9 +213,23 @@ once.
   service names (Workshop, Signature Camp, Facilitation) and English eyebrows such as "Our Services".
 - Server Components by default. Add `"use client"` only where state or effects are needed.
 - Every page exports `metadata`; the title template in `app/layout.js` appends `| SoulScity`.
-- Every page sets its own `alternates: { canonical: "/route" }`. **Never put canonical in the layout**:
-  every page would inherit `/` and read as a duplicate of home. It also points `soulscity.vercel.app`
-  and `/work?type=…` at the canonical URLs. A new page needs its own line.
+- Every page spreads `...pageMeta("/route")` (`lib/metadata.js`) into its `metadata`: canonical,
+  `og:url`, site name, `th_TH` locale and the OG image. **Never put canonical or og:url in the layout**:
+  every page would inherit `/` and read as a duplicate of home. Canonical also points
+  `soulscity.vercel.app` and `/work?type=…` at `soulscity.co.th`. A new page needs its own call.
+  The image is listed explicitly because a page that sets `openGraph` loses the inherited one.
+
+### SEO output generated from data — no separate editing
+
+| Output | Built from | Where |
+|---|---|---|
+| `Organization` + `WebSite` JSON-LD (every page) | `siteConfig` | `components/StructuredData.js` |
+| `Service` JSON-LD ×3 (home) | `serviceJourney` | `components/ServiceJourney.js`, next to the cards it describes |
+| `/llms.txt` | `siteConfig`, `serviceJourney`, `expertiseGroups` | `app/llms.txt/route.js` |
+| `/sitemap.xml` | route list | `app/sitemap.js` — **add new pages here by hand**; no `lastModified` on purpose |
+
+Editing a service in `lib/data.js` updates its card, its schema and llms.txt together. Keep schema
+next to the content it describes: Google expects it to match what is visible on that page.
 
 ## Owner decisions — do not "fix"
 

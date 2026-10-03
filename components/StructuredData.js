@@ -1,12 +1,15 @@
 import { siteConfig } from "@/lib/site";
 
-// Organization schema so search engines and AI assistants have a verifiable
-// description of who the company is and how to reach it. Every value comes from
-// siteConfig — nothing here is asserted that the site does not already state.
+// Referenced as `provider` by the Service schema in ServiceJourney.
+export const ORGANIZATION_ID = `${siteConfig.url}/#organization`;
+
+// Organization and WebSite schema so search engines and AI assistants have a
+// verifiable description of who the company is and how to reach it. Every value
+// comes from siteConfig — nothing here is asserted that the site does not already state.
 export default function StructuredData() {
-  const data = {
-    "@context": "https://schema.org",
+  const organization = {
     "@type": "Organization",
+    "@id": ORGANIZATION_ID,
     name: siteConfig.name,
     alternateName: siteConfig.legalNameTh,
     legalName: siteConfig.legalName,
@@ -30,6 +33,18 @@ export default function StructuredData() {
       availableLanguage: ["th", "en"],
     })),
   };
+
+  // Tells Google the site's name for search results.
+  const website = {
+    "@type": "WebSite",
+    name: siteConfig.name,
+    alternateName: siteConfig.legalNameTh,
+    url: siteConfig.url,
+    inLanguage: "th",
+    publisher: { "@id": ORGANIZATION_ID },
+  };
+
+  const data = { "@context": "https://schema.org", "@graph": [organization, website] };
 
   return (
     <script
