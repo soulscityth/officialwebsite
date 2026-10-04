@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import KeepWords from "@/components/KeepWords";
+import { ORGANIZATION_ID } from "@/components/StructuredData";
 import { serviceJourney } from "@/lib/data";
 
 // brand-300, drawn as 6px dashes. Horizontal between the markers on desktop,
@@ -94,9 +95,28 @@ function Card({ stage }) {
   );
 }
 
+// Service schema built from the same `serviceJourney` entries the cards render, so
+// editing a service in lib/data.js updates both. Keep it in this component: Google
+// expects schema to describe content that is visible on the page it sits on.
+function serviceSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@graph": serviceJourney.map((stage) => ({
+      "@type": "Service",
+      name: stage.title,
+      serviceType: stage.title,
+      description: stage.description,
+      provider: { "@id": ORGANIZATION_ID },
+      areaServed: { "@type": "Country", name: "Thailand" },
+      category: stage.fitFor,
+    })),
+  };
+}
+
 export default function ServiceJourney() {
   return (
     <section className="section bg-brand-50">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema()) }} />
       <div className="container-page">
         <div className="mx-auto max-w-4xl text-center">
           <span className="eyebrow bg-white">Our Services · บริการของเรา</span>

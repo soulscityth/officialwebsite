@@ -5,11 +5,12 @@ import KeepWords from "@/components/KeepWords";
 import PortfolioGrid, { PortfolioGridView } from "@/components/PortfolioGrid";
 import { stats } from "@/lib/data";
 import { siteConfig } from "@/lib/site";
+import { pageMeta } from "@/lib/metadata";
 
 export const metadata = {
   title: "ผลงานของเรา",
   description: `ผลงานค่าย เวิร์กช็อป และกิจกรรมการเรียนรู้ที่ ${siteConfig.name} ออกแบบและจัดขึ้น`,
-  alternates: { canonical: "/work" },
+  ...pageMeta("/work"),
 };
 
 export default function WorkPage() {

@@ -4,11 +4,12 @@ import { ArrowDown, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { domains, signatureCamp, formatTypes, expertiseGroups } from "@/lib/data";
 import { siteConfig } from "@/lib/site";
 import KeepWords from "@/components/KeepWords";
+import { pageMeta } from "@/lib/metadata";
 
 export const metadata = {
   title: "บริการของเรา",
   description: `Signature Camp และประเด็นการเรียนรู้ที่ ${siteConfig.name} เชี่ยวชาญ`,
-  alternates: { canonical: "/services" },
+  ...pageMeta("/services"),
 };
 
 // Full class strings, not built from the colour name, so Tailwind can find them.

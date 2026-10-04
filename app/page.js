@@ -5,12 +5,10 @@ import { siteConfig } from "@/lib/site";
 import PartnerMarquee from "@/components/PartnerMarquee";
 import ServiceJourney from "@/components/ServiceJourney";
 import { domains, stats, process } from "@/lib/data";
+import { pageMeta } from "@/lib/metadata";
 
-// Title and description come from the layout defaults. Canonical is set per page,
-// never in the layout, or every page would inherit "/" and read as a duplicate of home.
-export const metadata = {
-  alternates: { canonical: "/" },
-};
+// Title and description come from the layout defaults; see lib/metadata.js.
+export const metadata = pageMeta("/");
 
 export default function HomePage() {
   return (
