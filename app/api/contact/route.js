@@ -51,7 +51,7 @@ export async function POST(request) {
   try {
     const { error } = await resend.emails.send({
       from: "SoulScity Website <onboarding@resend.dev>",
-      to: process.env.CONTACT_EMAIL || siteConfig.email,
+      to: process.env.CONTACT_EMAIL || siteConfig.formInbox,
       replyTo: email,
       subject: subject ? `[เว็บไซต์] ${subject}` : `[เว็บไซต์] ข้อความใหม่จาก ${name}`,
       text: [

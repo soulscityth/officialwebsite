@@ -310,7 +310,12 @@ Copy `.env.example` → `.env.local` (it is correctly not in the repo).
 
 - `RESEND_API_KEY` — required for the contact form; get it from resend.com or Vercel →
   Settings → Environment Variables. Without it the site runs fine, only mail sending fails.
-- `CONTACT_EMAIL` — optional recipient override; defaults to `siteConfig.email`.
+- `CONTACT_EMAIL` — optional recipient override; defaults to `siteConfig.formInbox`.
+
+**Two email addresses, on purpose.** `siteConfig.email` (`contact@soulscity.co.th`, since 2026-10-05) is
+the public one: contact page, footer, schema, llms.txt. `siteConfig.formInbox` (`soulscity.th@gmail.com`)
+is where the form delivers. They are split because the Resend sandbox sender only delivers to the Resend
+account's own address; pointing the form at `contact@` would break it until the domain is verified.
 
 There is currently **no `.env.local` on the Windows machine**, so `/api/contact` returns 500 locally.
 That is expected, not a bug — production has the key set in Vercel.
