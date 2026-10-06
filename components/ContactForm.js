@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Send, CheckCircle2, AlertCircle } from "lucide-react";
 import KeepWords from "@/components/KeepWords";
 import { activityTypes, learnerLevels } from "@/lib/data";
@@ -10,6 +10,16 @@ export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const errorRef = useRef(null);
+
+  // The error renders just above the submit button, which is at the bottom of the
+  // screen when tapped: there it lands partly off-screen and under the floating LINE
+  // button. Bring it to the middle of the viewport instead.
+  useEffect(() => {
+    if (!error || !errorRef.current) return;
+    const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    errorRef.current.scrollIntoView({ block: "center", behavior: smooth ? "smooth" : "auto" });
+  }, [error]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -234,7 +244,7 @@ export default function ContactForm() {
       </div>
 
       {error && (
-        <div className="flex items-start gap-2 rounded-xl bg-red-50 p-4 text-sm text-red-700">
+        <div ref={errorRef} role="alert" className="flex items-start gap-2 rounded-xl bg-red-50 p-4 text-sm text-red-700">
           <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
           <span>{error}</span>
         </div>

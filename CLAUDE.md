@@ -310,19 +310,17 @@ Copy `.env.example` → `.env.local` (it is correctly not in the repo).
 
 - `RESEND_API_KEY` — required for the contact form; get it from resend.com or Vercel →
   Settings → Environment Variables. Without it the site runs fine, only mail sending fails.
-- `CONTACT_EMAIL` — optional recipient override; defaults to `siteConfig.formInbox`.
+- `CONTACT_EMAIL` — optional recipient override; defaults to `siteConfig.email`.
 
-**Two email addresses, on purpose.** `siteConfig.email` (`contact@soulscity.co.th`, since 2026-10-05) is
-the public one: contact page, footer, schema, llms.txt. `siteConfig.formInbox` (`soulscity.th@gmail.com`)
-is where the form delivers. They are split because the Resend sandbox sender only delivers to the Resend
-account's own address; pointing the form at `contact@` would break it until the domain is verified.
+**Email.** `siteConfig.email` (`contact@soulscity.co.th`) is both the public address and the form's
+recipient. The form sends as `web@soulscity.co.th`: the domain is verified in Resend (DKIM + SPF, Tokyo
+region, 2026-10-02), on the Resend account registered to `soulscity.th@gmail.com`. `web@` needs no
+mailbox; replies go to the customer through `replyTo`. The key is set for **production only**, so the
+form cannot send from preview, and a real end-to-end test is one submission on the live site.
 
 There is currently **no `.env.local` on the Windows machine**, so `/api/contact` returns 500 locally.
 That is expected, not a bug — production has the key set in Vercel.
 
-The Resend `from:` is still the shared sandbox `onboarding@resend.dev`. Now that `soulscity.co.th`
-is owned and delegated, verifying it in Resend and sending as e.g. `web@soulscity.co.th` is the
-outstanding deliverability improvement.
 
 ## Working agreement
 

@@ -50,8 +50,10 @@ export async function POST(request) {
 
   try {
     const { error } = await resend.emails.send({
-      from: "SoulScity Website <onboarding@resend.dev>",
-      to: process.env.CONTACT_EMAIL || siteConfig.formInbox,
+      // soulscity.co.th is verified in Resend (DKIM + SPF, since 2026-10-02), so any
+      // address on it can send. web@ needs no mailbox: replies go to replyTo.
+      from: "SoulScity Website <web@soulscity.co.th>",
+      to: process.env.CONTACT_EMAIL || siteConfig.email,
       replyTo: email,
       subject: subject ? `[เว็บไซต์] ${subject}` : `[เว็บไซต์] ข้อความใหม่จาก ${name}`,
       text: [
