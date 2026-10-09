@@ -28,6 +28,8 @@ const MANUAL = [
   "ตั้งแต่จุดประกาย",
   "ระดมความคิด",
   "ปรึกษาโครงการฟรี",
+  // Home Signature Work card title; balance otherwise splits "สะท้อน / คิด".
+  "สะท้อนคิด",
   "ลองคิด",
   "ลองทำ",
   // Team quotes on About, in the narrow photo-card column.

@@ -74,7 +74,7 @@ Almost all copy is centralised — edit these first, not the pages.
 social handles, service area, nav items, canonical `url`.
 
 `lib/data.js` — `domains`, `signatureCamp`, `formatTypes`, `serviceJourney`, `expertiseGroups`, `process`, `values`,
-`team`, `stats`, `partners`, `portfolio`.
+`team`, `stats`, `partners`, `portfolio`, `signatureWork`.
 
 **Portfolio entries.** `portfolio` is `portfolioRaw` sorted newest-first by `sortDate`:
 
@@ -125,6 +125,7 @@ earlier commit. Do not renumber to "fix" them.
 | `Footer.js` | Server |
 | `TeamCard.js` | Server. About team card: photo panel covers the card's full height. Expertise tags drop into a strip under the photo only below 380px (see Owner decisions) |
 | `ServiceJourney.js` | Server. Home "Our Services": Workshop → Signature Camp → Facilitation from `serviceJourney`. Markers in a row above the cards on `lg`; below that they move beside each stacked card on a dashed vertical line |
+| `SignatureWork.js` + `SignatureCard.js` | Home "Signature Work", between Our Services and Process. Server section; the card is a client flip card (photo + title front, topics and facts back, both faces in one grid cell so the card grows to the taller face, hidden face `inert`). `signatureWork` in `lib/data.js` picks four `portfolio` entries by title plus a service label and photo; every fact shown comes from `portfolio`, and a renamed title fails the build. Card links go to `/work` |
 
 ### PartnerMarquee — do not refactor to `gap`
 
@@ -276,6 +277,11 @@ folder can be drafted from.
 stay as they are) · case-study URLs in the sitemap · `Event` JSON-LD · an "อยากจัดแบบนี้บ้าง" button to
 `/contact` with the activity type preselected. The Signature Camp card's "ดูตัวอย่างค่าย" link
 (`serviceJourney`, now `/work`) can then point at a camp case study.
+
+**Home Signature Work cards** (built 2026-10-09 from the design at https://claude.ai/artifact/6cLFz9ArX4fWWLHTPZ2CjV)
+show three of these projects plus Craft AI. The design's card backs had process steps and "ผู้เรียนได้"
+bullets. Those were placeholder copy, so the backs show `portfolio` facts instead. Once case-study pages exist, point
+each card's link at its page and use the owners' outcomes there.
 
 **Open decisions:** photos (use the 3-4 per project already here, or the owners send more; the plan
 suggested 4-6) · build **one project first** (suggested: SK Design Thinking Camp) and agree the page
