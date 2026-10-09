@@ -125,7 +125,7 @@ earlier commit. Do not renumber to "fix" them.
 | `Footer.js` | Server |
 | `TeamCard.js` | Server. About team card: photo panel covers the card's full height. Expertise tags drop into a strip under the photo only below 380px (see Owner decisions) |
 | `Packages.js` | Server. Home "Our Packages · บันได 4 ขั้น" from `packages`: Spark Workshop → Signature Camp (featured, dark) → Stride Journey → Summit Partner, prices per room of 40, a 4-bar ladder under each card, the `packagesNote` footnote and a consult CTA band. Emits the home `Service` JSON-LD with each starting price. Replaced `ServiceJourney.js` on 2026-10-09 |
-| `SignatureWork.js` + `SignatureCard.js` | Home "Signature Work", between Our Packages and Process. Server section; the card is a client flip card (photo + title front, topics and facts back, both faces in one grid cell so the card grows to the taller face, hidden face `inert`). `signatureWork` in `lib/data.js` picks four `portfolio` entries by title plus a service label and photo; every fact shown comes from `portfolio`, and a renamed title fails the build. Card links go to `/work` |
+| `SignatureWork.js` + `SignatureCard.js` | Home "Signature Work", right after the hero (the "ประเด็นการเรียนรู้" domains section was removed from home 2026-10-09; `domains` still feeds `/services` and the footer). Server section; the card is a client flip card (photo + title front, topics and facts back, both faces in one grid cell so the card grows to the taller face, hidden face `inert`). `signatureWork` in `lib/data.js` picks four `portfolio` entries by title plus a service label and photo; every fact shown comes from `portfolio`, and a renamed title fails the build. Card links go to `/work` |
 
 ### PartnerMarquee — do not refactor to `gap`
 

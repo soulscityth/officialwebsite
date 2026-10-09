@@ -5,7 +5,7 @@ import { siteConfig } from "@/lib/site";
 import PartnerMarquee from "@/components/PartnerMarquee";
 import Packages from "@/components/Packages";
 import SignatureWork from "@/components/SignatureWork";
-import { domains, stats, process } from "@/lib/data";
+import { stats, process } from "@/lib/data";
 import { pageMeta } from "@/lib/metadata";
 
 // Title and description come from the layout defaults; see lib/metadata.js.
@@ -76,49 +76,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Content domains preview */}
-      <section className="section bg-slate-50">
-        <div className="container-page">
-          <div className="mx-auto max-w-2xl text-center">
-            <span className="eyebrow"><KeepWords>ประเด็นการเรียนรู้ที่เราเชี่ยวชาญ</KeepWords></span>
-            <h2 className="mt-4 font-display text-3xl font-bold text-slate-900 sm:text-4xl">
-              <KeepWords>
-                ออกแบบการเรียนรู้ที่มีความหมายในทุกมิติ
-              </KeepWords>
-            </h2>
-            <p className="mt-4 text-balance text-slate-600">
-              <KeepWords>
-                เราออกแบบกระบวนการเรียนรู้ที่ผสมผสานศาสตร์การเรียนรู้กับวิธีการสอนที่ทันสมัย เพื่อให้ผู้เรียนได้ประสบการณ์ที่สนุก น่าตื่นเต้น และมีคุณค่า
-              </KeepWords>
-            </p>
-          </div>
-
-          <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {domains.map((domain) => (
-              <div key={domain.title} className="card">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
-                  <domain.icon className="h-6 w-6" />
-                </div>
-                <h3 className="mt-5 font-display text-lg font-semibold text-slate-900"><KeepWords>{domain.title}</KeepWords></h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600"><KeepWords>{domain.description}</KeepWords></p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <Link href="/services" className="btn-secondary">
-              <KeepWords>
-                ดูบริการทั้งหมด
-              </KeepWords>
-              <ArrowUpRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <SignatureWork />
 
       <Packages />
-
-      <SignatureWork />
 
       {/* Process */}
       <section className="section bg-slate-50">
