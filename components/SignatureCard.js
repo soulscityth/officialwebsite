@@ -48,7 +48,7 @@ export default function SignatureCard({ item }) {
           <div className="absolute inset-x-0 bottom-[28%] top-0 -z-20 overflow-hidden">
             <Image
               src={item.image}
-              alt={item.title}
+              alt={item.alt}
               fill
               sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
               className="scale-[1.02] object-cover transition-transform duration-700 group-hover:scale-[1.07] motion-reduce:transition-none motion-reduce:group-hover:scale-[1.02]"

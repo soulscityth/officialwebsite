@@ -254,6 +254,11 @@ Choices the owners made knowingly. They look like bugs or inconsistencies; leave
   **10% upgrade credit** (owners chose not to publish it). The playbook's internal cost/margin view never
   goes on the site. `/services`, `llms.txt` and the Signature Work "Facilitation" card still describe
   the old three services; moving them over is a separate decision.
+- **Signature Work photos are not from their projects (2026-10-09).** The cards use the four brochure
+  shots from the design (`public/signature/`, Drive › For Brochure, July 2025, 1600px) instead of the
+  projects' own `public/work/` photos, which are 480–560px and looked soft at card size. The owners chose
+  this knowingly. Alt text describes each photo, never the card's project. If high-res originals of the
+  projects' own photos turn up, they are the better fix.
 - **Portfolio `misc` stays "Miscellaneous"** even though the third service is now Facilitation: the
   category also holds a stage play, an exhibition and Excel training.
 - **About paragraph 2** ("ด้วยความเชื่อเหล่านี้ …") stays as written; three rewrites were drafted and
