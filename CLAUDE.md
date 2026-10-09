@@ -74,7 +74,7 @@ Almost all copy is centralised — edit these first, not the pages.
 social handles, service area, nav items, canonical `url`.
 
 `lib/data.js` — `domains`, `signatureCamp`, `formatTypes`, `serviceJourney`, `expertiseGroups`, `process`, `values`,
-`team`, `stats`, `partners`, `portfolio`, `signatureWork`.
+`team`, `stats`, `partners`, `portfolio`, `signatureWork`, `packages`, `packagesNote`.
 
 **Portfolio entries.** `portfolio` is `portfolioRaw` sorted newest-first by `sortDate`:
 
@@ -124,8 +124,8 @@ earlier commit. Do not renumber to "fix" them.
 | `ContactForm.js` | Client. Posts to `/api/contact` |
 | `Footer.js` | Server |
 | `TeamCard.js` | Server. About team card: photo panel covers the card's full height. Expertise tags drop into a strip under the photo only below 380px (see Owner decisions) |
-| `ServiceJourney.js` | Server. Home "Our Services": Workshop → Signature Camp → Facilitation from `serviceJourney`. Markers in a row above the cards on `lg`; below that they move beside each stacked card on a dashed vertical line |
-| `SignatureWork.js` + `SignatureCard.js` | Home "Signature Work", between Our Services and Process. Server section; the card is a client flip card (photo + title front, topics and facts back, both faces in one grid cell so the card grows to the taller face, hidden face `inert`). `signatureWork` in `lib/data.js` picks four `portfolio` entries by title plus a service label and photo; every fact shown comes from `portfolio`, and a renamed title fails the build. Card links go to `/work` |
+| `Packages.js` | Server. Home "Our Packages · บันได 4 ขั้น" from `packages`: Spark Workshop → Signature Camp (featured, dark) → Stride Journey → Summit Partner, prices per room of 40, a 4-bar ladder under each card, the `packagesNote` footnote and a consult CTA band. Emits the home `Service` JSON-LD with each starting price. Replaced `ServiceJourney.js` on 2026-10-09 |
+| `SignatureWork.js` + `SignatureCard.js` | Home "Signature Work", between Our Packages and Process. Server section; the card is a client flip card (photo + title front, topics and facts back, both faces in one grid cell so the card grows to the taller face, hidden face `inert`). `signatureWork` in `lib/data.js` picks four `portfolio` entries by title plus a service label and photo; every fact shown comes from `portfolio`, and a renamed title fails the build. Card links go to `/work` |
 
 ### PartnerMarquee — do not refactor to `gap`
 
@@ -230,11 +230,12 @@ once.
 | Output | Built from | Where |
 |---|---|---|
 | `Organization` + `WebSite` JSON-LD (every page) | `siteConfig` | `components/StructuredData.js` |
-| `Service` JSON-LD ×3 (home) | `serviceJourney` | `components/ServiceJourney.js`, next to the cards it describes |
+| `Service` JSON-LD ×4 with prices (home) | `packages` | `components/Packages.js`, next to the cards it describes |
 | `/llms.txt` | `siteConfig`, `serviceJourney`, `expertiseGroups` | `app/llms.txt/route.js` |
 | `/sitemap.xml` | route list | `app/sitemap.js` — **add new pages here by hand**; no `lastModified` on purpose |
 
-Editing a service in `lib/data.js` updates its card, its schema and llms.txt together. Keep schema
+Editing a package in `lib/data.js` updates its card and its schema together. `/llms.txt` still lists the
+three services from `serviceJourney` (see Owner decisions). Keep schema
 next to the content it describes: Google expects it to match what is visible on that page.
 
 ## Owner decisions — do not "fix"
@@ -244,7 +245,15 @@ Choices the owners made knowingly. They look like bugs or inconsistencies; leave
 - **Team cards, 380–1023px:** Kanta's and Tanthai's expertise tags stay in the text column, so their
   cards are taller and their photos zoom in ~30% more than the others'. Moving the tags under the photo
   for all widths below `lg` fixed it; the owners chose the 380px breakpoint anyway.
-- **Signature Camp duration** reads "3 วัน – ค้างคืน" in `serviceJourney`. Owners' wording.
+- **Signature Camp duration** reads "3 วัน – ค้างคืน" in `serviceJourney` (now only in llms.txt). Owners'
+  wording. The home package card says "2–3 วัน", from the Packages 2027 playbook.
+- **Packages on the home page only (2026-10-09).** The owners published prices from the Packages 2027
+  playbook (https://claude.ai/artifact/DCdj9BM5tv7XhqNR6XLqt6): Spark from 19,000, Camp from 68,000,
+  Stride 120,000 (~9% saving), Summit 155,000 / Plus 245,000, per room of 40. Left off on purpose: the
+  **Skills Map** (does not exist yet; add it to the cards and the section lead once it does) and the
+  **10% upgrade credit** (owners chose not to publish it). The playbook's internal cost/margin view never
+  goes on the site. `/services`, `llms.txt` and the Signature Work "Facilitation" card still describe
+  the old three services; moving them over is a separate decision.
 - **Portfolio `misc` stays "Miscellaneous"** even though the third service is now Facilitation: the
   category also holds a stage play, an exhibition and Excel training.
 - **About paragraph 2** ("ด้วยความเชื่อเหล่านี้ …") stays as written; three rewrites were drafted and

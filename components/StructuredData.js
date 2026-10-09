@@ -1,6 +1,6 @@
 import { siteConfig } from "@/lib/site";
 
-// Referenced as `provider` by the Service schema in ServiceJourney.
+// Referenced as `provider` by the Service schema in Packages.
 export const ORGANIZATION_ID = `${siteConfig.url}/#organization`;
 
 // Organization and WebSite schema so search engines and AI assistants have a

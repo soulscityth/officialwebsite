@@ -3,7 +3,7 @@ import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 import KeepWords from "@/components/KeepWords";
 import { siteConfig } from "@/lib/site";
 import PartnerMarquee from "@/components/PartnerMarquee";
-import ServiceJourney from "@/components/ServiceJourney";
+import Packages from "@/components/Packages";
 import SignatureWork from "@/components/SignatureWork";
 import { domains, stats, process } from "@/lib/data";
 import { pageMeta } from "@/lib/metadata";
@@ -116,7 +116,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <ServiceJourney />
+      <Packages />
 
       <SignatureWork />
 
