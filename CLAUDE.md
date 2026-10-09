@@ -254,11 +254,12 @@ Choices the owners made knowingly. They look like bugs or inconsistencies; leave
   **10% upgrade credit** (owners chose not to publish it). The playbook's internal cost/margin view never
   goes on the site. `/services`, `llms.txt` and the Signature Work "Facilitation" card still describe
   the old three services; moving them over is a separate decision.
-- **Signature Work photos are not from their projects (2026-10-09).** The cards use the four brochure
-  shots from the design (`public/signature/`, Drive › For Brochure, July 2025, 1600px) instead of the
-  projects' own `public/work/` photos, which are 480–560px and looked soft at card size. The owners chose
-  this knowingly. Alt text describes each photo, never the card's project. If high-res originals of the
-  projects' own photos turn up, they are the better fix.
+- **Signature Work photos** (2026-10-09) are each project's own Instagram posts from the Drive PR folder
+  (`1MOlZeP9rNJklkPudnsGDgxQqPm8fK-Bh`, one subfolder per project), 1080x1080 PNGs with the branded
+  bands cropped off (y 142–972) into `public/signature/`. The `public/work/` copies are only 480–560px
+  and looked soft at card size. SK Design Thinking Experience Camp 2024 has no folder, so the camp card
+  shows SK Design Thinking Camp 2025 instead. Briefly the design's brochure shots were used; they showed
+  other events and were replaced.
 - **Portfolio `misc` stays "Miscellaneous"** even though the third service is now Facilitation: the
   category also holds a stage play, an exhibition and Excel training.
 - **About paragraph 2** ("ด้วยความเชื่อเหล่านี้ …") stays as written; three rewrites were drafted and
@@ -293,7 +294,7 @@ stay as they are) · case-study URLs in the sitemap · `Event` JSON-LD · an "�
 (`serviceJourney`, now `/work`) can then point at a camp case study.
 
 **Home Signature Work cards** (built 2026-10-09 from the design at https://claude.ai/artifact/6cLFz9ArX4fWWLHTPZ2CjV)
-show three of these projects plus Craft AI. The design's card backs had process steps and "ผู้เรียนได้"
+show two of these projects (House of The Saint, AC STEM) plus SK Design Thinking Camp 2025 and Craft AI. The design's card backs had process steps and "ผู้เรียนได้"
 bullets. Those were placeholder copy, so the backs show `portfolio` facts instead. Once case-study pages exist, point
 each card's link at its page and use the owners' outcomes there.
 
