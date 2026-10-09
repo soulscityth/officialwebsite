@@ -258,7 +258,9 @@ Choices the owners made knowingly. They look like bugs or inconsistencies; leave
   (`1MOlZeP9rNJklkPudnsGDgxQqPm8fK-Bh`, one subfolder per project), 1080x1080 PNGs with the branded
   bands cropped off (y 142–972) into `public/signature/`. The `public/work/` copies are only 480–560px
   and looked soft at card size. SK Design Thinking Experience Camp 2024 has no folder, so the camp card
-  shows SK Design Thinking Camp 2025 instead. Briefly the design's brochure shots were used; they showed
+  shows SK Design Thinking Camp 2025 instead. Owners picked the files (2026-10-09): SK 2025 `02`,
+  house of the saint `06`, ac turbo `05`, ถอดบทเรียน `08`. An optional `position` on a `signatureWork`
+  entry sets `object-position` when a centred crop cuts the subject (Craft AI uses `20% center`). Briefly the design's brochure shots were used; they showed
   other events and were replaced.
 - **Portfolio `misc` stays "Miscellaneous"** even though the third service is now Facilitation: the
   category also holds a stage play, an exhibition and Excel training.

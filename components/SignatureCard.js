@@ -49,6 +49,7 @@ export default function SignatureCard({ item }) {
             <Image
               src={item.image}
               alt={item.alt}
+              style={item.position ? { objectPosition: item.position } : undefined}
               fill
               sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
               className="scale-[1.02] object-cover transition-transform duration-700 group-hover:scale-[1.07] motion-reduce:transition-none motion-reduce:group-hover:scale-[1.02]"
