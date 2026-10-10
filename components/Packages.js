@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Sparkles } from "lucide-react";
 import KeepWords from "@/components/KeepWords";
 import { ORGANIZATION_ID } from "@/components/StructuredData";
 import { packages, packagesNote } from "@/lib/data";
@@ -149,6 +149,17 @@ function Card({ pkg }) {
           </li>
         ))}
       </ul>
+
+      <Link
+        href="/skills-map"
+        className={`inline-flex min-h-[44px] items-center gap-1.5 self-start text-sm font-medium underline-offset-4 hover:underline ${
+          dark ? "text-brand-200 hover:text-white" : "text-brand-600 hover:text-brand-700"
+        }`}
+      >
+        <Sparkles className="h-4 w-4" aria-hidden="true" />
+        <KeepWords>วัดผลด้วย Skills Map</KeepWords>
+        <ArrowRight className="h-4 w-4" aria-hidden="true" />
+      </Link>
 
       <div className={`space-y-2.5 border-t pt-4 ${dark ? "border-brand-200/25" : "border-brand-100"}`}>
         <Ladder step={pkg.step} dark={dark} />

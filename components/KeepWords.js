@@ -32,6 +32,10 @@ const MANUAL = [
   "สะท้อนคิด",
   // Home packages, Spark card: the number stays with its noun.
   "1 หัวข้อต่องาน",
+  // "ทั้งปี" is listed and matches first, splitting "ทั้งปี / การศึกษา".
+  "ทั้งปีการศึกษา",
+  // Skills Map start date, never "ปีการศึกษา / 2570".
+  "ปีการศึกษา 2570",
   "ลองคิด",
   "ลองทำ",
   // Team quotes on About, in the narrow photo-card column.

@@ -2,7 +2,8 @@
 
 Marketing site for **SoulScity Learning Co., Ltd.** (บริษัท โซล-ไซ-ตี้ เลิร์นนิ่ง จำกัด) — a Thai
 learning-design company running camps, workshops, and facilitation programmes for schools,
-universities, and companies. Five pages, all in Thai: `/` `/about` `/services` `/work` `/contact`.
+universities, and companies. Six pages, all in Thai: `/` `/about` `/services` `/skills-map` `/work` `/contact`.
+`/skills-map` is not in the navbar; it is reached from the home package cards.
 
 ## Deploy chain
 
@@ -74,7 +75,7 @@ Almost all copy is centralised — edit these first, not the pages.
 social handles, service area, nav items, canonical `url`.
 
 `lib/data.js` — `domains`, `signatureCamp`, `formatTypes`, `serviceJourney`, `expertiseGroups`, `process`, `values`,
-`team`, `stats`, `partners`, `portfolio`, `signatureWork`, `packages`, `packagesNote`.
+`team`, `stats`, `partners`, `portfolio`, `signatureWork`, `packages`, `packagesNote`, `skillsMap`.
 
 **Portfolio entries.** `portfolio` is `portfolioRaw` sorted newest-first by `sortDate`:
 
@@ -126,6 +127,7 @@ earlier commit. Do not renumber to "fix" them.
 | `TeamCard.js` | Server. About team card: photo panel covers the card's full height. Expertise tags drop into a strip under the photo only below 380px (see Owner decisions) |
 | `Packages.js` | Server. Home "Our Packages · บันได 4 ขั้น" from `packages`: Spark Workshop → Signature Camp (featured, dark) → Stride Journey → Summit Partner, prices per room of 40, a 4-bar ladder under each card, the `packagesNote` footnote and a consult CTA band. Emits the home `Service` JSON-LD with each starting price. Replaced `ServiceJourney.js` on 2026-10-09 |
 | `SignatureWork.js` + `SignatureCard.js` | Home "Signature Work", right after the hero (the "ประเด็นการเรียนรู้" domains section was removed from home 2026-10-09; `domains` still feeds `/services` and the footer). Server section; the card is a client flip card (photo + title front, topics and facts back, both faces in one grid cell so the card grows to the taller face, hidden face `inert`). `signatureWork` in `lib/data.js` picks four `portfolio` entries by title plus a service label and photo; every fact shown comes from `portfolio`, and a renamed title fails the build. Card links go to `/work` |
+| `SkillsMapDemo.js` | Client. The `/skills-map` hero dashboard: radar of 7 skills, before vs a chosen round, per-skill detail, labelled "ตัวอย่างข้อมูลสมมติ". Gets `skillsMap` as a prop from the page so the client bundle doesn't pull in all of `lib/data.js` |
 
 ### PartnerMarquee — do not refactor to `gap`
 
@@ -197,7 +199,7 @@ preview alias to audit a deployed build (see Deploy chain). Output files go to t
 
 | Command | What it answers | Clean result today |
 |---|---|---|
-| `node scripts/audit/layout.js` | Sideways overflow, h1/h2 with a stranded last word, `[object Object]`, console errors — 5 pages × 8 widths | Only the About h1 at 768px |
+| `node scripts/audit/layout.js` | Sideways overflow, h1/h2 with a stranded last word, `[object Object]`, console errors — 6 pages × 8 widths (`PAGES` in `scripts/audit/browser.js`) | Only the About h1 at 768px |
 | `node scripts/audit/breaks.js` | Thai words split mid-word (needs `pip install pythainlp`) | 2 lines, both fine: "Mid- / Year" and "เชิงปฏิบัติ \| การมีส่วนร่วม" (a real space) |
 | `node scripts/audit/lines.js /route "text" [widths]` | Exactly how one heading or paragraph wraps at each width — use after every copy change | — |
 | `node scripts/audit/shot.js /route "text" [widths]` | PNG of the section holding that text; phones at 2x, navbar and LINE button hidden | — |
@@ -250,7 +252,6 @@ Choices the owners made knowingly. They look like bugs or inconsistencies; leave
 - **Packages on the home page only (2026-10-09).** The owners published prices from the Packages 2027
   playbook (https://claude.ai/artifact/DCdj9BM5tv7XhqNR6XLqt6): Spark from 19,000, Camp from 68,000,
   Stride 120,000 (~9% saving), Summit 155,000 / Plus 245,000, per room of 40. Left off on purpose: the
-  **Skills Map** (does not exist yet; add it to the cards and the section lead once it does) and the
   **10% upgrade credit** (owners chose not to publish it). The playbook's internal cost/margin view never
   goes on the site. `/services`, `llms.txt` and the Signature Work "Facilitation" card still describe
   the old three services; moving them over is a separate decision.
@@ -262,6 +263,13 @@ Choices the owners made knowingly. They look like bugs or inconsistencies; leave
   house of the saint `06`, ac turbo `05`, ถอดบทเรียน `08`. An optional `position` on a `signatureWork`
   entry sets `object-position` when a centred crop cuts the subject (Craft AI uses `20% center`). Briefly the design's brochure shots were used; they showed
   other events and were replaced.
+- **Skills Map (2026-10-10).** `/skills-map` went live from the owners' design
+  (https://claude.ai/artifact/Ujz4GGQPcGdMbirb2DoFSm) before the Skills Map has run with any client, so
+  all copy presents it as **starting ปีการศึกษา 2570**, never as already used "in every project". A
+  "วัดผลด้วย Skills Map" link sits on each home package card; owners chose that over a navbar item for
+  now. The demo dashboard is invented data and says so. The four research figures were checked against
+  their sources. Once real results exist, swap the demo for anonymised real data and drop "เริ่ม…".
+  Before collecting individual profiles (minors' data), the owners need a PDPA consent step.
 - **Portfolio `misc` stays "Miscellaneous"** even though the third service is now Facilitation: the
   category also holds a stage play, an exhibition and Excel training.
 - **About paragraph 2** ("ด้วยความเชื่อเหล่านี้ …") stays as written; three rewrites were drafted and
