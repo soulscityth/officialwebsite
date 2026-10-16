@@ -16,7 +16,12 @@ export function GET() {
     `${siteConfig.positioning} — ${siteConfig.taglineEn} ${siteConfig.serviceArea}`,
     "",
     "## Pages",
-    ...siteConfig.nav.map((item) => `- [${item.label}](${url(item.href)})`),
+    ...siteConfig.nav.flatMap((item) => [
+      `- [${item.label}](${url(item.href)})`,
+      ...(item.children || [])
+        .filter((child) => child.href !== item.href)
+        .map((child) => `  - [${child.label}](${url(child.href)}): ${child.desc}`),
+    ]),
     "",
     "## Services",
     ...serviceJourney.map(

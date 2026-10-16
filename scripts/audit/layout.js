@@ -28,8 +28,16 @@ const { chromium, PAGES, WIDTHS, openPage } = require("./browser");
       await p.waitForTimeout(100);
       const r = await p.evaluate(() => {
         const pageScroll = document.documentElement.scrollWidth > innerWidth + 1;
+        // Inside a sideways scroller (the /services/* tabs on a phone) running past
+        // the edge is the design, not overflow.
+        const inScroller = (e) => {
+          for (let a = e.parentElement; a; a = a.parentElement) {
+            if (/auto|scroll/.test(getComputedStyle(a).overflowX)) return true;
+          }
+          return false;
+        };
         const poking = [...document.querySelectorAll("p,h1,h2,h3,li,span,a,button,label")]
-          .filter((e) => e.offsetParent && e.getBoundingClientRect().right > innerWidth + 1)
+          .filter((e) => e.offsetParent && e.getBoundingClientRect().right > innerWidth + 1 && !inScroller(e))
           .map((e) => e.textContent.trim().slice(0, 40));
         const heads = [...document.querySelectorAll("h1,h2")]
           .filter((h) => h.offsetParent)

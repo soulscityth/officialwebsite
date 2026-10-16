@@ -41,6 +41,14 @@ const MANUAL = [
   // Team quotes on About, in the narrow photo-card column.
   "ที่มั่นคง",
   "ที่ดี",
+  // /services/* sub-pages: "โพสต์อิ / ท", "รูปแบบ / นี้".
+  "โพสต์อิท",
+  "ผลงานจริง",
+  // "ได้ผล" is listed and matches first, so it split "ได้ผล / งานจริง".
+  "ได้ผลงานจริง",
+  "รูปแบบนี้",
+  // Summit table at 320px: "Spark 2– / 3 ครั้ง".
+  "2–3 ครั้ง",
 ];
 
 const WORDS = new Set([...MANUAL, ...generated]);

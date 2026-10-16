@@ -2,8 +2,10 @@
 
 Marketing site for **SoulScity Learning Co., Ltd.** (บริษัท โซล-ไซ-ตี้ เลิร์นนิ่ง จำกัด) — a Thai
 learning-design company running camps, workshops, and facilitation programmes for schools,
-universities, and companies. Six pages, all in Thai: `/` `/about` `/services` `/skills-map` `/work` `/contact`.
-`/skills-map` is not in the navbar; it is reached from the home package cards.
+universities, and companies. Ten pages, all in Thai: `/` `/about` `/services` `/skills-map` `/work` `/contact`,
+plus four service sub-pages `/services/packages` `/services/camps` `/services/partnership`
+`/services/organizations`. The navbar's "บริการของเรา" opens a dropdown listing `/services`, the four
+sub-pages and `/skills-map` (`children` of that nav item in `lib/site.js`); see Service sub-pages below.
 
 ## Deploy chain
 
@@ -121,12 +123,16 @@ earlier commit. Do not renumber to "fix" them.
 | `PortfolioCard.js` | Client. Per-card image carousel: prev/next, dot indicators, touch swipe, crossfade via stacked absolute images |
 | `PortfolioGrid.js` | Client. Category filter tabs with counts, filter in `?type=`. Reading the URL suspends a static page, so `/work` passes `<PortfolioGridView active="all" />` as the Suspense fallback: all cards are in the server HTML (crawlers, AI bots). A `?type=` link flashes "all" before filtering — accepted (owners chose this over making `/work` dynamic) |
 | `PartnerMarquee.js` | **Server** component. Two rows scrolling in opposite directions, infinite |
-| `Navbar.js` | Client. Sticky, scroll state, mobile menu |
+| `Navbar.js` | Client. Sticky, scroll state, mobile menu. An item with `children` is a dropdown: opens on hover and focus, the chevron is a real button (touch, keyboard), Escape and outside click close it. On mobile the children are listed indented under their parent. Desktop items are `px-3.5` (was `px-4`) so the chevron fits: at 900px the menu has 18px either side |
 | `ContactForm.js` | Client. Posts to `/api/contact` |
 | `Footer.js` | Server |
 | `TeamCard.js` | Server. About team card: photo panel covers the card's full height. Expertise tags drop into a strip under the photo only below 380px (see Owner decisions) |
 | `Packages.js` | Server. Home "Our Packages · บันได 4 ขั้น" from `packages`: Spark Workshop → Signature Camp (featured, dark) → Stride Journey → Summit Partner, prices per room of 40, a 4-bar ladder under each card, the `packagesNote` footnote and a consult CTA band. Emits the home `Service` JSON-LD with each starting price. Replaced `ServiceJourney.js` on 2026-10-09 |
 | `SignatureWork.js` + `SignatureCard.js` | Home "Signature Work", right after the hero (the "ประเด็นการเรียนรู้" domains section was removed from home 2026-10-09; `domains` still feeds `/services` and the footer). Server section; the card is a client flip card (photo + title front, topics and facts back, both faces in one grid cell so the card grows to the taller face, hidden face `inert`). `signatureWork` in `lib/data.js` picks four `portfolio` entries by title plus a service label and photo; every fact shown comes from `portfolio`, and a renamed title fails the build. Card links go to `/work` |
+| `ServiceBits.js` | Server. Pieces shared by the `/services/*` sub-pages: `StepBadge` and `stepTone` (the 01–04 colour ramp), `SectionHead`, `ServiceHero`, `CheckItem`, `WorkCards` (portfolio entries with their first photo, linking to `/work?type=`), `ServiceCta` |
+| `ServicesSubnav.js` | Client. Tabs across the top of each sub-page, from the nav item's `children`. Scrolls sideways on a phone, wraps from 640px |
+| `PriceEstimator.js` | Client. `/services/packages` "ประมาณราคาเบื้องต้น": package × ceil(learners / 40) rooms; 5 rooms or more shows "เสนอราคาเฉพาะงาน". Gets `packages` as a prop |
+| `OrgAudiences.js` | Client. `/services/organizations` องค์กร / มหาวิทยาลัย tabs; the works for each tab are rendered on the server and passed in |
 | `SkillsMapDemo.js` | Client. The `/skills-map` hero dashboard: radar of 7 skills, before vs a chosen round, per-skill detail, labelled "ตัวอย่างข้อมูลสมมติ". Gets `skillsMap` as a prop from the page so the client bundle doesn't pull in all of `lib/data.js` |
 
 ### PartnerMarquee — do not refactor to `gap`
@@ -199,8 +205,8 @@ preview alias to audit a deployed build (see Deploy chain). Output files go to t
 
 | Command | What it answers | Clean result today |
 |---|---|---|
-| `node scripts/audit/layout.js` | Sideways overflow, h1/h2 with a stranded last word, `[object Object]`, console errors — 6 pages × 8 widths (`PAGES` in `scripts/audit/browser.js`) | Only the About h1 at 768px |
-| `node scripts/audit/breaks.js` | Thai words split mid-word (needs `pip install pythainlp`) | 2 lines, both fine: "Mid- / Year" and "เชิงปฏิบัติ \| การมีส่วนร่วม" (a real space) |
+| `node scripts/audit/layout.js` | Sideways overflow, h1/h2 with a stranded last word, `[object Object]`, console errors — 10 pages × 8 widths (`PAGES` in `scripts/audit/browser.js`). Elements inside a sideways scroller (the sub-page tabs on a phone) are not counted as overflow | Only the About h1 at 768px |
+| `node scripts/audit/breaks.js` | Thai words split mid-word (needs `pip install pythainlp`) | 3 lines, all fine: "Mid- / Year" and "Next- / Gen" (real hyphens, /work) and "เชิงปฏิบัติ \| การมีส่วนร่วม" (a real space) |
 | `node scripts/audit/lines.js /route "text" [widths]` | Exactly how one heading or paragraph wraps at each width — use after every copy change | — |
 | `node scripts/audit/shot.js /route "text" [widths]` | PNG of the section holding that text; phones at 2x, navbar and LINE button hidden | — |
 
@@ -233,12 +239,31 @@ once.
 |---|---|---|
 | `Organization` + `WebSite` JSON-LD (every page) | `siteConfig` | `components/StructuredData.js` |
 | `Service` JSON-LD ×4 with prices (home) | `packages` | `components/Packages.js`, next to the cards it describes |
-| `/llms.txt` | `siteConfig`, `serviceJourney`, `expertiseGroups` | `app/llms.txt/route.js` |
+| `/llms.txt` | `siteConfig` (nav and its `children`), `serviceJourney`, `expertiseGroups` | `app/llms.txt/route.js` |
 | `/sitemap.xml` | route list | `app/sitemap.js` — **add new pages here by hand**; no `lastModified` on purpose |
 
 Editing a package in `lib/data.js` updates its card and its schema together. `/llms.txt` still lists the
 three services from `serviceJourney` (see Owner decisions). Keep schema
 next to the content it describes: Google expects it to match what is visible on that page.
+
+## Service sub-pages (`/services/*`, added 2026-10-16)
+
+Built from the owners' v2 design: canvas "SoulScity Website Restructure"
+(https://claude.ai/artifact/5UTbJRAroaVkN6scXXSYMG), row "หน้าบริการ 4 หน้า · ดีไซน์จริง v2". The owners
+asked for them as **new pages under บริการของเรา, with `/services` kept as it was**; overlapping content
+between `/services` and the sub-pages is accepted. Design's `ServicesV2` became `/services/packages`.
+
+- Prices and package contents come from `packages` (the same source as the home cards), page-specific
+  lists from the block at the end of `lib/data.js` (`packageCompare`, `campTracks`, `orgAudiences`, …).
+  Project cards look up `portfolio` by title (`worksByTitle`), so a renamed title fails the build.
+- The partnership hero's "สรุปผลสำหรับผู้บริหาร" is computed from `skillsMap.demo` and labelled
+  "ตัวอย่าง · ข้อมูลสมมติ". Every Skills Map mention says it starts in ปีการศึกษา 2570.
+- **Left out on purpose, waiting for the owners** (the design had placeholders; never invent them):
+  camp safety section (insurance terms, first aid, emergency plan), teacher / HR testimonials, the
+  partnership FAQ answers (instalments, purchasing documents, rescheduling), the corporate starting
+  price per half-day session, the corporate quote turnaround in days, and a tax-invoice claim (unknown
+  whether the company is VAT-registered). Add each as a section or line once supplied.
+- Response time is "ภายใน 1 วันทำการ", the same promise the contact page makes.
 
 ## Owner decisions — do not "fix"
 

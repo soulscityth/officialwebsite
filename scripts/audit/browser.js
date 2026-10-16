@@ -31,7 +31,18 @@ function loadPlaywright() {
 }
 
 const BASE = (process.env.AUDIT_URL || "http://127.0.0.1:3000").replace(/\/$/, "");
-const PAGES = ["/", "/about", "/services", "/skills-map", "/work", "/contact"];
+const PAGES = [
+  "/",
+  "/about",
+  "/services",
+  "/services/packages",
+  "/services/camps",
+  "/services/partnership",
+  "/services/organizations",
+  "/skills-map",
+  "/work",
+  "/contact",
+];
 // Phone (320 old iPhone SE, 360 Android, 390/414 iPhone), tablet, laptop, desktop.
 const WIDTHS = [320, 360, 390, 414, 768, 1024, 1280, 1440];
 const OUT = path.join(os.tmpdir(), "soulscity-audit");
