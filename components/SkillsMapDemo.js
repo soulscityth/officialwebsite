@@ -47,15 +47,14 @@ export default function SkillsMapDemo({ skillsMap }) {
   const { skills, levels, demo } = skillsMap;
   const level = (v) => levels[levelIndex(v)];
   const [view, setView] = useState("group");
-  const [roundId, setRoundId] = useState(demo.rounds[0].id);
   const [learnerId, setLearnerId] = useState(demo.learners[0].id);
   const [sel, setSel] = useState(0);
 
-  const round = demo.rounds.find((r) => r.id === roundId);
+  const round = demo.rounds[0];
   const learner = demo.learners.find((l) => l.id === learnerId);
   const person = view === "person";
   const before = person ? learner.before : demo.before;
-  const now = person ? learner[roundId] : round.values;
+  const now = person ? learner[round.id] : round.values;
   const groupNow = round.values;
 
   let best = 0;
@@ -97,24 +96,6 @@ export default function SkillsMapDemo({ skillsMap }) {
             <KeepWords>{v.label}</KeepWords>
           </button>
         ))}
-      </div>
-
-      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
-        <div role="group" aria-label="เลือกรอบการวัด" className="flex flex-wrap gap-1.5">
-          {demo.rounds.map((r) => (
-            <button
-              key={r.id}
-              type="button"
-              aria-pressed={r.id === roundId}
-              onClick={() => setRoundId(r.id)}
-              className={`min-h-[36px] rounded-full px-3.5 text-[13px] font-medium ring-1 ring-inset transition-colors ${
-                r.id === roundId ? "bg-brand-50 text-brand-800 ring-brand-400" : "text-slate-600 ring-slate-200 hover:bg-slate-50"
-              }`}
-            >
-              <KeepWords>{r.label}</KeepWords>
-            </button>
-          ))}
-        </div>
       </div>
 
       {person && (
