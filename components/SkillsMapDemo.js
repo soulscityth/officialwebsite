@@ -28,21 +28,35 @@ const LABELS = [
 ];
 
 const fmt = (v) => v.toFixed(1);
-const delta = (a, b) => `${b - a >= 0 ? "+" : ""}${fmt(b - a)}`;
+const delta = (a, b) => (Math.abs(b - a) < 0.05 ? "±0" : `${b - a > 0 ? "+" : ""}${fmt(b - a)}`);
 const levelIndex = (v) => (v < 1.5 ? 0 : v < 2.5 ? 1 : v < 3.5 ? 2 : 3);
+const compare = (mine, group) =>
+  Math.abs(mine - group) < 0.05 ? "เท่ากับค่าเฉลี่ย" : mine > group ? "สูงกว่าค่าเฉลี่ย" : "ต่ำกว่าค่าเฉลี่ย";
 const average = (values) => values.reduce((s, v) => s + v, 0) / values.length;
 
+const VIEWS = [
+  { id: "group", label: "ภาพรวมกลุ่ม" },
+  { id: "person", label: "รายคน" },
+];
+
 // The dashboard a school receives, with invented sample numbers (labelled on the card).
-// Takes `skillsMap` as a prop so the client bundle doesn't pull in all of lib/data.js.
+// Two views: the group's averages, or one learner (A–F, anonymised) drawn against the
+// group average. Takes `skillsMap` as a prop so the client bundle doesn't pull in all
+// of lib/data.js.
 export default function SkillsMapDemo({ skillsMap }) {
   const { skills, levels, demo } = skillsMap;
   const level = (v) => levels[levelIndex(v)];
+  const [view, setView] = useState("group");
   const [roundId, setRoundId] = useState(demo.rounds[0].id);
+  const [learnerId, setLearnerId] = useState(demo.learners[0].id);
   const [sel, setSel] = useState(0);
 
   const round = demo.rounds.find((r) => r.id === roundId);
-  const before = demo.before;
-  const now = round.values;
+  const learner = demo.learners.find((l) => l.id === learnerId);
+  const person = view === "person";
+  const before = person ? learner.before : demo.before;
+  const now = person ? learner[roundId] : round.values;
+  const groupNow = round.values;
 
   let best = 0;
   let low = 0;
@@ -69,25 +83,67 @@ export default function SkillsMapDemo({ skillsMap }) {
         </span>
       </div>
 
-      <div role="group" aria-label="เลือกรอบการวัด" className="mt-4 inline-flex flex-wrap gap-1 rounded-full bg-brand-50 p-1">
-        {demo.rounds.map((r) => (
+      <div role="group" aria-label="มุมมอง" className="mt-4 grid grid-cols-2 gap-1 rounded-full bg-brand-50 p-1 sm:inline-grid">
+        {VIEWS.map((v) => (
           <button
-            key={r.id}
+            key={v.id}
             type="button"
-            aria-pressed={r.id === roundId}
-            onClick={() => setRoundId(r.id)}
-            className={`min-h-[40px] rounded-full px-4 text-sm font-medium transition-colors ${
-              r.id === roundId ? "bg-brand-600 text-white" : "text-brand-700 hover:bg-white"
+            aria-pressed={v.id === view}
+            onClick={() => setView(v.id)}
+            className={`min-h-[40px] rounded-full px-5 text-sm font-semibold transition-colors ${
+              v.id === view ? "bg-brand-600 text-white" : "text-brand-700 hover:bg-white"
             }`}
           >
-            <KeepWords>{r.label}</KeepWords>
+            <KeepWords>{v.label}</KeepWords>
           </button>
         ))}
       </div>
 
+      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+        <div role="group" aria-label="เลือกรอบการวัด" className="flex flex-wrap gap-1.5">
+          {demo.rounds.map((r) => (
+            <button
+              key={r.id}
+              type="button"
+              aria-pressed={r.id === roundId}
+              onClick={() => setRoundId(r.id)}
+              className={`min-h-[36px] rounded-full px-3.5 text-[13px] font-medium ring-1 ring-inset transition-colors ${
+                r.id === roundId ? "bg-brand-50 text-brand-800 ring-brand-400" : "text-slate-600 ring-slate-200 hover:bg-slate-50"
+              }`}
+            >
+              <KeepWords>{r.label}</KeepWords>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {person && (
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          <p id="learner-label" className="text-xs text-slate-500">
+            <KeepWords>{`ผู้เรียน (ตัวอย่าง ${demo.learners.length} จาก 40 คน)`}</KeepWords>
+          </p>
+          <div role="group" aria-labelledby="learner-label" className="flex flex-wrap gap-1.5">
+            {demo.learners.map((l) => (
+              <button
+                key={l.id}
+                type="button"
+                aria-pressed={l.id === learnerId}
+                aria-label={`ผู้เรียน ${l.id}`}
+                onClick={() => setLearnerId(l.id)}
+                className={`h-10 w-10 rounded-full font-display text-sm font-semibold transition-colors ${
+                  l.id === learnerId ? "bg-brand-800 text-white" : "bg-slate-50 text-slate-700 hover:bg-brand-50"
+                }`}
+              >
+                {l.id}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className="mt-4 grid gap-4 sm:grid-cols-[minmax(0,1fr)_200px]">
         <div>
-          <svg viewBox="0 20 440 350" role="img" aria-label="กราฟใยแมงมุม 7 ทักษะ เทียบก่อนและหลัง" className="w-full">
+          <svg viewBox="0 20 440 350" role="img" aria-label={person ? `กราฟใยแมงมุม 7 ทักษะ ผู้เรียน ${learner.id} เทียบก่อน หลัง และค่าเฉลี่ยกลุ่ม` : "กราฟใยแมงมุม 7 ทักษะ เทียบก่อนและหลัง"} className="w-full">
             {[1, 2, 3].map((v) => (
               <polygon key={v} points={ring(v)} fill="none" stroke="#d1e9e9" />
             ))}
@@ -98,6 +154,9 @@ export default function SkillsMapDemo({ skillsMap }) {
             })}
             <line x1={CX} y1={CY} x2={selX} y2={selY} stroke="#0f6265" strokeWidth="2" />
             <polygon points={polygon(before)} fill="rgba(113,183,184,.18)" stroke="#3f9698" strokeWidth="1.5" strokeDasharray="5 4" />
+            {person && (
+              <polygon points={polygon(groupNow)} fill="none" stroke="#d97706" strokeWidth="1.5" strokeDasharray="1.5 3.5" strokeLinecap="round" />
+            )}
             <polygon points={polygon(now)} fill="rgba(15,98,101,.22)" stroke="#0f6265" strokeWidth="2.5" strokeLinejoin="round" />
             <circle cx={bX} cy={bY} r="5" fill="#ffffff" stroke="#3f9698" strokeWidth="2" />
             <circle cx={nX} cy={nY} r="6.5" fill="#0f6265" stroke="#ffffff" strokeWidth="2" />
@@ -129,6 +188,12 @@ export default function SkillsMapDemo({ skillsMap }) {
               <span className="h-0.5 w-4 bg-brand-600" aria-hidden="true" />
               <KeepWords>{round.now}</KeepWords>
             </span>
+            {person && (
+              <span className="inline-flex items-center gap-1.5">
+                <span className="h-0 w-4 border-t-2 border-dotted border-amber-600" aria-hidden="true" />
+                <KeepWords>ค่าเฉลี่ยกลุ่ม</KeepWords>
+              </span>
+            )}
             <span>
               <KeepWords>ระดับ 1–4 ตาม rubric</KeepWords>
             </span>
@@ -175,6 +240,11 @@ export default function SkillsMapDemo({ skillsMap }) {
           <p className="mt-1 text-xs text-slate-500">
             <KeepWords>{`หลักฐาน: ${round.evidence}`}</KeepWords>
           </p>
+          {person && (
+            <p className="mt-1 text-xs font-medium text-amber-800">
+              <KeepWords>{`ค่าเฉลี่ยกลุ่ม${round.now} ${fmt(groupNow[sel])} · ผู้เรียน ${learner.id} ${compare(now[sel], groupNow[sel])}`}</KeepWords>
+            </p>
+          )}
         </div>
         <div className="flex items-center gap-3">
           <div className="text-center">
@@ -199,7 +269,7 @@ export default function SkillsMapDemo({ skillsMap }) {
       <dl className="mt-3 grid grid-cols-1 gap-2 text-sm sm:grid-cols-3">
         <div className="rounded-xl bg-slate-50 px-3 py-2">
           <dt className="text-xs text-slate-500">
-            <KeepWords>ค่าเฉลี่ย 7 ทักษะ</KeepWords>
+            <KeepWords>{person ? `ค่าเฉลี่ยของ ${learner.id}` : "ค่าเฉลี่ย 7 ทักษะ"}</KeepWords>
           </dt>
           <dd className="font-semibold">
             {fmt(average(before))} → {fmt(average(now))}

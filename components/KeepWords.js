@@ -49,6 +49,8 @@ const MANUAL = [
   "รูปแบบนี้",
   // Summit table at 320px: "Spark 2– / 3 ครั้ง".
   "2–3 ครั้ง",
+  // Skills Map dashboard view switch at 320px: "ภาพรวม / กลุ่ม".
+  "ภาพรวมกลุ่ม",
 ];
 
 const WORDS = new Set([...MANUAL, ...generated]);

@@ -133,7 +133,7 @@ earlier commit. Do not renumber to "fix" them.
 | `ServicesSubnav.js` | Client. Tabs across the top of each sub-page, from the nav item's `children`. Scrolls sideways on a phone, wraps from 640px |
 | `PriceEstimator.js` | Client. `/services/packages` "ประมาณราคาเบื้องต้น": package × ceil(learners / 40) rooms; 5 rooms or more shows "เสนอราคาเฉพาะงาน". Gets `packages` as a prop |
 | `OrgAudiences.js` | Client. `/services/organizations` องค์กร / มหาวิทยาลัย tabs; the works for each tab are rendered on the server and passed in |
-| `SkillsMapDemo.js` | Client. The `/skills-map` hero dashboard: radar of 7 skills, before vs a chosen round, per-skill detail, labelled "ตัวอย่างข้อมูลสมมติ". Gets `skillsMap` as a prop from the page so the client bundle doesn't pull in all of `lib/data.js` |
+| `SkillsMapDemo.js` | Client. The `/skills-map` hero dashboard: radar of 7 skills, before vs a chosen round, per-skill detail, labelled "ตัวอย่างข้อมูลสมมติ". Two views (2026-10-17, owners' ask): "ภาพรวมกลุ่ม" (group averages) and "รายคน" (one of six invented learners A–F from `skillsMap.demo.learners`, whole rubric levels, with the group average as a dotted amber outline and "สูงกว่า / ต่ำกว่า / เท่ากับค่าเฉลี่ย" in the detail). Learners stay anonymised letters, never names. Gets `skillsMap` as a prop from the page so the client bundle doesn't pull in all of `lib/data.js` |
 
 ### PartnerMarquee — do not refactor to `gap`
 
