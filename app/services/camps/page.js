@@ -14,6 +14,7 @@ import {
 } from "@/components/ServiceBits";
 import { campDays, campIncludes, campTracks, packages, packagesNote, worksByTitle } from "@/lib/data";
 import { pageMeta } from "@/lib/metadata";
+import { contactHref } from "@/lib/contact";
 
 export const metadata = {
   title: "ค่ายและเวิร์กช็อป",
@@ -23,6 +24,7 @@ export const metadata = {
 };
 
 const baht = (n) => n.toLocaleString("en-US");
+const CAMP_CONTACT = contactHref({ subject: "ปรึกษาการจัดค่าย Signature Camp", activity: "ค่าย" });
 const spark = packages.find((p) => p.step === "01");
 const camp = packages.find((p) => p.step === "02");
 
@@ -75,7 +77,7 @@ export default function CampsPage() {
             ))}
           </dl>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
-            <Link href="/contact" className="btn bg-white text-brand-800 hover:bg-brand-50" data-ga-event="cta_consult_click">
+            <Link href={CAMP_CONTACT} className="btn bg-white text-brand-800 hover:bg-brand-50" data-ga-event="cta_consult_click">
               <KeepWords>ปรึกษาการจัดค่าย</KeepWords>
               <ArrowUpRight className="h-4 w-4" />
             </Link>
@@ -231,7 +233,11 @@ export default function CampsPage() {
                 <KeepWords>{packagesNote}</KeepWords>
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <Link href="/contact" className="btn bg-white text-brand-800 hover:bg-brand-50" data-ga-event="cta_consult_click">
+                <Link
+                  href={contactHref({ subject: "ขอใบเสนอราคา Signature Camp", activity: "ค่าย" })}
+                  className="btn bg-white text-brand-800 hover:bg-brand-50"
+                  data-ga-event="cta_consult_click"
+                >
                   <KeepWords>ขอใบเสนอราคา</KeepWords>
                 </Link>
                 <Link href="/services/packages#estimate" className="btn-ghost-light">
@@ -287,7 +293,11 @@ export default function CampsPage() {
                 {baht(spark.price.amount)} <span className="text-lg font-medium text-slate-600">บาท</span>
               </p>
             </div>
-            <Link href="/contact" className="btn-primary mt-6 w-full" data-ga-event="cta_consult_click">
+            <Link
+              href={contactHref({ subject: "จอง Spark Workshop", activity: "เวิร์กช็อป" })}
+              className="btn-primary mt-6 w-full"
+              data-ga-event="cta_consult_click"
+            >
               <KeepWords>จอง Spark Workshop</KeepWords>
               <ArrowUpRight className="h-4 w-4" />
             </Link>
@@ -310,6 +320,7 @@ export default function CampsPage() {
         title="บอกจำนวนนักเรียน ช่วงเวลา และ track ที่สนใจ"
         lead="ทีมงานตอบกลับภายใน 1 วันทำการ"
         primary="ปรึกษาการจัดค่าย"
+        contact={CAMP_CONTACT}
         second={{ href: "/services/partnership", label: "อยากให้ต่อเนื่อง? ดู Stride" }}
       />
     </>

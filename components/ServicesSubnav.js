@@ -7,7 +7,8 @@ import { siteConfig } from "@/lib/site";
 
 const items = siteConfig.nav.find((item) => item.children).children;
 
-// Tabs across the top of the /services/* sub-pages, from the navbar's dropdown list.
+// Tabs across the top of every page in the บริการของเรา dropdown (/services, its four
+// sub-pages and /skills-map), from the navbar's dropdown list.
 // On a phone, one row that scrolls sideways rather than wrapping to three; from 640px
 // it wraps, so no tab is hidden off the edge of a tablet.
 export default function ServicesSubnav() {

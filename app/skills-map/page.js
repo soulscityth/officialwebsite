@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight, FileText, Map as MapIcon, TrendingUp, UserRound } from "lucide-react";
 import KeepWords from "@/components/KeepWords";
 import SkillsMapDemo from "@/components/SkillsMapDemo";
+import ServicesSubnav from "@/components/ServicesSubnav";
 import { packages, skillsMap } from "@/lib/data";
 import { pageMeta } from "@/lib/metadata";
 
@@ -35,6 +36,8 @@ export default function SkillsMapPage() {
 
   return (
     <>
+      <ServicesSubnav />
+
       {/* Hero, with the sample dashboard */}
       <section className="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-950">
         <div className="absolute inset-0 bg-hero-grid bg-[length:20px_20px] opacity-20" />

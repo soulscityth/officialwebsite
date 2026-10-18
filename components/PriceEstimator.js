@@ -4,10 +4,13 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Minus, Plus } from "lucide-react";
 import KeepWords from "@/components/KeepWords";
+import { contactHref } from "@/lib/contact";
 
 const ROOM = 40;
 const SIZES = [40, 80, 120, 160, 200];
 const baht = (n) => n.toLocaleString("en-US");
+// Contact-form activity for each package step; Summit spans several kinds, so none.
+const ACTIVITY = { "01": "เวิร์กช็อป", "02": "ค่าย", "03": "ค่าย" };
 
 // /services/packages "ประมาณราคาเบื้องต้น". Prices are per room of 40 learners
 // (`packages`); 5 rooms or more is quoted per project, as the packages note says.
@@ -18,6 +21,17 @@ export default function PriceEstimator({ packages }) {
   const pkg = packages.find((p) => p.step === step);
   const rooms = Math.ceil(n / ROOM);
   const custom = rooms >= 5;
+
+  // "ส่งตัวเลขนี้ให้ทีม" carries the choice and the estimate into the contact form.
+  const estimate = custom
+    ? `${rooms} ห้อง ขอใบเสนอราคาเฉพาะงาน`
+    : `งบเริ่มต้นที่ประมาณจากหน้าเว็บ ${baht(pkg.price.amount * rooms)} บาท (${baht(pkg.price.amount)} บาท × ${rooms} ห้อง)`;
+  const contact = contactHref({
+    subject: `สนใจ ${pkg.title} · ${n} คน`,
+    activity: ACTIVITY[pkg.step],
+    participants: n,
+    message: `สนใจ ${pkg.title} สำหรับผู้เรียนประมาณ ${n} คน · ${estimate}`,
+  });
 
   const chip = (on) =>
     `min-h-[44px] rounded-full px-4 text-sm font-medium ring-1 ring-inset transition-colors ${
@@ -101,7 +115,7 @@ export default function PriceEstimator({ packages }) {
         </div>
       </div>
 
-      <Link href="/contact" className="btn-primary mt-6 w-full" data-ga-event="cta_consult_click">
+      <Link href={contact} className="btn-primary mt-6 w-full" data-ga-event="cta_consult_click">
         <KeepWords>ส่งตัวเลขนี้ให้ทีม แล้วคุยต่อ</KeepWords>
         <ArrowUpRight className="h-4 w-4" />
       </Link>

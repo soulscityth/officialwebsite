@@ -125,7 +125,8 @@ export function WorksHeader({ title }) {
 
 // Closing call to action: the same dark panel as the other pages' CTAs. `second` is
 // an optional secondary link; LINE is the default.
-export function ServiceCta({ eyebrow, title, lead, primary, second }) {
+// `contact` is a prefilled /contact link from contactHref(); plain /contact without it.
+export function ServiceCta({ eyebrow, title, lead, primary, second, contact = "/contact" }) {
   const secondary = second || { href: siteConfig.line.url, label: siteConfig.line.label, external: true };
   return (
     <section className="section">
@@ -148,7 +149,7 @@ export function ServiceCta({ eyebrow, title, lead, primary, second }) {
             )}
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link
-                href="/contact"
+                href={contact}
                 className="btn w-full bg-white text-brand-800 hover:bg-brand-50 sm:w-auto"
                 data-ga-event="cta_consult_click"
               >

@@ -1,7 +1,8 @@
 import { Fragment } from "react";
 import Link from "next/link";
-import { ArrowDown, ArrowUpRight, CheckCircle2 } from "lucide-react";
-import { domains, signatureCamp, formatTypes, expertiseGroups } from "@/lib/data";
+import { ArrowDown, ArrowRight, ArrowUpRight, Building2, CheckCircle2, Handshake, Layers, Sparkles, Tent } from "lucide-react";
+import { domains, signatureCamp, formatTypes, expertiseGroups, packages } from "@/lib/data";
+import ServicesSubnav from "@/components/ServicesSubnav";
 import { siteConfig } from "@/lib/site";
 import KeepWords from "@/components/KeepWords";
 import { pageMeta } from "@/lib/metadata";
@@ -20,9 +21,27 @@ const tagColors = {
   sky: { dot: "bg-sky-600", chip: "bg-sky-50 text-sky-800 ring-sky-200" },
 };
 
+const baht = (n) => n.toLocaleString("en-US");
+const price = (step) => baht(packages.find((p) => p.step === step).price.amount);
+
+// "เลือกบริการที่ตรงกับคุณ": the four sub-pages, so this page leads somewhere. Labels and
+// blurbs come from the navbar dropdown; starting prices from `packages`.
+const subPageExtras = {
+  "/services/packages": { icon: Layers, note: `เริ่มต้น ${price("01")} บาท`, cta: "เทียบแพ็กเกจและราคา" },
+  "/services/camps": { icon: Tent, note: `Spark ${price("01")} · Camp ${price("02")} บาท`, cta: "ดูค่ายและเวิร์กช็อป" },
+  "/services/partnership": { icon: Handshake, note: `เริ่มต้น ${price("03")} บาท`, cta: "ดูแผนระยะยาว" },
+  "/services/organizations": { icon: Building2, note: "เสนอราคาตามโจทย์", cta: "ดูบริการสำหรับองค์กร" },
+};
+const subPages = siteConfig.nav
+  .find((item) => item.children)
+  .children.filter((child) => subPageExtras[child.href])
+  .map((child) => ({ ...child, ...subPageExtras[child.href] }));
+
 export default function ServicesPage() {
   return (
     <>
+      <ServicesSubnav />
+
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-950">
         <div className="absolute inset-0 bg-hero-grid bg-[length:20px_20px] opacity-20" />
@@ -37,6 +56,52 @@ export default function ServicesPage() {
             <KeepWords>
                 ตั้งแต่เวิร์กช็อปครึ่งวันไปจนถึงค่ายหลายวัน เราออกแบบและจัดกระบวนการเรียนรู้ให้ตรงกับเป้าหมายของโรงเรียนและองค์กรของคุณ
             </KeepWords>
+          </p>
+        </div>
+      </section>
+
+      {/* Where to go next: the four service sub-pages */}
+      <section className="section bg-brand-50">
+        <div className="container-page">
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="eyebrow bg-white"><KeepWords>เลือกบริการที่ตรงกับคุณ</KeepWords></span>
+            <h2 className="mt-4 font-display text-3xl font-bold text-slate-900 sm:text-4xl">
+              <KeepWords>เริ่มจากโจทย์ของคุณ</KeepWords>
+            </h2>
+          </div>
+          <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+            {subPages.map((page) => (
+              <Link
+                key={page.href}
+                href={page.href}
+                className="group flex flex-col rounded-2xl bg-white p-6 shadow-card ring-1 ring-slate-100 transition-transform duration-200 hover:-translate-y-1"
+              >
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+                  <page.icon className="h-6 w-6" />
+                </span>
+                <h3 className="mt-5 font-display text-lg font-semibold text-slate-900 group-hover:text-brand-700">
+                  <KeepWords>{page.label}</KeepWords>
+                </h3>
+                <p className="mt-1.5 flex-grow text-sm leading-relaxed text-slate-600">
+                  <KeepWords>{page.desc}</KeepWords>
+                </p>
+                <p className="mt-4 text-[13px] font-medium text-brand-700">
+                  <KeepWords>{page.note}</KeepWords>
+                </p>
+                <span className="mt-3 inline-flex min-h-[44px] items-center gap-1.5 border-t border-brand-100 pt-3 text-sm font-semibold text-brand-600">
+                  <KeepWords>{page.cta}</KeepWords>
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                </span>
+              </Link>
+            ))}
+          </div>
+          <p className="mt-6 text-center text-sm text-slate-600">
+            <Sparkles className="mr-1.5 inline h-4 w-4 align-[-3px] text-brand-600" aria-hidden="true" />
+            <KeepWords>ทุกบริการวัดการเติบโตด้วย</KeepWords>{" "}
+            <Link href="/skills-map" className="font-semibold text-brand-600 underline-offset-4 hover:underline">
+              Skills Map
+            </Link>{" "}
+            <KeepWords>เริ่มปีการศึกษา 2570</KeepWords>
           </p>
         </div>
       </section>

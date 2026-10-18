@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Send, CheckCircle2, AlertCircle } from "lucide-react";
 import KeepWords from "@/components/KeepWords";
 import { activityTypes, learnerLevels } from "@/lib/data";
+import { CONTACT_PARAMS } from "@/lib/contact";
 import { trackEvent, GA_EVENTS } from "@/lib/analytics";
 
 export default function ContactForm() {
@@ -11,6 +12,26 @@ export default function ContactForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const errorRef = useRef(null);
+  const formRef = useRef(null);
+  const [prefilled, setPrefilled] = useState(false);
+
+  // Service pages link here with the package, head count and estimate in the query
+  // (lib/contact.js). Read it after mount rather than with useSearchParams, which
+  // would make the static /contact page suspend.
+  useEffect(() => {
+    const form = formRef.current;
+    if (!form) return;
+    const params = new URLSearchParams(window.location.search);
+    const set = (field, value) => {
+      if (value && form.elements[field]) form.elements[field].value = value.slice(0, 2000);
+    };
+    set("subject", params.get(CONTACT_PARAMS.subject));
+    set("message", params.get(CONTACT_PARAMS.message));
+    set("participants", params.get(CONTACT_PARAMS.participants));
+    const activity = params.get(CONTACT_PARAMS.activity);
+    if (activityTypes.includes(activity)) set("activityType", activity);
+    setPrefilled([...Object.values(CONTACT_PARAMS)].some((k) => params.get(k)));
+  }, []);
 
   // The error renders just above the submit button, which is at the bottom of the
   // screen when tapped: there it lands partly off-screen and under the floating LINE
@@ -45,6 +66,8 @@ export default function ContactForm() {
       // rather than button presses.
       trackEvent(GA_EVENTS.formSubmit, { activity_type: data.activityType || "unspecified" });
       setSubmitted(true);
+      // "ส่งข้อความอีกครั้ง" brings back an empty form; the prefill note no longer applies.
+      setPrefilled(false);
     } catch (err) {
       setError(err.message || "ส่งข้อความไม่สำเร็จ กรุณาลองใหม่ภายหลัง");
     } finally {
@@ -78,7 +101,12 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
+      {prefilled && (
+        <p className="rounded-xl bg-brand-50 px-4 py-3 text-sm text-brand-800">
+          <KeepWords>เรากรอกข้อมูลจากหน้าที่คุณดูอยู่ไว้ให้แล้ว แก้ไขหรือเพิ่มเติมได้ก่อนส่ง</KeepWords>
+        </p>
+      )}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-slate-700">

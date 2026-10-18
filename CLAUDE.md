@@ -124,13 +124,13 @@ earlier commit. Do not renumber to "fix" them.
 | `PortfolioGrid.js` | Client. Category filter tabs with counts, filter in `?type=`. Reading the URL suspends a static page, so `/work` passes `<PortfolioGridView active="all" />` as the Suspense fallback: all cards are in the server HTML (crawlers, AI bots). A `?type=` link flashes "all" before filtering — accepted (owners chose this over making `/work` dynamic) |
 | `PartnerMarquee.js` | **Server** component. Two rows scrolling in opposite directions, infinite |
 | `Navbar.js` | Client. Sticky, scroll state, mobile menu. An item with `children` is a dropdown: opens on hover and focus, the chevron is a real button (touch, keyboard), Escape and outside click close it. On mobile the children are listed indented under their parent. Desktop items are `px-3.5` (was `px-4`) so the chevron fits: at 900px the menu has 18px either side |
-| `ContactForm.js` | Client. Posts to `/api/contact` |
+| `ContactForm.js` | Client. Posts to `/api/contact`. Prefills from the query on mount (`subject`, `activity`, `participants`, `message`; build links with `contactHref()` in `lib/contact.js`, which lands on `#contact-form`) and then shows "เรากรอกข้อมูล…ไว้ให้แล้ว". Reads `window.location`, not `useSearchParams`, so `/contact` stays static. An `activity` not in `activityTypes` is ignored |
 | `Footer.js` | Server |
 | `TeamCard.js` | Server. About team card: photo panel covers the card's full height. Expertise tags drop into a strip under the photo only below 380px (see Owner decisions) |
 | `Packages.js` | Server. Home "Our Packages · บันได 4 ขั้น" from `packages`: Spark Workshop → Signature Camp (featured, dark) → Stride Journey → Summit Partner, prices per room of 40, a 4-bar ladder under each card, the `packagesNote` footnote and a consult CTA band. Emits the home `Service` JSON-LD with each starting price. Replaced `ServiceJourney.js` on 2026-10-09 |
 | `SignatureWork.js` + `SignatureCard.js` | Home "Signature Work", right after the hero (the "ประเด็นการเรียนรู้" domains section was removed from home 2026-10-09; `domains` still feeds `/services` and the footer). Server section; the card is a client flip card (photo + title front, topics and facts back, both faces in one grid cell so the card grows to the taller face, hidden face `inert`). `signatureWork` in `lib/data.js` picks four `portfolio` entries by title plus a service label and photo; every fact shown comes from `portfolio`, and a renamed title fails the build. Card links go to `/work` |
 | `ServiceBits.js` | Server. Pieces shared by the `/services/*` sub-pages: `StepBadge` and `stepTone` (the 01–04 colour ramp), `SectionHead`, `ServiceHero`, `CheckItem`, `WorkCards` (portfolio entries with their first photo, linking to `/work?type=`), `ServiceCta` |
-| `ServicesSubnav.js` | Client. Tabs across the top of each sub-page, from the nav item's `children`. Scrolls sideways on a phone, wraps from 640px |
+| `ServicesSubnav.js` | Client. Tabs across the top of every page in the dropdown (`/services`, the four sub-pages, `/skills-map`), from the nav item's `children`. Scrolls sideways on a phone, wraps from 640px |
 | `PriceEstimator.js` | Client. `/services/packages` "ประมาณราคาเบื้องต้น": package × ceil(learners / 40) rooms; 5 rooms or more shows "เสนอราคาเฉพาะงาน". Gets `packages` as a prop |
 | `OrgAudiences.js` | Client. `/services/organizations` องค์กร / มหาวิทยาลัย tabs; the works for each tab are rendered on the server and passed in |
 | `SkillsMapDemo.js` | Client. The `/skills-map` hero dashboard: radar of 7 skills, before vs after camp (the "หลัง 1 เดือน" round was removed 2026-10-17, owners), per-skill detail, labelled "ตัวอย่างข้อมูลสมมติ". Two views (2026-10-17, owners' ask): "ภาพรวมกลุ่ม" (group averages) and "รายคน" (one of six invented learners A–F from `skillsMap.demo.learners`, whole rubric levels, with the group average as a dotted amber outline and "สูงกว่า / ต่ำกว่า / เท่ากับค่าเฉลี่ย" in the detail). Learners stay anonymised letters, never names. Gets `skillsMap` as a prop from the page so the client bundle doesn't pull in all of `lib/data.js` |
@@ -264,6 +264,14 @@ between `/services` and the sub-pages is accepted. Design's `ServicesV2` became 
   price per half-day session, the corporate quote turnaround in days, and a tax-invoice claim (unknown
   whether the company is VAT-registered). Add each as a section or line once supplied.
 - Response time is "ภายใน 1 วันทำการ", the same promise the contact page makes.
+- **`/services` is the hub (2026-10-18).** It keeps all its old sections, plus the sub-page tabs and a
+  "เลือกบริการที่ตรงกับคุณ" card row (labels from the nav `children`, starting prices from `packages`)
+  right after the hero. Every consult / quote button on the sub-pages links to a prefilled
+  `/contact` via `contactHref()`; the estimator sends package, head count and its estimate.
+- **Known content mismatch, parked by the owners (2026-10-18):** `/services` says Signature Camp
+  picks one of Design Thinking / Storytelling / Leadership ("ครึ่งวันจนถึงหลายวัน"), `/services/camps`
+  and the packages say Leadership / Design Thinking / STEAM, 2–3 days. The owners will decide; don't
+  align either side until they do.
 
 ## Owner decisions — do not "fix"
 

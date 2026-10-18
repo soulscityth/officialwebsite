@@ -7,6 +7,7 @@ import OrgAudiences from "@/components/OrgAudiences";
 import { CheckItem, SectionHead, ServiceCta, ServiceHero, WorkCards, WorksHeader } from "@/components/ServiceBits";
 import { facilitationFormats, orgAudiences, orgPartnerNames, orgProcess, partners, worksByTitle } from "@/lib/data";
 import { pageMeta } from "@/lib/metadata";
+import { contactHref } from "@/lib/contact";
 
 export const metadata = {
   title: "องค์กรและมหาวิทยาลัย",
@@ -14,6 +15,8 @@ export const metadata = {
     "Team building, Leadership สำหรับหัวหน้างาน, ปฐมนิเทศ และเวทีถอดบทเรียน ออกแบบตามโจทย์ขององค์กร คณะ และสโมสรนักศึกษา เสนอราคาตามงาน",
   ...pageMeta("/services/organizations"),
 };
+
+const ORG_CONTACT = contactHref({ subject: "ขอใบเสนอราคา: กิจกรรมสำหรับองค์กร / มหาวิทยาลัย" });
 
 const orgPartners = orgPartnerNames.map((name) => {
   const partner = partners.find((p) => p.name === name);
@@ -50,7 +53,7 @@ export default function OrganizationsPage() {
             </KeepWords>
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
-            <Link href="/contact" className="btn bg-white text-brand-800 hover:bg-brand-50" data-ga-event="cta_consult_click">
+            <Link href={ORG_CONTACT} className="btn bg-white text-brand-800 hover:bg-brand-50" data-ga-event="cta_consult_click">
               <KeepWords>ขอใบเสนอราคา</KeepWords>
               <ArrowUpRight className="h-4 w-4" />
             </Link>
@@ -151,7 +154,7 @@ export default function OrganizationsPage() {
               <p className="text-pretty text-sm text-slate-600 lg:text-right">
                 <KeepWords>เล่าโจทย์สั้น ๆ แล้วรับร่างกระบวนการพร้อมใบเสนอราคา</KeepWords>
               </p>
-              <Link href="/contact" className="btn-primary" data-ga-event="cta_consult_click">
+              <Link href={ORG_CONTACT} className="btn-primary" data-ga-event="cta_consult_click">
                 <KeepWords>ขอใบเสนอราคา</KeepWords>
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
@@ -181,6 +184,7 @@ export default function OrganizationsPage() {
         title="เล่าโจทย์ของทีมคุณ แล้วรับร่างกระบวนการพร้อมใบเสนอราคา"
         lead="ทีมงานตอบกลับภายใน 1 วันทำการ"
         primary="ขอใบเสนอราคา"
+        contact={ORG_CONTACT}
       />
     </>
   );

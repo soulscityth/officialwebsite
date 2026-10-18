@@ -5,6 +5,7 @@ import ServicesSubnav from "@/components/ServicesSubnav";
 import { SectionHead, ServiceCta, ServiceHero, StepBadge } from "@/components/ServiceBits";
 import { evidenceRounds, packages, packagesNote, skillsMap, strideMonths, summitRows } from "@/lib/data";
 import { pageMeta } from "@/lib/metadata";
+import { contactHref } from "@/lib/contact";
 
 export const metadata = {
   title: "พันธมิตรระยะยาว",
@@ -14,6 +15,7 @@ export const metadata = {
 };
 
 const baht = (n) => n.toLocaleString("en-US");
+const PLAN_CONTACT = contactHref({ subject: "นัดคุยวางแผนปีการศึกษา: Stride Journey / Summit Partner" });
 const stride = packages.find((p) => p.step === "03");
 const summit = packages.find((p) => p.step === "04");
 
@@ -70,7 +72,7 @@ export default function PartnershipPage() {
             </KeepWords>
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
-            <Link href="/contact" className="btn bg-white text-brand-800 hover:bg-brand-50" data-ga-event="cta_consult_click">
+            <Link href={PLAN_CONTACT} className="btn bg-white text-brand-800 hover:bg-brand-50" data-ga-event="cta_consult_click">
               <KeepWords>นัดคุยวางแผนปีการศึกษา</KeepWords>
               <ArrowUpRight className="h-4 w-4" />
             </Link>
@@ -299,6 +301,7 @@ export default function PartnershipPage() {
         title="วางแผนพัฒนานักเรียนทั้งปีไปด้วยกัน"
         lead="เล่าเป้าหมายของโรงเรียนให้เราฟัง ทีมงานตอบกลับภายใน 1 วันทำการ"
         primary="นัดคุยวางแผนปีการศึกษา"
+        contact={PLAN_CONTACT}
       />
     </>
   );
