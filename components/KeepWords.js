@@ -34,8 +34,9 @@ const MANUAL = [
   "1 หัวข้อต่องาน",
   // "ทั้งปี" is listed and matches first, splitting "ทั้งปี / การศึกษา".
   "ทั้งปีการศึกษา",
-  // Skills Map start date, never "ปีการศึกษา / 2570".
-  "ปีการศึกษา 2570",
+  // Skills Map start date, never "ปีการศึกษา / 2569" or "ภาคเรียนที่ / 2".
+  "ปีการศึกษา 2569",
+  "ภาคเรียนที่ 2",
   "ลองคิด",
   "ลองทำ",
   // Team quotes on About, in the narrow photo-card column.

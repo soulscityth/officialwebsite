@@ -9,7 +9,7 @@ import { pageMeta } from "@/lib/metadata";
 export const metadata = {
   title: "Skills Map",
   description:
-    "SoulScity Skills Map แกนวัดผล 7 ทักษะ × rubric 4 ระดับ วัดก่อนและหลังทุกเวิร์กช็อปและค่าย เริ่มใช้ตั้งแต่ปีการศึกษา 2570",
+    "SoulScity Skills Map แกนวัดผล 7 ทักษะ × rubric 4 ระดับ วัดก่อนและหลังทุกเวิร์กช็อปและค่าย เริ่มใช้ตั้งแต่ภาคเรียนที่ 2 ปีการศึกษา 2569",
   ...pageMeta("/skills-map"),
 };
 

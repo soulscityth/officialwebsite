@@ -186,7 +186,7 @@ export default function CampsPage() {
             <Link href="/skills-map" className="font-medium text-brand-600 underline-offset-4 hover:underline">
               Skills Map
             </Link>{" "}
-            <KeepWords>ซึ่งเริ่มใช้ตั้งแต่ปีการศึกษา 2570</KeepWords>
+            <KeepWords>ซึ่งเริ่มใช้ตั้งแต่ภาคเรียนที่ 2 ปีการศึกษา 2569</KeepWords>
           </p>
         </div>
       </section>
@@ -281,7 +281,7 @@ export default function CampsPage() {
           </div>
           <div className="rounded-3xl bg-white p-7 shadow-card ring-1 ring-brand-100 lg:col-span-2">
             <ul className="space-y-2.5">
-              {[...spark.includes.slice(0, 2), "Skills Map แบบสั้น 3 ทักษะ (เริ่มปีการศึกษา 2570)", spark.includes[2]].map((t) => (
+              {[...spark.includes.slice(0, 2), "Skills Map แบบสั้น 3 ทักษะ (เริ่มภาคเรียนที่ 2 ปีการศึกษา 2569)", spark.includes[2]].map((t) => (
                 <CheckItem key={t}>
                   <KeepWords>{t}</KeepWords>
                 </CheckItem>

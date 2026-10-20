@@ -101,7 +101,7 @@ export default function ServicesPage() {
             <Link href="/skills-map" className="font-semibold text-brand-600 underline-offset-4 hover:underline">
               Skills Map
             </Link>{" "}
-            <KeepWords>เริ่มปีการศึกษา 2570</KeepWords>
+            <KeepWords>เริ่มภาคเรียนที่ 2 ปีการศึกษา 2569</KeepWords>
           </p>
         </div>
       </section>

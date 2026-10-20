@@ -257,7 +257,7 @@ between `/services` and the sub-pages is accepted. Design's `ServicesV2` became 
   lists from the block at the end of `lib/data.js` (`packageCompare`, `campTracks`, `orgAudiences`, …).
   Project cards look up `portfolio` by title (`worksByTitle`), so a renamed title fails the build.
 - The partnership hero's "สรุปผลสำหรับผู้บริหาร" is computed from `skillsMap.demo` and labelled
-  "ตัวอย่าง · ข้อมูลสมมติ". Every Skills Map mention says it starts in ปีการศึกษา 2570.
+  "ตัวอย่าง · ข้อมูลสมมติ". Every Skills Map mention says it starts in ภาคเรียนที่ 2 ปีการศึกษา 2569 (owners corrected this from "ปีการศึกษา 2570" on 2026-10-20: it starts around early 2570). Reports + photos are promised "ภายใน 14 วัน" (was 7, owners 2026-10-20). Org tabs (2026-10-20, owners): Rights Beyond Border sits under องค์กร, CBA จุฬาฯ under มหาวิทยาลัย.
 - **Left out on purpose, waiting for the owners** (the design had placeholders; never invent them):
   camp safety section (insurance terms, first aid, emergency plan), teacher / HR testimonials, the
   partnership FAQ answers (instalments, purchasing documents, rescheduling), the corporate starting
@@ -298,7 +298,7 @@ Choices the owners made knowingly. They look like bugs or inconsistencies; leave
   other events and were replaced.
 - **Skills Map (2026-10-10).** `/skills-map` went live from the owners' design
   (https://claude.ai/artifact/Ujz4GGQPcGdMbirb2DoFSm) before the Skills Map has run with any client, so
-  all copy presents it as **starting ปีการศึกษา 2570**, never as already used "in every project". A
+  all copy presents it as **starting ภาคเรียนที่ 2 ปีการศึกษา 2569** (was "ปีการศึกษา 2570" until 2026-10-20), never as already used "in every project". A
   "วัดผลด้วย Skills Map" link sits on each home package card; owners chose that over a navbar item for
   now. The demo dashboard is invented data and says so. The four research figures were checked against
   their sources. Once real results exist, swap the demo for anonymised real data and drop "เริ่ม…".

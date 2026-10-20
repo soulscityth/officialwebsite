@@ -227,7 +227,7 @@ export default function PackagesPage() {
           <p className="mt-6 text-balance text-center text-[13px] text-slate-600">
             <KeepWords>{packagesNote}</KeepWords>{" "}
             <Link href="/skills-map" className="font-medium text-brand-600 underline-offset-4 hover:underline">
-              <KeepWords>Skills Map เริ่มปีการศึกษา 2570</KeepWords>
+              <KeepWords>Skills Map เริ่มภาคเรียนที่ 2 ปีการศึกษา 2569</KeepWords>
             </Link>
           </p>
         </div>

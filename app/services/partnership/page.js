@@ -122,7 +122,7 @@ export default function PartnershipPage() {
             ))}
           </dl>
           <figcaption className="mt-4 text-center text-xs text-slate-500">
-            <KeepWords>หน้าตารายงานที่ ผอ. จะได้รับ · Skills Map เริ่มปีการศึกษา 2570</KeepWords>
+            <KeepWords>หน้าตารายงานที่ ผอ. จะได้รับ · Skills Map เริ่มภาคเรียนที่ 2 ปีการศึกษา 2569</KeepWords>
           </figcaption>
         </figure>
       </ServiceHero>
