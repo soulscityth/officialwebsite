@@ -1,6 +1,6 @@
 import { Resend } from "resend";
 import { siteConfig } from "@/lib/site";
-import { activityTypes, learnerLevels } from "@/lib/data";
+import { activityTypes, learnerLevels, packageOptions } from "@/lib/data";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -13,6 +13,7 @@ export async function POST(request) {
   }
 
   const name = (body.name || "").toString().trim().slice(0, 200);
+  const organization = (body.organization || "").toString().trim().slice(0, 200);
   const phone = (body.phone || "").toString().trim().slice(0, 50);
   const email = (body.email || "").toString().trim().slice(0, 200);
   const subject = (body.subject || "").toString().trim().slice(0, 300);
@@ -23,6 +24,7 @@ export async function POST(request) {
   const clean = (v, max) => (v || "").toString().trim().slice(0, max);
   const oneOf = (v, allowed) => (allowed.includes(v) ? v : "");
 
+  const packageInterest = oneOf(clean(body.packageInterest, 100), packageOptions);
   const activityType = oneOf(clean(body.activityType, 100), activityTypes);
   const learnerLevel = oneOf(clean(body.learnerLevel, 100), learnerLevels);
   const participants = clean(body.participants, 50);
@@ -43,7 +45,7 @@ export async function POST(request) {
   }
 
   const hasProjectDetails = Boolean(
-    activityType || learnerLevel || participants || durationDays || preferredPeriod
+    packageInterest || activityType || learnerLevel || participants || durationDays || preferredPeriod
   );
 
   const resend = new Resend(apiKey);
@@ -55,14 +57,22 @@ export async function POST(request) {
       from: "SoulScity Website <web@soulscity.co.th>",
       to: process.env.CONTACT_EMAIL || siteConfig.email,
       replyTo: email,
-      subject: subject ? `[เว็บไซต์] ${subject}` : `[เว็บไซต์] ข้อความใหม่จาก ${name}`,
+      subject: [
+        "[เว็บไซต์]",
+        subject || `ข้อความใหม่จาก ${name}`,
+        organization ? `· ${organization}` : null,
+      ]
+        .filter(Boolean)
+        .join(" "),
       text: [
         `ชื่อ: ${name}`,
+        organization ? `โรงเรียน / หน่วยงาน: ${organization}` : null,
         `อีเมล: ${email}`,
         phone ? `เบอร์โทรศัพท์: ${phone}` : null,
         subject ? `หัวข้อ: ${subject}` : null,
         hasProjectDetails ? "" : null,
         hasProjectDetails ? "--- รายละเอียดโครงการ ---" : null,
+        packageInterest ? `แพ็กเกจที่สนใจ: ${packageInterest}` : null,
         activityType ? `ประเภทกิจกรรม: ${activityType}` : null,
         learnerLevel ? `ระดับผู้เรียน: ${learnerLevel}` : null,
         participants ? `จำนวนผู้เข้าร่วม: ${participants}` : null,

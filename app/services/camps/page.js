@@ -24,7 +24,7 @@ export const metadata = {
 };
 
 const baht = (n) => n.toLocaleString("en-US");
-const CAMP_CONTACT = contactHref({ subject: "ปรึกษาการจัดค่าย Signature Camp", activity: "ค่าย" });
+const CAMP_CONTACT = contactHref({ subject: "ปรึกษาการจัดค่าย Signature Camp", activity: "ค่าย", pkg: "Signature Camp" });
 const spark = packages.find((p) => p.step === "01");
 const camp = packages.find((p) => p.step === "02");
 
@@ -234,7 +234,7 @@ export default function CampsPage() {
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <Link
-                  href={contactHref({ subject: "ขอใบเสนอราคา Signature Camp", activity: "ค่าย" })}
+                  href={contactHref({ subject: "ขอใบเสนอราคา Signature Camp", activity: "ค่าย", pkg: "Signature Camp" })}
                   className="btn bg-white text-brand-800 hover:bg-brand-50"
                   data-ga-event="cta_consult_click"
                 >
@@ -294,7 +294,7 @@ export default function CampsPage() {
               </p>
             </div>
             <Link
-              href={contactHref({ subject: "จอง Spark Workshop", activity: "เวิร์กช็อป" })}
+              href={contactHref({ subject: "จอง Spark Workshop", activity: "เวิร์กช็อป", pkg: "Spark Workshop" })}
               className="btn-primary mt-6 w-full"
               data-ga-event="cta_consult_click"
             >

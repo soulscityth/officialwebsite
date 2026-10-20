@@ -16,7 +16,10 @@ export const metadata = {
   ...pageMeta("/services/organizations"),
 };
 
-const ORG_CONTACT = contactHref({ subject: "ขอใบเสนอราคา: กิจกรรมสำหรับองค์กร / มหาวิทยาลัย" });
+const ORG_CONTACT = contactHref({
+  subject: "ขอใบเสนอราคา: กิจกรรมสำหรับองค์กร / มหาวิทยาลัย",
+  pkg: "องค์กร / มหาวิทยาลัย (ออกแบบตามโจทย์)",
+});
 
 const orgPartners = orgPartnerNames.map((name) => {
   const partner = partners.find((p) => p.name === name);

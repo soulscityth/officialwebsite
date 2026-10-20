@@ -28,6 +28,7 @@ export default function PriceEstimator({ packages }) {
     : `งบเริ่มต้นที่ประมาณจากหน้าเว็บ ${baht(pkg.price.amount * rooms)} บาท (${baht(pkg.price.amount)} บาท × ${rooms} ห้อง)`;
   const contact = contactHref({
     subject: `สนใจ ${pkg.title} · ${n} คน`,
+    pkg: pkg.title,
     activity: ACTIVITY[pkg.step],
     participants: n,
     message: `สนใจ ${pkg.title} สำหรับผู้เรียนประมาณ ${n} คน · ${estimate}`,

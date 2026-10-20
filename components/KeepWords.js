@@ -47,8 +47,8 @@ const MANUAL = [
   // "ได้ผล" is listed and matches first, so it split "ได้ผล / งานจริง".
   "ได้ผลงานจริง",
   "รูปแบบนี้",
-  // Summit table at 320px: "Spark 2– / 3 ครั้ง".
-  "2–3 ครั้ง",
+  // Summit table at 320px: keeps "Spark 2 ครั้ง" from ending on a lone "ครั้ง".
+  "2 ครั้ง",
   // Skills Map dashboard view switch at 320px: "ภาพรวม / กลุ่ม".
   "ภาพรวมกลุ่ม",
 ];

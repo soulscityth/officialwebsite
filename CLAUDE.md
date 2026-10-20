@@ -124,7 +124,7 @@ earlier commit. Do not renumber to "fix" them.
 | `PortfolioGrid.js` | Client. Category filter tabs with counts, filter in `?type=`. Reading the URL suspends a static page, so `/work` passes `<PortfolioGridView active="all" />` as the Suspense fallback: all cards are in the server HTML (crawlers, AI bots). A `?type=` link flashes "all" before filtering — accepted (owners chose this over making `/work` dynamic) |
 | `PartnerMarquee.js` | **Server** component. Two rows scrolling in opposite directions, infinite |
 | `Navbar.js` | Client. Sticky, scroll state, mobile menu. An item with `children` is a dropdown: opens on hover and focus, the chevron is a real button (touch, keyboard), Escape and outside click close it. On mobile the children are listed indented under their parent. Desktop items are `px-3.5` (was `px-4`) so the chevron fits: at 900px the menu has 18px either side |
-| `ContactForm.js` | Client. Posts to `/api/contact`. Prefills from the query on mount (`subject`, `activity`, `participants`, `message`; build links with `contactHref()` in `lib/contact.js`, which lands on `#contact-form`) and then shows "เรากรอกข้อมูล…ไว้ให้แล้ว". Reads `window.location`, not `useSearchParams`, so `/contact` stays static. An `activity` not in `activityTypes` is ignored |
+| `ContactForm.js` | Client. Posts to `/api/contact`. Prefills from the query on mount (`subject`, `package`, `activity`, `participants`, `message`; build links with `contactHref()` in `lib/contact.js`, key `pkg` for the package, which lands on `#contact-form`) and then shows "เรากรอกข้อมูล…ไว้ให้แล้ว". Reads `window.location`, not `useSearchParams`, so `/contact` stays static. An `activity` not in `activityTypes` or a `package` not in `packageOptions` is ignored. Optional fields ชื่อโรงเรียน / หน่วยงาน (`organization`, also appended to the email subject) and แพ็กเกจที่สนใจ (`packageInterest`, from `packageOptions`: the four package titles + องค์กร / มหาวิทยาลัย + ยังไม่แน่ใจ) added 2026-10-20 |
 | `Footer.js` | Server |
 | `TeamCard.js` | Server. About team card: photo panel covers the card's full height. Expertise tags drop into a strip under the photo only below 380px (see Owner decisions) |
 | `Packages.js` | Server. Home "Our Packages · บันได 4 ขั้น" from `packages`: Spark Workshop → Signature Camp (featured, dark) → Stride Journey → Summit Partner, prices per room of 40, a 4-bar ladder under each card, the `packagesNote` footnote and a consult CTA band. Emits the home `Service` JSON-LD with each starting price. Replaced `ServiceJourney.js` on 2026-10-09 |
@@ -284,7 +284,7 @@ Choices the owners made knowingly. They look like bugs or inconsistencies; leave
   wording. The home package card says "2–3 วัน", from the Packages 2027 playbook.
 - **Packages on the home page only (2026-10-09).** The owners published prices from the Packages 2027
   playbook (https://claude.ai/artifact/DCdj9BM5tv7XhqNR6XLqt6): Spark from 19,000, Camp from 68,000,
-  Stride 120,000 (~9% saving), Summit 155,000 / Plus 245,000, per room of 40. Left off on purpose: the
+  Stride 120,000 (~9% saving), Summit 155,000 / Plus 245,000, per room of 40. Summit includes Spark **2** times (was 2–3; owners, 2026-10-20). Left off on purpose: the
   **10% upgrade credit** (owners chose not to publish it). The playbook's internal cost/margin view never
   goes on the site. `/services`, `llms.txt` and the Signature Work "Facilitation" card still describe
   the old three services; moving them over is a separate decision.

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Send, CheckCircle2, AlertCircle } from "lucide-react";
 import KeepWords from "@/components/KeepWords";
-import { activityTypes, learnerLevels } from "@/lib/data";
+import { activityTypes, learnerLevels, packageOptions } from "@/lib/data";
 import { CONTACT_PARAMS } from "@/lib/contact";
 import { trackEvent, GA_EVENTS } from "@/lib/analytics";
 
@@ -30,6 +30,8 @@ export default function ContactForm() {
     set("participants", params.get(CONTACT_PARAMS.participants));
     const activity = params.get(CONTACT_PARAMS.activity);
     if (activityTypes.includes(activity)) set("activityType", activity);
+    const pkg = params.get(CONTACT_PARAMS.pkg);
+    if (packageOptions.includes(pkg)) set("packageInterest", pkg);
     setPrefilled([...Object.values(CONTACT_PARAMS)].some((k) => params.get(k)));
   }, []);
 
@@ -124,6 +126,21 @@ export default function ContactForm() {
           />
         </div>
         <div>
+          <label htmlFor="organization" className="mb-1.5 block text-sm font-medium text-slate-700">
+            <KeepWords>
+              ชื่อโรงเรียน / หน่วยงาน
+            </KeepWords>
+          </label>
+          <input
+            id="organization"
+            name="organization"
+            type="text"
+            autoComplete="organization"
+            placeholder="เช่น โรงเรียน… / บริษัท… / คณะ…"
+            className="input-field"
+          />
+        </div>
+        <div>
           <label htmlFor="phone" className="mb-1.5 block text-sm font-medium text-slate-700">
             <KeepWords>
               เบอร์โทรศัพท์
@@ -137,22 +154,21 @@ export default function ContactForm() {
             className="input-field"
           />
         </div>
-      </div>
-
-      <div>
-        <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-slate-700">
-          <KeepWords>
-            อีเมล
-          </KeepWords>
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          required
-          placeholder="you@example.com"
-          className="input-field"
-        />
+        <div>
+          <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-slate-700">
+            <KeepWords>
+              อีเมล
+            </KeepWords>
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            placeholder="you@example.com"
+            className="input-field"
+          />
+        </div>
       </div>
 
       {/* Project intake — every field optional so a general enquiry is never
@@ -162,6 +178,20 @@ export default function ContactForm() {
         <legend className="px-2 text-sm font-medium text-slate-700">
           เกี่ยวกับโครงการ <span className="font-normal text-slate-400"><KeepWords>(ไม่บังคับ)</KeepWords></span>
         </legend>
+
+        <div className="mb-5">
+          <label htmlFor="packageInterest" className="mb-1.5 block text-sm font-medium text-slate-700">
+            <KeepWords>
+              แพ็กเกจที่สนใจ
+            </KeepWords>
+          </label>
+          <select id="packageInterest" name="packageInterest" className="input-field" defaultValue="">
+            <option value="">เลือกแพ็กเกจ</option>
+            {packageOptions.map((p) => (
+              <option key={p} value={p}>{p}</option>
+            ))}
+          </select>
+        </div>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div>
